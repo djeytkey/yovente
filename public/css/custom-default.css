@@ -23,6 +23,10 @@ nav.navbar a.menu-btn:hover {
 	padding-left: 0;
 }
 
+.has-error {
+	color: red;
+}
+
 .pos-page .side-navbar {
 	top: 0;
 }

@@ -21,7 +21,7 @@
                                     <input type="file" name="image" class="form-control">
                                     @if($errors->has('image'))
                                    <span>
-                                       <strong>{{ $errors->first('image') }}</strong>
+                                       <strong class="has-error">{{ $errors->first('image') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -38,7 +38,7 @@
                                     <input type="email" name="email" placeholder="example@example.com" required class="form-control">
                                     @if($errors->has('email'))
                                    <span>
-                                       <strong>{{ $errors->first('email') }}</strong>
+                                       <strong class="has-error">{{ $errors->first('email') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -70,7 +70,7 @@
                                         <input type="text" name="name" required class="form-control">
                                         @if($errors->has('name'))
                                        <span>
-                                           <strong>{{ $errors->first('name') }}</strong>
+                                           <strong class="has-error">{{ $errors->first('name') }}</strong>
                                         </span>
                                         @endif
                                     </div>

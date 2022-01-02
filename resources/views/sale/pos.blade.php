@@ -761,7 +761,7 @@
                                       </div>
                                       @if($errors->has('reference_no'))
                                        <span>
-                                           <strong>{{ $errors->first('reference_no') }}</strong>
+                                           <strong class="has-error">{{ $errors->first('reference_no') }}</strong>
                                         </span>
                                         @endif
                                     </div>

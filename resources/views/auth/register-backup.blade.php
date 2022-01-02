@@ -19,7 +19,7 @@
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong class="has-error">{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -33,7 +33,7 @@
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong class="has-error">{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -47,7 +47,7 @@
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong class="has-error">{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
                             </div>

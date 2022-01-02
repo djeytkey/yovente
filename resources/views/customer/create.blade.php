@@ -48,7 +48,7 @@
                                     <input type="text" name="phone_number" required class="form-control">
                                     @if($errors->has('phone_number'))
                                    <span>
-                                       <strong>{{ $errors->first('phone_number') }}</strong>
+                                       <strong class="has-error">{{ $errors->first('phone_number') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -101,7 +101,7 @@
                                     <input type="text" name="name" class="form-control">
                                     @if($errors->has('name'))
                                    <span>
-                                       <strong>{{ $errors->first('name') }}</strong>
+                                       <strong class="has-error">{{ $errors->first('name') }}</strong>
                                     </span>
                                     @endif
                                 </div>

@@ -55,7 +55,7 @@
                 <label for="register-username" class="label-material">{{trans('file.UserName')}} *</label>
                 @if ($errors->has('name'))
                     <p>
-                        <strong>{{ $errors->first('name') }}</strong>
+                        <strong class="has-error">{{ $errors->first('name') }}</strong>
                     </p>
                 @endif
               </div>
@@ -64,7 +64,7 @@
                 <label for="register-email" class="label-material">{{trans('file.Email')}} *</label>
                 @if ($errors->has('email'))
                     <p>
-                        <strong>{{ $errors->first('email') }}</strong>
+                        <strong class="has-error">{{ $errors->first('email') }}</strong>
                     </p>
                 @endif
               </div>
@@ -139,7 +139,7 @@
                 <label for="passowrd" class="label-material">{{trans('file.Password')}} *</label>
                 @if ($errors->has('password'))
                     <p>
-                        <strong>{{ $errors->first('password') }}</strong>
+                        <strong class="has-error">{{ $errors->first('password') }}</strong>
                     </p>
                 @endif
               </div>

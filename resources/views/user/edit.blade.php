@@ -21,7 +21,7 @@
                                         <input type="text" name="name" required class="form-control" value="{{$lims_user_data->name}}">
                                         @if($errors->has('name'))
                                        <span>
-                                           <strong>{{ $errors->first('name') }}</strong>
+                                           <strong class="has-error">{{ $errors->first('name') }}</strong>
                                         </span>
                                         @endif
                                     </div>
@@ -39,7 +39,7 @@
                                         <input type="email" name="email" placeholder="example@example.com" required class="form-control" value="{{$lims_user_data->email}}">
                                         @if($errors->has('email'))
                                        <span>
-                                           <strong>{{ $errors->first('email') }}</strong>
+                                           <strong class="has-error">{{ $errors->first('email') }}</strong>
                                         </span>
                                         @endif
                                     </div>

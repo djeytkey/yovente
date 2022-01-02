@@ -25,7 +25,7 @@
                                         </div>
                                         @if($errors->has('reference_no'))
                                        <span>
-                                           <strong>{{ $errors->first('reference_no') }}</strong>
+                                           <strong class="has-error">{{ $errors->first('reference_no') }}</strong>
                                         </span>
                                         @endif
                                     </div>
@@ -176,7 +176,7 @@
                                             <input type="file" name="document" class="form-control" />
                                             @if($errors->has('extension'))
                                                 <span>
-                                                   <strong>{{ $errors->first('extension') }}</strong>
+                                                   <strong class="has-error">{{ $errors->first('extension') }}</strong>
                                                 </span>
                                             @endif
                                         </div>

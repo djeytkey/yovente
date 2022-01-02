@@ -31,7 +31,7 @@
                                     </div>
                                     @if($errors->has('site_logo'))
                                    <span>
-                                       <strong>{{ $errors->first('site_logo') }}</strong>
+                                       <strong class="has-error">{{ $errors->first('site_logo') }}</strong>
                                     </span>
                                     @endif
                                 </div>

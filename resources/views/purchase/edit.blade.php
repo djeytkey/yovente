@@ -64,7 +64,7 @@
                                             <input type="file" name="document" class="form-control" >
                                             @if($errors->has('extension'))
                                                 <span>
-                                                   <strong>{{ $errors->first('extension') }}</strong>
+                                                   <strong class="has-error">{{ $errors->first('extension') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
