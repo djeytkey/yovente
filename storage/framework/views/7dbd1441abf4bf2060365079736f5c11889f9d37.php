@@ -774,7 +774,7 @@
                                       </div>
                                       <?php if($errors->has('reference_no')): ?>
                                        <span>
-                                           <strong><?php echo e($errors->first('reference_no')); ?></strong>
+                                           <strong class="has-error"><?php echo e($errors->first('reference_no')); ?></strong>
                                         </span>
                                         <?php endif; ?>
                                     </div>

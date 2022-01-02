@@ -27,6 +27,12 @@ nav.navbar a.menu-btn:hover {
 	color: red;
 }
 
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+
 .pos-page .side-navbar {
 	top: 0;
 }

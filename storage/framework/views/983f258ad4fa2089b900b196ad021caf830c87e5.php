@@ -268,7 +268,7 @@
                                     <li id="sale-list-menu"><a
                                             href="<?php echo e(route('sales.index')); ?>"><?php echo e(trans('file.Sale List')); ?></a></li>
                                     <?php if($sale_add_permission_active): ?>
-                                        <li><a href="<?php echo e(route('sale.pos')); ?>">POS</a></li>
+                                        
                                         <li id="sale-create-menu"><a
                                                 href="<?php echo e(route('sales.create')); ?>"><?php echo e(trans('file.Add Sale')); ?></a>
                                         </li>
@@ -277,17 +277,7 @@
                                         </li>
                                     <?php endif; ?>
                                 <?php endif; ?>
-
-                                <?php if($gift_card_permission_active): ?>
-                                    <li id="gift-card-menu"><a
-                                            href="<?php echo e(route('gift_cards.index')); ?>"><?php echo e(trans('file.Gift Card List')); ?></a>
-                                    </li>
-                                <?php endif; ?>
-                                <?php if($coupon_permission_active): ?>
-                                    <li id="coupon-menu"><a
-                                            href="<?php echo e(route('coupons.index')); ?>"><?php echo e(trans('file.Coupon List')); ?></a>
-                                    </li>
-                                <?php endif; ?>
+                                
                                 <?php if($delivery_permission_active): ?>
                                     <li id="delivery-menu"><a
                                             href="<?php echo e(route('delivery.index')); ?>"><?php echo e(trans('file.Delivery List')); ?></a>
