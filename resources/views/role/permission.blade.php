@@ -301,8 +301,7 @@
                                         </tr>
 
                                         {{-- Devis --}}
-										{{-- 
-                                        <tr>
+                                        {{-- <tr>
                                             <td>{{ trans('file.Quotation') }}</td>
                                             <td class="text-center">
                                                 <div class="icheckbox_square-blue checked" aria-checked="false"
@@ -364,12 +363,10 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
-										 --}}
+                                        </tr> --}}
 
-										{{-- Transferts --}}
-										{{--
-                                        <tr>
+                                        {{-- Transferts --}}
+                                        {{-- <tr>
                                             <td>{{ trans('file.Transfer') }}</td>
                                             <td class="text-center">
                                                 <div class="icheckbox_square-blue" aria-checked="false"
@@ -431,10 +428,9 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
-										--}}
+                                        </tr> --}}
 
-										{{-- Retour des ventes --}}
+                                        {{-- Retour des ventes --}}
                                         <tr>
                                             <td>{{ trans('file.Sale Return') }}</td>
                                             <td class="text-center">
@@ -499,7 +495,7 @@
                                             </td>
                                         </tr>
 
-										{{-- Retour des achats --}}
+                                        {{-- Retour des achats --}}
                                         <tr>
                                             <td>{{ trans('file.Purchase Return') }}</td>
                                             <td class="text-center">
@@ -564,7 +560,7 @@
                                             </td>
                                         </tr>
 
-										{{-- Employés --}}
+                                        {{-- Employés --}}
                                         <tr>
                                             <td>{{ trans('file.Employee') }}</td>
                                             <td class="text-center">
@@ -629,7 +625,7 @@
                                             </td>
                                         </tr>
 
-										{{-- Utilisateurs --}}
+                                        {{-- Utilisateurs --}}
                                         <tr>
                                             <td>{{ trans('file.User') }}</td>
                                             <td class="text-center">
@@ -694,7 +690,7 @@
                                             </td>
                                         </tr>
 
-										{{-- Clients --}}
+                                        {{-- Clients --}}
                                         <tr>
                                             <td>{{ trans('file.customer') }}</td>
                                             <td class="text-center">
@@ -759,7 +755,7 @@
                                             </td>
                                         </tr>
 
-										{{-- Facturiers --}}
+                                        {{-- Facturiers --}}
                                         <tr>
                                             <td>{{ trans('file.Biller') }}</td>
                                             <td class="text-center">
@@ -824,7 +820,7 @@
                                             </td>
                                         </tr>
 
-										{{-- Fournisseurs --}}
+                                        {{-- Fournisseurs --}}
                                         <tr>
                                             <td>{{ trans('file.Supplier') }}</td>
                                             <td class="text-center">
@@ -889,9 +885,8 @@
                                             </td>
                                         </tr>
 
-										{{-- Comptabilités --}}
-										{{-- 
-                                        <tr>
+                                        {{-- Comptabilités --}}
+                                        {{-- <tr>
                                             <td>{{ trans('file.Accounting') }}</td>
                                             <td class="report-permissions" colspan="5">
                                                 <span>
@@ -961,10 +956,9 @@
                                                     </div>
                                                 </span>
                                             </td>
-                                        </tr>
-										 --}}
+                                        </tr> --}}
 
-										{{-- Personnel --}}
+                                        {{-- Personnel --}}
                                         <tr>
                                             <td>HRM</td>
                                             <td class="report-permissions" colspan="5">
@@ -1035,7 +1029,7 @@
                                             </td>
                                         </tr>
 
-										{{-- Rapports --}}
+                                        {{-- Rapports --}}
                                         <tr>
                                             <td>{{ trans('file.Reports') }}</td>
                                             <td class="report-permissions" colspan="5">
@@ -1313,7 +1307,7 @@
                                             </td>
                                         </tr>
 
-										{{-- Paramètres --}}
+                                        {{-- Paramètres --}}
                                         <tr>
                                             <td>{{ trans('file.settings') }}</td>
                                             <td class="report-permissions" colspan="5">
@@ -1541,7 +1535,7 @@
                                             </td>
                                         </tr>
 
-										{{-- Divers --}}
+                                        {{-- Divers --}}
                                         <tr>
                                             <td>{{ trans('file.Miscellaneous') }}</td>
                                             <td class="report-permissions" colspan="5">

@@ -302,12 +302,12 @@
                                         </tr>
 
                                         
-										
+                                        
 
-										
-										
+                                        
+                                        
 
-										
+                                        
                                         <tr>
                                             <td><?php echo e(trans('file.Sale Return')); ?></td>
                                             <td class="text-center">
@@ -372,7 +372,7 @@
                                             </td>
                                         </tr>
 
-										
+                                        
                                         <tr>
                                             <td><?php echo e(trans('file.Purchase Return')); ?></td>
                                             <td class="text-center">
@@ -437,7 +437,7 @@
                                             </td>
                                         </tr>
 
-										
+                                        
                                         <tr>
                                             <td><?php echo e(trans('file.Employee')); ?></td>
                                             <td class="text-center">
@@ -502,7 +502,7 @@
                                             </td>
                                         </tr>
 
-										
+                                        
                                         <tr>
                                             <td><?php echo e(trans('file.User')); ?></td>
                                             <td class="text-center">
@@ -567,7 +567,7 @@
                                             </td>
                                         </tr>
 
-										
+                                        
                                         <tr>
                                             <td><?php echo e(trans('file.customer')); ?></td>
                                             <td class="text-center">
@@ -632,7 +632,7 @@
                                             </td>
                                         </tr>
 
-										
+                                        
                                         <tr>
                                             <td><?php echo e(trans('file.Biller')); ?></td>
                                             <td class="text-center">
@@ -697,7 +697,7 @@
                                             </td>
                                         </tr>
 
-										
+                                        
                                         <tr>
                                             <td><?php echo e(trans('file.Supplier')); ?></td>
                                             <td class="text-center">
@@ -762,10 +762,10 @@
                                             </td>
                                         </tr>
 
-										
-										
+                                        
+                                        
 
-										
+                                        
                                         <tr>
                                             <td>HRM</td>
                                             <td class="report-permissions" colspan="5">
@@ -840,7 +840,7 @@
                                             </td>
                                         </tr>
 
-										
+                                        
                                         <tr>
                                             <td><?php echo e(trans('file.Reports')); ?></td>
                                             <td class="report-permissions" colspan="5">
@@ -1134,7 +1134,7 @@
                                             </td>
                                         </tr>
 
-										
+                                        
                                         <tr>
                                             <td><?php echo e(trans('file.settings')); ?></td>
                                             <td class="report-permissions" colspan="5">
@@ -1376,7 +1376,7 @@
                                             </td>
                                         </tr>
 
-										
+                                        
                                         <tr>
                                             <td><?php echo e(trans('file.Miscellaneous')); ?></td>
                                             <td class="report-permissions" colspan="5">
