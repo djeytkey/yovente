@@ -68,7 +68,7 @@
                 <label for="login-username" class="label-material"><?php echo e(trans('file.UserName')); ?></label>
                 <?php if($errors->has('name')): ?>
                     <p>
-                        <strong><?php echo e($errors->first('name')); ?></strong>
+                        <strong class="has-error"><?php echo e($errors->first('name')); ?></strong>
                     </p>
                 <?php endif; ?>
               </div>
@@ -78,7 +78,7 @@
                 <label for="login-password" class="label-material"><?php echo e(trans('file.Password')); ?></label>
                 <?php if($errors->has('password')): ?>
                     <p>
-                        <strong><?php echo e($errors->first('password')); ?></strong>
+                        <strong class="has-error"><?php echo e($errors->first('password')); ?></strong>
                     </p>
                 <?php endif; ?>
               </div>

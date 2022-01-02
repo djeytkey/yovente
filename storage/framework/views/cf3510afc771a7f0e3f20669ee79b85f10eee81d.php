@@ -31,7 +31,7 @@
                                     <input type="text" name="name" value="<?php echo e($lims_user_data->name); ?>" required class="form-control" />
                                     <?php if($errors->has('name')): ?>
                                     <span>
-                                       <strong><?php echo e($errors->first('name')); ?></strong>
+                                       <strong class="has-error"><?php echo e($errors->first('name')); ?></strong>
                                     </span>
                                     <?php endif; ?>
                                 </div>
@@ -40,7 +40,7 @@
                                     <input type="email" name="email" value="<?php echo e($lims_user_data->email); ?>" required class="form-control">
                                     <?php if($errors->has('email')): ?>
                                     <span>
-                                       <strong><?php echo e($errors->first('email')); ?></strong>
+                                       <strong class="has-error"><?php echo e($errors->first('email')); ?></strong>
                                     </span>
                                     <?php endif; ?>
                                 </div>
