@@ -170,6 +170,7 @@ return [
 	"Confirm Password" => "تأكيد كلمة المرور",
 	"POS Setting" => "وضع POS",
 	"Developed By" => "طورت بواسطة",
+	"Taux Livraison" => "قيمة الشحن",
 	"All" => "الكل",
 	"By" => "بواسطة",
 	"Cheque Number" => "رقم الشيك",

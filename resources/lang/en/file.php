@@ -170,6 +170,7 @@ return [
 	'Confirm Password' => 'Confirm Password',
 	'POS Setting' => 'POS Setting',
 	'Developed By' => 'Developed By',
+	'Taux Livraison' => 'Delivery Rate',
 	'All' => 'All',
 	'By' => 'By',
 	'Cheque Number' => 'Cheque Number',

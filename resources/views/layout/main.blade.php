@@ -789,8 +789,8 @@
                                 @if ($payment_report_active)
                                     <li id="payment-report-menu">
                                         {!! Form::open(['route' => 'report.paymentByDate', 'method' => 'post', 'id' => 'payment-report-form']) !!}
-                                        <input type="hidden" name="start_date" value="{{ date('Y-m') . '-' . '01' }}" />
-                                        <input type="hidden" name="end_date" value="{{ date('Y-m-d') }}" />
+                                        <input type="hidden" name="start_date" value="{{ '01' . '-' . date('m-Y') }}" />
+                                        <input type="hidden" name="end_date" value="{{ date('d-m-Y') }}" />
                                         <a id="payment-report-link" href="">{{ trans('file.Payment Report') }}</a>
                                         {!! Form::close() !!}
                                     </li>
@@ -957,6 +957,14 @@
                                         href="{{ route('role.index') }}">{{ trans('file.Role Permission') }}</a>
                                 </li>
                             @endif
+                            @if ($general_setting_permission_active)
+                                <li id="general-setting-menu"><a
+                                        href="{{ route('setting.general') }}">{{ trans('file.General Setting') }}</a>
+                                </li>
+                            @endif
+                            <li id="user-menu"><a
+                                href="{{ route('user.profile', ['id' => Auth::id()]) }}">{{ trans('file.User Profile') }}</a>
+                            </li>
                             @if ($send_notification_permission_active)
                                 <li id="notification-menu">
                                     <a href="" id="send-notification">{{ trans('file.Send Notification') }}</a>
@@ -986,10 +994,7 @@
                             @if ($tax_permission_active)
                                 <li id="tax-menu"><a href="{{ route('tax.index') }}">{{ trans('file.Tax') }}</a>
                                 </li>
-                            @endif
-                            <li id="user-menu"><a
-                                    href="{{ route('user.profile', ['id' => Auth::id()]) }}">{{ trans('file.User Profile') }}</a>
-                            </li>
+                            @endif                            
                             @if ($create_sms_permission_active)
                                 <li id="create-sms-menu"><a
                                         href="{{ route('setting.createSms') }}">{{ trans('file.Create SMS') }}</a>
@@ -998,12 +1003,7 @@
                             @if ($backup_database_permission_active)
                                 <li><a href="{{ route('setting.backup') }}">{{ trans('file.Backup Database') }}</a>
                                 </li>
-                            @endif
-                            @if ($general_setting_permission_active)
-                                <li id="general-setting-menu"><a
-                                        href="{{ route('setting.general') }}">{{ trans('file.General Setting') }}</a>
-                                </li>
-                            @endif
+                            @endif                            
                             @if ($mail_setting_permission_active)
                                 <li id="mail-setting-menu"><a
                                         href="{{ route('setting.mail') }}">{{ trans('file.Mail Setting') }}</a></li>

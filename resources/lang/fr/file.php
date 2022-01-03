@@ -170,6 +170,7 @@ return [
 	"Confirm Password" => "Confirmez le mot de passe",
 	"POS Setting" => "Réglage du PDV",
 	"Developed By" => "Développé par",
+	"Taux Livraison" => "Taux de livraison",
 	"All" => "Tout",
 	"By" => "Par",
 	"Cheque Number" => "Numéro du chèque",

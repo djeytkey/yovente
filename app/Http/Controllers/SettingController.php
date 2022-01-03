@@ -70,6 +70,7 @@ class SettingController extends Controller
         $general_setting->id = 1;
         $general_setting->site_title = $data['site_title'];
         $general_setting->currency = $data['currency'];
+        $general_setting->livraison = $data['livraison'];
         $general_setting->currency_position = $data['currency_position'];
         $general_setting->staff_access = $data['staff_access'];
         $general_setting->date_format = $data['date_format'];

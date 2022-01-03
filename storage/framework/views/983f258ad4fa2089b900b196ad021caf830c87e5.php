@@ -787,8 +787,8 @@
                                     <li id="payment-report-menu">
                                         <?php echo Form::open(['route' => 'report.paymentByDate', 'method' => 'post', 'id' => 'payment-report-form']); ?>
 
-                                        <input type="hidden" name="start_date" value="<?php echo e(date('Y-m') . '-' . '01'); ?>" />
-                                        <input type="hidden" name="end_date" value="<?php echo e(date('Y-m-d')); ?>" />
+                                        <input type="hidden" name="start_date" value="<?php echo e('01' . '-' . date('m-Y')); ?>" />
+                                        <input type="hidden" name="end_date" value="<?php echo e(date('d-m-Y')); ?>" />
                                         <a id="payment-report-link" href=""><?php echo e(trans('file.Payment Report')); ?></a>
                                         <?php echo Form::close(); ?>
 
@@ -960,6 +960,14 @@
                                         href="<?php echo e(route('role.index')); ?>"><?php echo e(trans('file.Role Permission')); ?></a>
                                 </li>
                             <?php endif; ?>
+                            <?php if($general_setting_permission_active): ?>
+                                <li id="general-setting-menu"><a
+                                        href="<?php echo e(route('setting.general')); ?>"><?php echo e(trans('file.General Setting')); ?></a>
+                                </li>
+                            <?php endif; ?>
+                            <li id="user-menu"><a
+                                href="<?php echo e(route('user.profile', ['id' => Auth::id()])); ?>"><?php echo e(trans('file.User Profile')); ?></a>
+                            </li>
                             <?php if($send_notification_permission_active): ?>
                                 <li id="notification-menu">
                                     <a href="" id="send-notification"><?php echo e(trans('file.Send Notification')); ?></a>
@@ -989,10 +997,7 @@
                             <?php if($tax_permission_active): ?>
                                 <li id="tax-menu"><a href="<?php echo e(route('tax.index')); ?>"><?php echo e(trans('file.Tax')); ?></a>
                                 </li>
-                            <?php endif; ?>
-                            <li id="user-menu"><a
-                                    href="<?php echo e(route('user.profile', ['id' => Auth::id()])); ?>"><?php echo e(trans('file.User Profile')); ?></a>
-                            </li>
+                            <?php endif; ?>                            
                             <?php if($create_sms_permission_active): ?>
                                 <li id="create-sms-menu"><a
                                         href="<?php echo e(route('setting.createSms')); ?>"><?php echo e(trans('file.Create SMS')); ?></a>
@@ -1001,12 +1006,7 @@
                             <?php if($backup_database_permission_active): ?>
                                 <li><a href="<?php echo e(route('setting.backup')); ?>"><?php echo e(trans('file.Backup Database')); ?></a>
                                 </li>
-                            <?php endif; ?>
-                            <?php if($general_setting_permission_active): ?>
-                                <li id="general-setting-menu"><a
-                                        href="<?php echo e(route('setting.general')); ?>"><?php echo e(trans('file.General Setting')); ?></a>
-                                </li>
-                            <?php endif; ?>
+                            <?php endif; ?>                            
                             <?php if($mail_setting_permission_active): ?>
                                 <li id="mail-setting-menu"><a
                                         href="<?php echo e(route('setting.mail')); ?>"><?php echo e(trans('file.Mail Setting')); ?></a></li>

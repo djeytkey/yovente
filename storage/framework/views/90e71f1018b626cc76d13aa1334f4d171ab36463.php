@@ -32,7 +32,7 @@
                                     </div>
                                     <?php if($errors->has('site_logo')): ?>
                                    <span>
-                                       <strong><?php echo e($errors->first('site_logo')); ?></strong>
+                                       <strong class="has-error"><?php echo e($errors->first('site_logo')); ?></strong>
                                     </span>
                                     <?php endif; ?>
                                 </div>
@@ -157,6 +157,12 @@
                                     <div class="form-group">
                                         <label><?php echo e(trans('file.Developed By')); ?></label>
                                         <input type="text" name="developed_by" class="form-control" value="<?php echo e($lims_general_setting_data->developed_by); ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label><?php echo e(trans('file.Taux Livraison')); ?> *</label>
+                                        <input type="number" min="0" name="livraison" class="form-control" value="<?php if($lims_general_setting_data): ?><?php echo e($lims_general_setting_data->livraison); ?><?php endif; ?>" required />
                                     </div>
                                 </div>       
                             </div>
