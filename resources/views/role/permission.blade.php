@@ -886,7 +886,7 @@
                                         </tr>
 
                                         {{-- Comptabilités --}}
-                                        {{-- <tr>
+                                        <tr>
                                             <td>{{ trans('file.Accounting') }}</td>
                                             <td class="report-permissions" colspan="5">
                                                 <span>
@@ -956,7 +956,7 @@
                                                     </div>
                                                 </span>
                                             </td>
-                                        </tr> --}}
+                                        </tr>
 
                                         {{-- Personnel --}}
                                         <tr>

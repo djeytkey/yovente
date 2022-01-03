@@ -49,7 +49,7 @@
                                     <input type="text" name="phone_number" required class="form-control">
                                     <?php if($errors->has('phone_number')): ?>
                                    <span>
-                                       <strong><?php echo e($errors->first('phone_number')); ?></strong>
+                                       <strong class="has-error"><?php echo e($errors->first('phone_number')); ?></strong>
                                     </span>
                                     <?php endif; ?>
                                 </div>
@@ -102,7 +102,7 @@
                                     <input type="text" name="name" class="form-control">
                                     <?php if($errors->has('name')): ?>
                                    <span>
-                                       <strong><?php echo e($errors->first('name')); ?></strong>
+                                       <strong class="has-error"><?php echo e($errors->first('name')); ?></strong>
                                     </span>
                                     <?php endif; ?>
                                 </div>

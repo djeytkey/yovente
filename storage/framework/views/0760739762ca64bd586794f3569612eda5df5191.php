@@ -763,7 +763,81 @@
                                         </tr>
 
                                         
-                                        
+                                        <tr>
+                                            <td><?php echo e(trans('file.Accounting')); ?></td>
+                                            <td class="report-permissions" colspan="5">
+                                                <span>
+                                                    <div aria-checked="false" aria-disabled="false">
+                                                        <div class="checkbox">
+                                                            <?php if(in_array('account-index', $all_permission)): ?>
+                                                                <input type="checkbox" value="1" id="account-index"
+                                                                    name="account-index" checked>
+                                                            <?php else: ?>
+                                                                <input type="checkbox" value="1" id="account-index"
+                                                                    name="account-index">
+                                                            <?php endif; ?>
+                                                            <label for="account-index"
+                                                                class="padding05"><?php echo e(trans('file.Account')); ?>
+
+                                                                &nbsp;&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                                <span>
+                                                    <div aria-checked="false" aria-disabled="false">
+                                                        <div class="checkbox">
+                                                            <?php if(in_array('money-transfer', $all_permission)): ?>
+                                                                <input type="checkbox" value="1" id="money-transfer"
+                                                                    name="money-transfer" checked>
+                                                            <?php else: ?>
+                                                                <input type="checkbox" value="1" id="money-transfer"
+                                                                    name="money-transfer">
+                                                            <?php endif; ?>
+                                                            <label for="money-transfer"
+                                                                class="padding05"><?php echo e(trans('file.Money Transfer')); ?>
+
+                                                                &nbsp;&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                                <span>
+                                                    <div aria-checked="false" aria-disabled="false">
+                                                        <div class="checkbox">
+                                                            <?php if(in_array('balance-sheet', $all_permission)): ?>
+                                                                <input type="checkbox" value="1" id="balance-sheet"
+                                                                    name="balance-sheet" checked>
+                                                            <?php else: ?>
+                                                                <input type="checkbox" value="1" id="balance-sheet"
+                                                                    name="balance-sheet">
+                                                            <?php endif; ?>
+                                                            <label for="balance-sheet"
+                                                                class="padding05"><?php echo e(trans('file.Balance Sheet')); ?>
+
+                                                                &nbsp;&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                                <span>
+                                                    <div aria-checked="false" aria-disabled="false">
+                                                        <div class="checkbox">
+                                                            <?php if(in_array('account-statement', $all_permission)): ?>
+                                                                <input type="checkbox" value="1"
+                                                                    id="account-statement-permission"
+                                                                    name="account-statement" checked>
+                                                            <?php else: ?>
+                                                                <input type="checkbox" value="1"
+                                                                    id="account-statement-permission"
+                                                                    name="account-statement">
+                                                            <?php endif; ?>
+                                                            <label for="account-statement-permission"
+                                                                class="padding05"><?php echo e(trans('file.Account Statement')); ?>
+
+                                                                &nbsp;&nbsp;</label>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            </td>
+                                        </tr>
 
                                         
                                         <tr>

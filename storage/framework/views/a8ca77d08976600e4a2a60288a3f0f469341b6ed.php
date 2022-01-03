@@ -27,7 +27,7 @@
                                     <input type="file" name="image" class="form-control">
                                     <?php if($errors->has('image')): ?>
                                    <span>
-                                       <strong><?php echo e($errors->first('image')); ?></strong>
+                                       <strong class="has-error"><?php echo e($errors->first('image')); ?></strong>
                                     </span>
                                     <?php endif; ?>
                                 </div>
@@ -38,7 +38,7 @@
                                     <input type="text" name="company_name" required class="form-control">
                                     <?php if($errors->has('company_name')): ?>
                                    <span>
-                                       <strong><?php echo e($errors->first('company_name')); ?></strong>
+                                       <strong class="has-error"><?php echo e($errors->first('company_name')); ?></strong>
                                     </span>
                                     <?php endif; ?>
                                 </div>
@@ -55,7 +55,7 @@
                                     <input type="email" name="email" placeholder="example@example.com" required class="form-control">
                                     <?php if($errors->has('email')): ?>
                                    <span>
-                                       <strong><?php echo e($errors->first('email')); ?></strong>
+                                       <strong class="has-error"><?php echo e($errors->first('email')); ?></strong>
                                     </span>
                                     <?php endif; ?>
                                 </div>

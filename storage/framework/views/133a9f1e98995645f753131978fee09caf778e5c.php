@@ -194,14 +194,14 @@
                 slidertext = '<div id="product-img-slider" class="carousel slide" data-ride="carousel"><div class="carousel-inner">';
                 for (var i = 0; i < product_image.length; i++) {
                     if(!i)
-                        slidertext += '<div class="carousel-item active"><img src="public/images/product/'+product_image[i]+'" height="300" width="100%"></div>';
+                        slidertext += '<div class="carousel-item active"><img src="public/images/product/'+product_image[i]+'" width="100%"></div>';
                     else
-                        slidertext += '<div class="carousel-item"><img src="public/images/product/'+product_image[i]+'" height="300" width="100%"></div>';
+                        slidertext += '<div class="carousel-item"><img src="public/images/product/'+product_image[i]+'" width="100%"></div>';
                 }
                 slidertext += '</div><a class="carousel-control-prev" href="#product-img-slider" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#product-img-slider" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>';
             }
             else {
-                slidertext = '<img src="public/images/product/'+product[17]+'" height="300" width="100%">';
+                slidertext = '<img src="public/images/product/'+product[17]+'" width="100%">';
             }
         }
         
@@ -339,7 +339,7 @@
                 {"data": "options"},
             ],
             'language': {
-                /*'searchPlaceholder': "<?php echo e(trans('file.Type Product Name or Code...')); ?>",*/
+                'searchPlaceholder': "<?php echo e(trans('file.Type Product Name or Code...')); ?>",
                 'lengthMenu': '_MENU_ <?php echo e(trans("file.records per page")); ?>',
                  "info":      '<small><?php echo e(trans("file.Showing")); ?> _START_ - _END_ (_TOTAL_)</small>',
                 "search":  '<?php echo e(trans("file.Search")); ?>',

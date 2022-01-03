@@ -220,6 +220,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        //echo dd($request);
         $this->validate($request, [
             'code' => [
                 'max:255',
@@ -486,7 +487,7 @@ class ProductController extends Controller
 
     public function generateCode()
     {
-        $id = Keygen::numeric(8)->generate();
+        $id = Keygen::numeric(8)->prefix('P-'.date("y").'-')->generate();
         return $id;
     }
 

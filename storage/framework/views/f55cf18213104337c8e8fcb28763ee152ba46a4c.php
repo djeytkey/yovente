@@ -47,8 +47,8 @@
                                         <label><?php echo e(trans('file.Barcode Symbology')); ?> *</strong> </label>
                                         <div class="input-group">
                                             <select name="barcode_symbology" required class="form-control selectpicker">
-                                                <option value="C128">Code 128</option>
                                                 <option value="C39">Code 39</option>
+                                                <option value="C128">Code 128</option>                                                
                                                 <option value="UPCA">UPC-A</option>
                                                 <option value="UPCE">UPC-E</option>
                                                 <option value="EAN8">EAN-8</option>
@@ -170,33 +170,7 @@
                                         <input type="number" name="alert_quantity" class="form-control" step="any">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label><?php echo e(trans('file.Product Tax')); ?></strong> </label>
-                                        <select name="tax_id" class="form-control selectpicker">
-                                            <option value="">No Tax</option>
-                                            <?php $__currentLoopData = $lims_tax_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tax): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option value="<?php echo e($tax->id); ?>"><?php echo e($tax->name); ?></option>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label><?php echo e(trans('file.Tax Method')); ?></strong> </label> <i class="dripicons-question" data-toggle="tooltip" title="<?php echo e(trans('file.Exclusive: Poduct price = Actual product price + Tax. Inclusive: Actual product price = Product price - Tax')); ?>"></i>
-                                        <select name="tax_method" class="form-control selectpicker">
-                                            <option value="1"><?php echo e(trans('file.Exclusive')); ?></option>
-                                            <option value="2"><?php echo e(trans('file.Inclusive')); ?></option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group mt-3">
-                                        <input type="checkbox" name="featured" value="1">&nbsp;
-                                        <label><?php echo e(trans('file.Featured')); ?></label>
-                                        <p class="italic"><?php echo e(trans('file.Featured product will be displayed in POS')); ?></p>
-                                    </div> 
-                                </div>                             
+                                                            
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label><?php echo e(trans('file.Product Image')); ?></strong> </label> <i class="dripicons-question" data-toggle="tooltip" title="<?php echo e(trans('file.You can upload multiple image. Only .jpeg, .jpg, .png, .gif file can be uploaded. First image will be base image.')); ?>"></i>
@@ -237,9 +211,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="col-md-12 mt-3" id="batch-option">
-                                    <h5><input name="is_batch" type="checkbox" id="is-batch" value="1">&nbsp; <?php echo e(trans('file.This product has batch and expired date')); ?></h5>
-                                </div>
+                                
                                 <div class="col-md-12 mt-3" id="variant-option">
                                     <h5><input name="is_variant" type="checkbox" id="is-variant" value="1">&nbsp; <?php echo e(trans('file.This product has variant')); ?></h5>
                                 </div>

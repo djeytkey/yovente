@@ -12,7 +12,7 @@
                     </div>
                     <div class="card-body">
                         <p class="italic"><small><?php echo e(trans('file.The field labels marked with * are required input fields')); ?>.</small></p>
-                        <?php echo Form::open(['route' => 'sales.store', 'method' => 'post', 'files' => true, 'class' => 'payment-form']); ?>
+                        <?php echo Form::open(['route' => 'sales.store', 'method' => 'post', 'files' => false, 'class' => 'payment-form']); ?>
 
                         <div class="row">
                             <div class="col-md-12">
@@ -27,7 +27,7 @@
                                         </div>
                                         <?php if($errors->has('reference_no')): ?>
                                        <span>
-                                           <strong><?php echo e($errors->first('reference_no')); ?></strong>
+                                           <strong class="has-error"><?php echo e($errors->first('reference_no')); ?></strong>
                                         </span>
                                         <?php endif; ?>
                                     </div>
@@ -38,7 +38,7 @@
                                                 <?php $deposit = []; ?>
                                                 <?php $__currentLoopData = $lims_customer_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php $deposit[$customer->id] = $customer->deposit - $customer->expense; ?>
-                                                <option value="<?php echo e($customer->id); ?>"><?php echo e($customer->name . ' (' . $customer->phone_number . ')'); ?></option>
+                                                <option value="<?php echo e($customer->id); ?>"><?php echo e($customer->name/* . ' (' . $customer->phone_number . ')'*/); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </select>
                                         </div>
@@ -178,7 +178,7 @@
                                             <input type="file" name="document" class="form-control" />
                                             <?php if($errors->has('extension')): ?>
                                                 <span>
-                                                   <strong><?php echo e($errors->first('extension')); ?></strong>
+                                                   <strong class="has-error"><?php echo e($errors->first('extension')); ?></strong>
                                                 </span>
                                             <?php endif; ?>
                                         </div>

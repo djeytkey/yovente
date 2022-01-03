@@ -33,6 +33,10 @@ nav.navbar a.menu-btn:hover {
     width: 1%;
 }
 
+tr.product-link td {
+    vertical-align: middle;
+}
+
 .pos-page .side-navbar {
 	top: 0;
 }

@@ -49,8 +49,8 @@
                                         <label>{{trans('file.Barcode Symbology')}} *</strong> </label>
                                         <div class="input-group">
                                             <select name="barcode_symbology" required class="form-control selectpicker">
-                                                <option value="C128">Code 128</option>
                                                 <option value="C39">Code 39</option>
+                                                <option value="C128">Code 128</option>                                                
                                                 <option value="UPCA">UPC-A</option>
                                                 <option value="UPCE">UPC-E</option>
                                                 <option value="EAN8">EAN-8</option>
@@ -172,7 +172,7 @@
                                         <input type="number" name="alert_quantity" class="form-control" step="any">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label>{{trans('file.Product Tax')}}</strong> </label>
                                         <select name="tax_id" class="form-control selectpicker">
@@ -198,7 +198,7 @@
                                         <label>{{trans('file.Featured')}}</label>
                                         <p class="italic">{{trans('file.Featured product will be displayed in POS')}}</p>
                                     </div> 
-                                </div>                             
+                                </div>  --}}                            
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>{{trans('file.Product Image')}}</strong> </label> <i class="dripicons-question" data-toggle="tooltip" title="{{trans('file.You can upload multiple image. Only .jpeg, .jpg, .png, .gif file can be uploaded. First image will be base image.')}}"></i>
@@ -238,9 +238,9 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="col-md-12 mt-3" id="batch-option">
+                                {{-- <div class="col-md-12 mt-3" id="batch-option">
                                     <h5><input name="is_batch" type="checkbox" id="is-batch" value="1">&nbsp; {{trans('file.This product has batch and expired date')}}</h5>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12 mt-3" id="variant-option">
                                     <h5><input name="is_variant" type="checkbox" id="is-variant" value="1">&nbsp; {{trans('file.This product has variant')}}</h5>
                                 </div>
