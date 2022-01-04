@@ -161,7 +161,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label><?php echo e(trans('file.Taux Livraison')); ?> *</label>
+                                        <label><?php echo e(trans('file.Delivery Rate')); ?> *</label>
                                         <input type="number" min="0" name="livraison" class="form-control" value="<?php if($lims_general_setting_data): ?><?php echo e($lims_general_setting_data->livraison); ?><?php endif; ?>" required />
                                     </div>
                                 </div>       

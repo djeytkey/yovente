@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>{{trans('file.Taux Livraison')}} *</label>
+                                        <label>{{trans('file.Delivery Rate')}} *</label>
                                         <input type="number" min="0" name="livraison" class="form-control" value="@if($lims_general_setting_data){{$lims_general_setting_data->livraison}}@endif" required />
                                     </div>
                                 </div>       

@@ -329,10 +329,11 @@ class SaleController extends Controller
                 $lims_biller_list = Biller::where('is_active', true)->get();
             }
 
+            $lims_general_setting_data = GeneralSetting::latest()->first();
             $lims_tax_list = Tax::where('is_active', true)->get();
             $lims_pos_setting_data = PosSetting::latest()->first();
 
-            return view('sale.create',compact('lims_customer_list', 'lims_warehouse_list', 'lims_biller_list', 'lims_pos_setting_data', 'lims_tax_list'));
+            return view('sale.create',compact('lims_customer_list', 'lims_warehouse_list', 'lims_biller_list', 'lims_pos_setting_data', 'lims_tax_list', 'lims_general_setting_data'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');

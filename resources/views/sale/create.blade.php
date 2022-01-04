@@ -94,8 +94,8 @@
                                                 <tfoot class="tfoot active">
                                                     <th colspan="2">{{trans('file.Total')}}</th>
                                                     <th id="total-qty">0</th>
-                                                    <th></th>
-                                                    <th></th>
+                                                    <th style="text-align: right;">{{trans('file.Delivery Rate')}}</th>
+                                                    <th id="taux-livraison">{{ number_format($lims_general_setting_data->livraison, 2, '.', ' ') }}</th>
                                                     <th id="total-discount">0.00</th>
                                                     <th id="total-tax">0.00</th>
                                                     <th id="total">0.00</th>
@@ -185,8 +185,8 @@
                                         <div class="form-group">
                                             <label>{{trans('file.Sale Status')}} *</label>
                                             <select name="sale_status" class="form-control">
-                                                <option value="1">{{trans('file.Completed')}}</option>
                                                 <option value="2">{{trans('file.Pending')}}</option>
+                                                <option value="1">{{trans('file.Completed')}}</option>                                                
                                             </select>
                                         </div>
                                     </div>
@@ -486,11 +486,12 @@ $('#lims_productcodeSearch').on('input', function(){
     temp_data = $('#lims_productcodeSearch').val();
     if(!customer_id){
         $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
-        alert('Please select Customer!');
+        alert('{{ trans('file.Please select Customer!') }}');
     }
     else if(!warehouse_id){
         $('#lims_productcodeSearch').val(temp_data.substring(0, temp_data.length - 1));
-        alert('Please select Warehouse!');
+        
+        alert('{{ trans('file.Please select Warehouse!') }}');
     }
 
 });
@@ -878,9 +879,11 @@ function calculateTotal() {
 
     //Sum of subtotal
     var total = 0;
+    var taux_livraison = parseFloat($("#taux-livraison").text());
     $(".sub-total").each(function() {
         total += parseFloat($(this).text());
     });
+    total = total + taux_livraison;
     $("#total").text(total.toFixed(2));
     $('input[name="total_price"]').val(total.toFixed(2));
 

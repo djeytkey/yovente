@@ -9,7 +9,7 @@ nav.navbar a.menu-btn:hover {
 .side-navbar {
 	/*background-color: #fafbfe;*/
 	background-color: #222d32;
-    position: absolute;
+    position: fixed;
     top: 63px;
     left: 0;
     width: 200px;
