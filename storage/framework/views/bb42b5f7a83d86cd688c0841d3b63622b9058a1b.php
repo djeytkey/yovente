@@ -35,9 +35,9 @@
                     <?php else: ?>
                         <td></td>
                     <?php endif; ?>
-                    <td><?php echo e(number_format((float)$credit->amount, 2, '.', '')); ?></td>
+                    <td><?php echo e(number_format((float)$credit->amount, 2, '.', ' ')); ?></td>
                     <td>0.00</td>
-                    <td><?php echo e(number_format((float)$balance, 2, '.', '')); ?></td>
+                    <td><?php echo e(number_format((float)$balance, 2, '.', ' ')); ?></td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -50,15 +50,15 @@
                     <td><?php echo e(date($general_setting->date_format, strtotime($recieved_money->created_at->toDateString()))); ?></td>
                     <td><?php echo e($recieved_money->reference_no); ?></td>
                     <td></td>
-                    <td><?php echo e(number_format((float)$recieved_money->amount, 2, '.', '')); ?></td>
+                    <td><?php echo e(number_format((float)$recieved_money->amount, 2, '.', ' ')); ?></td>
                     <td>0.00</td>
-                    <td><?php echo e(number_format((float)$balance, 2, '.', '')); ?></td>
+                    <td><?php echo e(number_format((float)$balance, 2, '.', ' ')); ?></td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 <?php $__currentLoopData = $debit_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$debit): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php
-                    $transaction = App\Purchase::select('reference_no')->find($credit->purchase_id);
+                    $transaction = App\Purchase::select('reference_no')->find($debit->purchase_id);
                     $balance = $balance - $debit->amount; 
                 ?>
                 <tr>
@@ -71,8 +71,8 @@
                         <td></td>
                     <?php endif; ?>
                     <td>0.00</td>
-                    <td><?php echo e(number_format((float)$debit->amount, 2, '.', '')); ?></td>
-                    <td><?php echo e(number_format((float)$balance, 2, '.', '')); ?></td>
+                    <td><?php echo e(number_format((float)$debit->amount, 2, '.', ' ')); ?></td>
+                    <td><?php echo e(number_format((float)$balance, 2, '.', ' ')); ?></td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -91,8 +91,8 @@
                         <td></td>
                     <?php endif; ?>
                     <td>0.00</td>
-                    <td><?php echo e(number_format((float)$return->grand_total, 2, '.', '')); ?></td>
-                    <td><?php echo e(number_format((float)$balance, 2, '.', '')); ?></td>
+                    <td><?php echo e(number_format((float)$return->grand_total, 2, '.', ' ')); ?></td>
+                    <td><?php echo e(number_format((float)$balance, 2, '.', ' ')); ?></td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -110,9 +110,9 @@
                     <?php else: ?>
                         <td></td>
                     <?php endif; ?>
-                    <td><?php echo e(number_format((float)$return->grand_total, 2, '.', '')); ?></td>
+                    <td><?php echo e(number_format((float)$return->grand_total, 2, '.', ' ')); ?></td>
                     <td>0.00</td>
-                    <td><?php echo e(number_format((float)$balance, 2, '.', '')); ?></td>
+                    <td><?php echo e(number_format((float)$balance, 2, '.', ' ')); ?></td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -124,8 +124,8 @@
                     <td><?php echo e($expense->reference_no); ?></td>
                     <td></td>
                     <td>0.00</td>
-                    <td><?php echo e(number_format((float)$expense->amount, 2, '.', '')); ?></td>
-                    <td><?php echo e(number_format((float)$balance, 2, '.', '')); ?></td>
+                    <td><?php echo e(number_format((float)$expense->amount, 2, '.', ' ')); ?></td>
+                    <td><?php echo e(number_format((float)$balance, 2, '.', ' ')); ?></td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -137,8 +137,8 @@
                     <td><?php echo e($payroll->reference_no); ?></td>
                     <td></td>
                     <td>0.00</td>
-                    <td><?php echo e(number_format((float)$payroll->amount, 2, '.', '')); ?></td>
-                    <td><?php echo e(number_format((float)$balance, 2, '.', '')); ?></td>
+                    <td><?php echo e(number_format((float)$payroll->amount, 2, '.', ' ')); ?></td>
+                    <td><?php echo e(number_format((float)$balance, 2, '.', ' ')); ?></td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -150,8 +150,8 @@
                     <td><?php echo e($sent_money->reference_no); ?></td>
                     <td></td>
                     <td>0.00</td>
-                    <td><?php echo e(number_format((float)$sent_money->amount, 2, '.', '')); ?></td>
-                    <td><?php echo e(number_format((float)$balance, 2, '.', '')); ?></td>
+                    <td><?php echo e(number_format((float)$sent_money->amount, 2, '.', ' ')); ?></td>
+                    <td><?php echo e(number_format((float)$balance, 2, '.', ' ')); ?></td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>

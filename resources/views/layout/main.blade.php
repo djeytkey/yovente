@@ -169,7 +169,7 @@
                                         </li>
                                     @endif
                                 @endif
-                                @if ($print_barcode_active)
+                                {{-- @if ($print_barcode_active)
                                     <li id="printBarcode-menu"><a
                                             href="{{ route('product.printBarcode') }}">{{ __('file.print_barcode') }}</a>
                                     </li>
@@ -186,7 +186,7 @@
                                     <li id="stock-count-menu"><a
                                             href="{{ route('stock-count.index') }}">{{ trans('file.Stock Count') }}</a>
                                     </li>
-                                @endif
+                                @endif --}}
                             </ul>
                         </li>
                     @endif
@@ -469,7 +469,7 @@
                                     </li>
                                     <li><a id="add-account" href="">{{ trans('file.Add Account') }}</a></li>
                                 @endif
-                                @if ($money_transfer_permission_active)
+                                {{-- @if ($money_transfer_permission_active)
                                     <li id="money-transfer-menu"><a
                                             href="{{ route('money-transfers.index') }}">{{ trans('file.Money Transfer') }}</a>
                                     </li>
@@ -478,7 +478,7 @@
                                     <li id="balance-sheet-menu"><a
                                             href="{{ route('accounts.balancesheet') }}">{{ trans('file.Balance Sheet') }}</a>
                                     </li>
-                                @endif
+                                @endif --}}
                                 @if ($account_statement_permission_active)
                                     <li id="account-statement-menu"><a id="account-statement"
                                             href="">{{ trans('file.Account Statement') }}</a></li>
@@ -513,7 +513,7 @@
                         ->where([['permission_id', $payroll->id], ['role_id', $role->id]])
                         ->first();
                     ?>
-                    @if (Auth::user()->role_id != 5)
+                    {{-- @if (Auth::user()->role_id != 5)
                         <li class=""><a href="#hrm" aria-expanded="false" data-toggle="collapse"> <i
                                     class="dripicons-user-group"></i><span>HRM</span></a>
                             <ul id="hrm" class="collapse list-unstyled ">
@@ -540,7 +540,7 @@
                                         href="{{ route('holidays.index') }}">{{ trans('file.Holiday') }}</a></li>
                             </ul>
                         </li>
-                    @endif
+                    @endif --}}
                     {{-- Utilisateur Menu --}}
                     <?php
                     $user_index_permission_active = DB::table('permissions')
@@ -1416,15 +1416,16 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-6 form-group">
+                            {{-- <div class="col-md-6 form-group">
                                 <label> {{ trans('file.Type') }}</label>
+                                <input type="text" name="type" class="form-control" required disabled value="{{ trans('file.All') }}"/>
                                 <select class="form-control selectpicker" name="type">
                                     <option value="0">{{ trans('file.All') }}</option>
                                     <option value="1">{{ trans('file.Debit') }}</option>
                                     <option value="2">{{ trans('file.Credit') }}</option>
                                 </select>
-                            </div>
-                            <div class="col-md-12 form-group">
+                            </div> --}}
+                            <div class="col-md-6 form-group">
                                 <label>{{ trans('file.Choose Your Date') }}</label>
                                 <div class="input-group">
                                     <input type="text" class="daterangepicker-field form-control" required />

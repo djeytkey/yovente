@@ -35,9 +35,9 @@
                     @else
                         <td></td>
                     @endif
-                    <td>{{number_format((float)$credit->amount, 2, '.', '')}}</td>
+                    <td>{{number_format((float)$credit->amount, 2, '.', ' ')}}</td>
                     <td>0.00</td>
-                    <td>{{number_format((float)$balance, 2, '.', '')}}</td>
+                    <td>{{number_format((float)$balance, 2, '.', ' ')}}</td>
                 </tr>
                 @endforeach
 
@@ -50,15 +50,15 @@
                     <td>{{date($general_setting->date_format, strtotime($recieved_money->created_at->toDateString()))}}</td>
                     <td>{{$recieved_money->reference_no}}</td>
                     <td></td>
-                    <td>{{number_format((float)$recieved_money->amount, 2, '.', '')}}</td>
+                    <td>{{number_format((float)$recieved_money->amount, 2, '.', ' ')}}</td>
                     <td>0.00</td>
-                    <td>{{number_format((float)$balance, 2, '.', '')}}</td>
+                    <td>{{number_format((float)$balance, 2, '.', ' ')}}</td>
                 </tr>
                 @endforeach
 
                 @foreach($debit_list as $key=>$debit)
                 <?php
-                    $transaction = App\Purchase::select('reference_no')->find($credit->purchase_id);
+                    $transaction = App\Purchase::select('reference_no')->find($debit->purchase_id);
                     $balance = $balance - $debit->amount; 
                 ?>
                 <tr>
@@ -71,14 +71,14 @@
                         <td></td>
                     @endif
                     <td>0.00</td>
-                    <td>{{number_format((float)$debit->amount, 2, '.', '')}}</td>
-                    <td>{{number_format((float)$balance, 2, '.', '')}}</td>
+                    <td>{{number_format((float)$debit->amount, 2, '.', ' ')}}</td>
+                    <td>{{number_format((float)$balance, 2, '.', ' ')}}</td>
                 </tr>
                 @endforeach
 
                 @foreach($return_list as $key=>$return)
                 <?php 
-                    $transaction = App\Returns::select('reference_no')->find($credit->return_id);
+                    $transaction = App\Returns::select('reference_no')->find($return->return_id);
                     $balance = $balance - $return->grand_total; 
                 ?>
                 <tr>
@@ -91,14 +91,14 @@
                         <td></td>
                     @endif
                     <td>0.00</td>
-                    <td>{{number_format((float)$return->grand_total, 2, '.', '')}}</td>
-                    <td>{{number_format((float)$balance, 2, '.', '')}}</td>
+                    <td>{{number_format((float)$return->grand_total, 2, '.', ' ')}}</td>
+                    <td>{{number_format((float)$balance, 2, '.', ' ')}}</td>
                 </tr>
                 @endforeach
 
                 @foreach($purchase_return_list as $key=>$return)
                 <?php
-                    $transaction = App\ReturnPurchase::select('reference_no')->find($credit->return_id);
+                    $transaction = App\ReturnPurchase::select('reference_no')->find($return->return_id);
                     $balance = $balance + $return->grand_total;
                 ?>
                 <tr>
@@ -110,9 +110,9 @@
                     @else
                         <td></td>
                     @endif
-                    <td>{{number_format((float)$return->grand_total, 2, '.', '')}}</td>
+                    <td>{{number_format((float)$return->grand_total, 2, '.', ' ')}}</td>
                     <td>0.00</td>
-                    <td>{{number_format((float)$balance, 2, '.', '')}}</td>
+                    <td>{{number_format((float)$balance, 2, '.', ' ')}}</td>
                 </tr>
                 @endforeach
 
@@ -124,8 +124,8 @@
                     <td>{{$expense->reference_no}}</td>
                     <td></td>
                     <td>0.00</td>
-                    <td>{{number_format((float)$expense->amount, 2, '.', '')}}</td>
-                    <td>{{number_format((float)$balance, 2, '.', '')}}</td>
+                    <td>{{number_format((float)$expense->amount, 2, '.', ' ')}}</td>
+                    <td>{{number_format((float)$balance, 2, '.', ' ')}}</td>
                 </tr>
                 @endforeach
 
@@ -137,8 +137,8 @@
                     <td>{{$payroll->reference_no}}</td>
                     <td></td>
                     <td>0.00</td>
-                    <td>{{number_format((float)$payroll->amount, 2, '.', '')}}</td>
-                    <td>{{number_format((float)$balance, 2, '.', '')}}</td>
+                    <td>{{number_format((float)$payroll->amount, 2, '.', ' ')}}</td>
+                    <td>{{number_format((float)$balance, 2, '.', ' ')}}</td>
                 </tr>
                 @endforeach
 
@@ -150,8 +150,8 @@
                     <td>{{$sent_money->reference_no}}</td>
                     <td></td>
                     <td>0.00</td>
-                    <td>{{number_format((float)$sent_money->amount, 2, '.', '')}}</td>
-                    <td>{{number_format((float)$balance, 2, '.', '')}}</td>
+                    <td>{{number_format((float)$sent_money->amount, 2, '.', ' ')}}</td>
+                    <td>{{number_format((float)$balance, 2, '.', ' ')}}</td>
                 </tr>
                 @endforeach
             </tbody>

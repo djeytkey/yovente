@@ -169,24 +169,7 @@
                                         </li>
                                     <?php endif; ?>
                                 <?php endif; ?>
-                                <?php if($print_barcode_active): ?>
-                                    <li id="printBarcode-menu"><a
-                                            href="<?php echo e(route('product.printBarcode')); ?>"><?php echo e(__('file.print_barcode')); ?></a>
-                                    </li>
-                                <?php endif; ?>
-                                <?php if($adjustment_active): ?>
-                                    <li id="adjustment-list-menu"><a
-                                            href="<?php echo e(route('qty_adjustment.index')); ?>"><?php echo e(trans('file.Adjustment List')); ?></a>
-                                    </li>
-                                    <li id="adjustment-create-menu"><a
-                                            href="<?php echo e(route('qty_adjustment.create')); ?>"><?php echo e(trans('file.Add Adjustment')); ?></a>
-                                    </li>
-                                <?php endif; ?>
-                                <?php if($stock_count_active): ?>
-                                    <li id="stock-count-menu"><a
-                                            href="<?php echo e(route('stock-count.index')); ?>"><?php echo e(trans('file.Stock Count')); ?></a>
-                                    </li>
-                                <?php endif; ?>
+                                
                             </ul>
                         </li>
                     <?php endif; ?>
@@ -460,16 +443,7 @@
                                     </li>
                                     <li><a id="add-account" href=""><?php echo e(trans('file.Add Account')); ?></a></li>
                                 <?php endif; ?>
-                                <?php if($money_transfer_permission_active): ?>
-                                    <li id="money-transfer-menu"><a
-                                            href="<?php echo e(route('money-transfers.index')); ?>"><?php echo e(trans('file.Money Transfer')); ?></a>
-                                    </li>
-                                <?php endif; ?>
-                                <?php if($balance_sheet_permission_active): ?>
-                                    <li id="balance-sheet-menu"><a
-                                            href="<?php echo e(route('accounts.balancesheet')); ?>"><?php echo e(trans('file.Balance Sheet')); ?></a>
-                                    </li>
-                                <?php endif; ?>
+                                
                                 <?php if($account_statement_permission_active): ?>
                                     <li id="account-statement-menu"><a id="account-statement"
                                             href=""><?php echo e(trans('file.Account Statement')); ?></a></li>
@@ -504,34 +478,7 @@
                         ->where([['permission_id', $payroll->id], ['role_id', $role->id]])
                         ->first();
                     ?>
-                    <?php if(Auth::user()->role_id != 5): ?>
-                        <li class=""><a href="#hrm" aria-expanded="false" data-toggle="collapse"> <i
-                                    class="dripicons-user-group"></i><span>HRM</span></a>
-                            <ul id="hrm" class="collapse list-unstyled ">
-                                <?php if($department_active): ?>
-                                    <li id="dept-menu"><a
-                                            href="<?php echo e(route('departments.index')); ?>"><?php echo e(trans('file.Department')); ?></a>
-                                    </li>
-                                <?php endif; ?>
-                                <?php if($index_employee_active): ?>
-                                    <li id="employee-menu"><a
-                                            href="<?php echo e(route('employees.index')); ?>"><?php echo e(trans('file.Employee')); ?></a>
-                                    </li>
-                                <?php endif; ?>
-                                <?php if($attendance_active): ?>
-                                    <li id="attendance-menu"><a
-                                            href="<?php echo e(route('attendance.index')); ?>"><?php echo e(trans('file.Attendance')); ?></a>
-                                    </li>
-                                <?php endif; ?>
-                                <?php if($payroll_active): ?>
-                                    <li id="payroll-menu"><a
-                                            href="<?php echo e(route('payroll.index')); ?>"><?php echo e(trans('file.Payroll')); ?></a></li>
-                                <?php endif; ?>
-                                <li id="holiday-menu"><a
-                                        href="<?php echo e(route('holidays.index')); ?>"><?php echo e(trans('file.Holiday')); ?></a></li>
-                            </ul>
-                        </li>
-                    <?php endif; ?>
+                    
                     
                     <?php
                     $user_index_permission_active = DB::table('permissions')
@@ -1387,15 +1334,8 @@
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
+                            
                             <div class="col-md-6 form-group">
-                                <label> <?php echo e(trans('file.Type')); ?></label>
-                                <select class="form-control selectpicker" name="type">
-                                    <option value="0"><?php echo e(trans('file.All')); ?></option>
-                                    <option value="1"><?php echo e(trans('file.Debit')); ?></option>
-                                    <option value="2"><?php echo e(trans('file.Credit')); ?></option>
-                                </select>
-                            </div>
-                            <div class="col-md-12 form-group">
                                 <label><?php echo e(trans('file.Choose Your Date')); ?></label>
                                 <div class="input-group">
                                     <input type="text" class="daterangepicker-field form-control" required />

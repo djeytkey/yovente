@@ -59,7 +59,7 @@
                                             <input type="file" name="document" class="form-control" />
                                             <?php if($errors->has('extension')): ?>
                                                 <span>
-                                                   <strong><?php echo e($errors->first('extension')); ?></strong>
+                                                   <strong class="has-error"><?php echo e($errors->first('extension')); ?></strong>
                                                 </span>
                                             <?php endif; ?>
                                         </div>
