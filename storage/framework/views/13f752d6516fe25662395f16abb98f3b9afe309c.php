@@ -98,6 +98,7 @@
                                                     <th id="total-qty">0</th>
                                                     <th style="text-align: right;"><?php echo e(trans('file.Delivery Rate')); ?></th>
                                                     <th id="taux-livraison"><?php echo e(number_format($lims_general_setting_data->livraison, 2, '.', ' ')); ?></th>
+                                                    
                                                     <th id="total-discount">0.00</th>
                                                     <th id="total-tax">0.00</th>
                                                     <th id="total">0.00</th>
@@ -136,6 +137,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
+                                            <input type="hidden" name="livraison" />
                                             <input type="hidden" name="grand_total" />
                                             <input type="hidden" name="pos" value="0" />
                                             <input type="hidden" name="coupon_active" value="0" />
@@ -340,13 +342,13 @@
                             <input type="number" name="edit_unit_price" class="form-control" step="any">
                         </div>
                         <?php
-                $tax_name_all[] = 'No Tax';
-                $tax_rate_all[] = 0;
-                foreach($lims_tax_list as $tax) {
-                    $tax_name_all[] = $tax->name;
-                    $tax_rate_all[] = $tax->rate;
-                }
-            ?>
+                            $tax_name_all[] = 'No Tax';
+                            $tax_rate_all[] = 0;
+                            foreach($lims_tax_list as $tax) {
+                                $tax_name_all[] = $tax->name;
+                                $tax_rate_all[] = $tax->rate;
+                            }
+                        ?>
                             <div class="form-group">
                                 <label><?php echo e(trans('file.Tax Rate')); ?></label>
                                 <select name="edit_tax_rate" class="form-control selectpicker">
@@ -654,6 +656,7 @@ function productSearch(data) {
         },
         success: function(data) {
             var flag = 1;
+            alert(data);
             $(".product-code").each(function(i) {
                 if ($(this).val() == data[1]) {
                     rowindex = i;
@@ -688,6 +691,7 @@ function productSearch(data) {
                 cols += '<input type="hidden" class="product-id" name="product_id[]" value="' + data[9] + '"/>';
                 cols += '<input type="hidden" class="sale-unit" name="sale_unit[]" value="' + temp_unit_name[0] + '"/>';
                 cols += '<input type="hidden" class="net_unit_price" name="net_unit_price[]" />';
+                cols += '<input type="hidden" class="original_price" name="original_price[]" value="' + data[2] + '"/>';
                 cols += '<input type="hidden" class="discount-value" name="discount[]" />';
                 cols += '<input type="hidden" class="tax-rate" name="tax_rate[]" value="' + data[3] + '"/>';
                 cols += '<input type="hidden" class="tax-value" name="tax[]" />';
@@ -885,12 +889,18 @@ function calculateTotal() {
     //Sum of subtotal
     var total = 0;
     var taux_livraison = parseFloat($("#taux-livraison").text());
+    /*if ($("#taux-livraison").text() !== "0.00") {
+        var taux_livraison = parseFloat($("#taux-livraison").text());
+    } else {
+        var taux_livraison = 0;
+    }*/
     $(".sub-total").each(function() {
         total += parseFloat($(this).text());
     });
     total = total + taux_livraison;
     $("#total").text(total.toFixed(2));
     $('input[name="total_price"]').val(total.toFixed(2));
+    $('input[name="livraison"]').val(taux_livraison.toFixed(2));
 
     calculateGrandTotal();
 }

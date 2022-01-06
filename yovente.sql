@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : jeu. 06 jan. 2022 à 16:10
+-- Généré le : jeu. 06 jan. 2022 à 22:22
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.20RC1
 
@@ -309,13 +309,6 @@ CREATE TABLE `deliveries` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `deliveries`
---
-
-INSERT INTO `deliveries` (`id`, `reference_no`, `sale_id`, `user_id`, `address`, `delivered_by`, `recieved_by`, `file`, `note`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'dr-20220106-034522', 1, 1, 'Just here for Customer 1 Meknès', 'Ozone Express', 'Customer 1', NULL, NULL, '3', '2022-01-06 14:45:50', '2022-01-06 14:47:18');
 
 -- --------------------------------------------------------
 
@@ -677,7 +670,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (130, '2021_05_22_105611_add_product_batch_id_to_purchase_product_return_table', 83),
 (131, '2021_05_23_124848_add_product_batch_id_to_product_transfer_table', 84),
 (132, '2021_05_26_153106_add_product_batch_id_to_product_quotation_table', 85),
-(134, '2022_01_03_205841_add_livraison_to_general_settings_table', 86);
+(134, '2022_01_03_205841_add_livraison_to_general_settings_table', 86),
+(135, '2022_01_06_181753_add_livraison_to_sales_table', 87),
+(136, '2022_01_06_182916_add_original_price_to_product_sales_table', 88);
 
 -- --------------------------------------------------------
 
@@ -751,7 +746,6 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`id`, `payment_reference`, `user_id`, `purchase_id`, `sale_id`, `cash_register_id`, `account_id`, `amount`, `change`, `paying_method`, `payment_note`, `created_at`, `updated_at`) VALUES
-(1, 'spr-20220106-034517', 1, NULL, 1, 1, 1, 680, 0, 'Cash', NULL, '2022-01-06 14:45:17', '2022-01-06 14:45:17'),
 (2, 'ppr-20220106-035539', 1, 2, NULL, NULL, 1, 2100, 0, 'Cash', NULL, '2022-01-06 14:55:39', '2022-01-06 14:55:39');
 
 -- --------------------------------------------------------
@@ -1025,7 +1019,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `code`, `type`, `barcode_symbology`, `brand_id`, `category_id`, `unit_id`, `purchase_unit_id`, `sale_unit_id`, `cost`, `price`, `qty`, `alert_quantity`, `promotion`, `promotion_price`, `starting_date`, `last_date`, `tax_id`, `tax_method`, `image`, `file`, `is_variant`, `is_batch`, `is_diffPrice`, `featured`, `product_list`, `qty_list`, `price_list`, `product_details`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Product 1 Tunique', 'P-22-693', 'standard', 'C39', 1, 3, 1, 1, 1, '70', '150', 26, 10, NULL, NULL, NULL, NULL, NULL, 1, '1641224145340robe-hijab-1.jpg,1641224145342robe-hijab-1-1.jpg', NULL, 1, NULL, 0, 0, NULL, NULL, NULL, '<p>Return within @60 days@. For detailed information.</p>\r\n<p><strong>Editor&rsquo;s Note:</strong></p>\r\n<p>This formal scarf by AlwayShawl is a nice way to add a fashionable sense to every outfit. Wear yours with low-key accessories, to create an updated, figure-flattering look.</p>\r\n<p><strong>Fabric Info:</strong>&nbsp;Elasticity of the material enables strength and durability. Light weight of the fabric keeps the condition better for longer use.</p>\r\n<p>Polyester</p>\r\n<p><strong>Delivery:</strong>&nbsp;This item will be dispatched in 24 hours</p>', 1, '2022-01-03 15:34:01', '2022-01-06 14:45:09');
+(1, 'Product 1 Tunique', 'P-22-693', 'standard', 'C39', 1, 3, 1, 1, 1, '70', '150', 30, 10, NULL, NULL, NULL, NULL, NULL, 1, '1641224145340robe-hijab-1.jpg,1641224145342robe-hijab-1-1.jpg', NULL, 1, NULL, 0, 0, NULL, NULL, NULL, '<p>Return within @60 days@. For detailed information.</p>\r\n<p><strong>Editor&rsquo;s Note:</strong></p>\r\n<p>This formal scarf by AlwayShawl is a nice way to add a fashionable sense to every outfit. Wear yours with low-key accessories, to create an updated, figure-flattering look.</p>\r\n<p><strong>Fabric Info:</strong>&nbsp;Elasticity of the material enables strength and durability. Light weight of the fabric keeps the condition better for longer use.</p>\r\n<p>Polyester</p>\r\n<p><strong>Delivery:</strong>&nbsp;This item will be dispatched in 24 hours</p>', 1, '2022-01-03 15:34:01', '2022-01-06 21:40:58');
 
 -- --------------------------------------------------------
 
@@ -1155,6 +1149,7 @@ CREATE TABLE `product_sales` (
   `qty` double NOT NULL,
   `sale_unit_id` int(11) NOT NULL,
   `net_unit_price` double NOT NULL,
+  `original_price` double NOT NULL,
   `discount` double NOT NULL,
   `tax_rate` double NOT NULL,
   `tax` double NOT NULL,
@@ -1167,11 +1162,9 @@ CREATE TABLE `product_sales` (
 -- Déchargement des données de la table `product_sales`
 --
 
-INSERT INTO `product_sales` (`id`, `sale_id`, `product_id`, `product_batch_id`, `variant_id`, `qty`, `sale_unit_id`, `net_unit_price`, `discount`, `tax_rate`, `tax`, `total`, `created_at`, `updated_at`) VALUES
-(5, 1, 1, NULL, 1, 1, 1, 170, 0, 0, 0, 170, '2022-01-06 14:45:08', '2022-01-06 14:45:08'),
-(6, 1, 1, NULL, 2, 1, 1, 160, 0, 0, 0, 160, '2022-01-06 14:45:08', '2022-01-06 14:45:08'),
-(7, 1, 1, NULL, 3, 1, 1, 150, 0, 0, 0, 150, '2022-01-06 14:45:09', '2022-01-06 14:45:09'),
-(8, 1, 1, NULL, 4, 1, 1, 150, 0, 0, 0, 150, '2022-01-06 14:45:09', '2022-01-06 14:45:09');
+INSERT INTO `product_sales` (`id`, `sale_id`, `product_id`, `product_batch_id`, `variant_id`, `qty`, `sale_unit_id`, `net_unit_price`, `original_price`, `discount`, `tax_rate`, `tax`, `total`, `created_at`, `updated_at`) VALUES
+(11, 4, 1, NULL, 1, 1, 1, 220, 170, 0, 0, 0, 220, '2022-01-06 22:21:30', '2022-01-06 22:21:30'),
+(12, 4, 1, NULL, 4, 1, 1, 200, 150, 0, 0, 0, 200, '2022-01-06 22:21:30', '2022-01-06 22:21:30');
 
 -- --------------------------------------------------------
 
@@ -1218,10 +1211,10 @@ CREATE TABLE `product_variants` (
 --
 
 INSERT INTO `product_variants` (`id`, `product_id`, `variant_id`, `position`, `item_code`, `additional_price`, `qty`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 'XL-P-22-693', 20, 9, '2022-01-03 15:55:42', '2022-01-06 14:45:08'),
-(2, 1, 2, 2, 'L-P-22-693', 10, 9, '2022-01-03 15:55:42', '2022-01-06 14:45:08'),
-(3, 1, 3, 3, 'M-P-22-693', NULL, 4, '2022-01-03 15:55:42', '2022-01-06 14:45:08'),
-(4, 1, 4, 4, 'S-P-22-693', NULL, 4, '2022-01-03 15:55:42', '2022-01-06 14:45:09');
+(1, 1, 1, 1, 'XL-P-22-693', 20, 10, '2022-01-03 15:55:42', '2022-01-06 21:40:58'),
+(2, 1, 2, 2, 'L-P-22-693', NULL, 10, '2022-01-03 15:55:42', '2022-01-06 17:01:47'),
+(3, 1, 3, 3, 'M-P-22-693', NULL, 5, '2022-01-03 15:55:42', '2022-01-06 16:57:34'),
+(4, 1, 4, 4, 'S-P-22-693', NULL, 5, '2022-01-03 15:55:42', '2022-01-06 16:57:34');
 
 -- --------------------------------------------------------
 
@@ -1246,10 +1239,10 @@ CREATE TABLE `product_warehouse` (
 --
 
 INSERT INTO `product_warehouse` (`id`, `product_id`, `product_batch_id`, `variant_id`, `warehouse_id`, `qty`, `price`, `created_at`, `updated_at`) VALUES
-(1, '1', NULL, 4, 1, 4, NULL, '2022-01-03 16:11:06', '2022-01-06 14:45:09'),
-(2, '1', NULL, 3, 1, 4, NULL, '2022-01-03 16:11:06', '2022-01-06 14:45:09'),
-(3, '1', NULL, 2, 1, 9, NULL, '2022-01-03 16:11:07', '2022-01-06 14:45:08'),
-(4, '1', NULL, 1, 1, 9, NULL, '2022-01-03 16:11:07', '2022-01-06 14:45:08');
+(1, '1', NULL, 4, 1, 5, NULL, '2022-01-03 16:11:06', '2022-01-06 16:57:35'),
+(2, '1', NULL, 3, 1, 5, NULL, '2022-01-03 16:11:06', '2022-01-06 16:57:34'),
+(3, '1', NULL, 2, 1, 10, NULL, '2022-01-03 16:11:07', '2022-01-06 16:57:34'),
+(4, '1', NULL, 1, 1, 10, NULL, '2022-01-03 16:11:07', '2022-01-06 16:57:34');
 
 -- --------------------------------------------------------
 
@@ -1645,6 +1638,7 @@ CREATE TABLE `sales` (
   `total_discount` double NOT NULL,
   `total_tax` double NOT NULL,
   `total_price` double NOT NULL,
+  `livraison` int(11) NOT NULL,
   `grand_total` double NOT NULL,
   `order_tax_rate` double DEFAULT NULL,
   `order_tax` double DEFAULT NULL,
@@ -1666,8 +1660,8 @@ CREATE TABLE `sales` (
 -- Déchargement des données de la table `sales`
 --
 
-INSERT INTO `sales` (`id`, `reference_no`, `user_id`, `cash_register_id`, `customer_id`, `warehouse_id`, `biller_id`, `item`, `total_qty`, `total_discount`, `total_tax`, `total_price`, `grand_total`, `order_tax_rate`, `order_tax`, `order_discount`, `coupon_id`, `coupon_discount`, `shipping_cost`, `sale_status`, `payment_status`, `document`, `paid_amount`, `sale_note`, `staff_note`, `created_at`, `updated_at`) VALUES
-(1, 'sr-20220104-015038', 1, 1, 1, 1, 1, 4, 4, 0, 0, 680, 680, 0, 0, 0, NULL, NULL, 0, 1, 4, NULL, 680, NULL, NULL, '2022-01-04 00:50:38', '2022-01-06 14:45:17');
+INSERT INTO `sales` (`id`, `reference_no`, `user_id`, `cash_register_id`, `customer_id`, `warehouse_id`, `biller_id`, `item`, `total_qty`, `total_discount`, `total_tax`, `total_price`, `livraison`, `grand_total`, `order_tax_rate`, `order_tax`, `order_discount`, `coupon_id`, `coupon_discount`, `shipping_cost`, `sale_status`, `payment_status`, `document`, `paid_amount`, `sale_note`, `staff_note`, `created_at`, `updated_at`) VALUES
+(4, 'sr-20220106-112130', 1, 1, 1, 1, 1, 2, 2, 0, 0, 470, 50, 470, 0, 0, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, '2022-01-06 22:21:30', '2022-01-06 22:21:30');
 
 -- --------------------------------------------------------
 
@@ -2415,7 +2409,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT pour la table `money_transfers`
@@ -2505,7 +2499,7 @@ ALTER TABLE `product_returns`
 -- AUTO_INCREMENT pour la table `product_sales`
 --
 ALTER TABLE `product_sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `product_transfer`
@@ -2565,7 +2559,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `stock_counts`

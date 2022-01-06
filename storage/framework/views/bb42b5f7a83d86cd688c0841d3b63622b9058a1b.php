@@ -78,7 +78,7 @@
 
                 <?php $__currentLoopData = $return_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$return): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php 
-                    $transaction = App\Returns::select('reference_no')->find($credit->return_id);
+                    $transaction = App\Returns::select('reference_no')->find($return->return_id);
                     $balance = $balance - $return->grand_total; 
                 ?>
                 <tr>
@@ -98,7 +98,7 @@
 
                 <?php $__currentLoopData = $purchase_return_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$return): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <?php
-                    $transaction = App\ReturnPurchase::select('reference_no')->find($credit->return_id);
+                    $transaction = App\ReturnPurchase::select('reference_no')->find($return->return_id);
                     $balance = $balance + $return->grand_total;
                 ?>
                 <tr>

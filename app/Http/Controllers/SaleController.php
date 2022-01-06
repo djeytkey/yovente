@@ -333,7 +333,7 @@ class SaleController extends Controller
             $lims_tax_list = Tax::where('is_active', true)->get();
             $lims_pos_setting_data = PosSetting::latest()->first();
 
-            return view('sale.create',compact('lims_customer_list', 'lims_warehouse_list', 'lims_biller_list', 'lims_pos_setting_data', 'lims_tax_list', 'lims_general_setting_data'));
+            return view('sale.create',compact('role', 'lims_customer_list', 'lims_warehouse_list', 'lims_biller_list', 'lims_pos_setting_data', 'lims_tax_list', 'lims_general_setting_data'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
@@ -341,6 +341,7 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request);
         $data = $request->all();
         if(isset($request->reference_no)) {
             $this->validate($request, [
@@ -349,7 +350,7 @@ class SaleController extends Controller
                 ],
             ]);
         }
-        //return dd($data);
+        
         $data['user_id'] = Auth::id();
         $cash_register_data = CashRegister::where([
             ['user_id', $data['user_id']],
@@ -429,6 +430,7 @@ class SaleController extends Controller
         $qty = $data['qty'];
         $sale_unit = $data['sale_unit'];
         $net_unit_price = $data['net_unit_price'];
+        $original_price = $data['original_price'];
         $discount = $data['discount'];
         $tax_rate = $data['tax_rate'];
         $tax = $data['tax'];
@@ -522,6 +524,7 @@ class SaleController extends Controller
             $product_sale['qty'] = $mail_data['qty'][$i] = $qty[$i];
             $product_sale['sale_unit_id'] = $sale_unit_id;
             $product_sale['net_unit_price'] = $net_unit_price[$i];
+            $product_sale['original_price'] = $original_price[$i];
             $product_sale['discount'] = $discount[$i];
             $product_sale['tax_rate'] = $tax_rate[$i];
             $product_sale['tax'] = $tax[$i];
