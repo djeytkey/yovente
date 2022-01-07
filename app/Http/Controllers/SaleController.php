@@ -341,7 +341,7 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request);
+        dd($request);
         $data = $request->all();
         if(isset($request->reference_no)) {
             $this->validate($request, [
@@ -1443,7 +1443,7 @@ class SaleController extends Controller
             $lims_tax_list = Tax::where('is_active', true)->get();
             $lims_sale_data = Sale::find($id);
             $lims_product_sale_data = Product_Sale::where('sale_id', $id)->get();
-            return view('sale.edit',compact('lims_customer_list', 'lims_warehouse_list', 'lims_biller_list', 'lims_tax_list', 'lims_sale_data','lims_product_sale_data'));
+            return view('sale.edit', compact('lims_customer_list', 'lims_warehouse_list', 'lims_biller_list', 'lims_tax_list', 'lims_sale_data','lims_product_sale_data'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');

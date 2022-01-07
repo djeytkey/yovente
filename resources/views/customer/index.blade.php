@@ -20,7 +20,7 @@
         @endif
     </div>
     <div class="table-responsive">
-        <table id="customer-table" class="table">
+        <table width="100%" id="customer-table" class="table">
             <thead>
                 <tr>
                     <th class="not-exported"></th>
@@ -62,12 +62,12 @@
                                     <a href="{{ route('customer.edit', $customer->id) }}" class="btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</a>
                                 </li>
                                 @endif
-                                <li>
+                                {{-- <li>
                                     <button type="button" data-id="{{$customer->id}}" class="deposit btn btn-link" data-toggle="modal" data-target="#depositModal" ><i class="dripicons-plus"></i> {{trans('file.Add Deposit')}}</button>
                                 </li>
                                 <li>
                                     <button type="button" data-id="{{$customer->id}}" class="getDeposit btn btn-link"><i class="fa fa-money"></i> {{trans('file.View Deposit')}}</button>
-                                </li>
+                                </li> --}}
                                 <li class="divider"></li>
                                 @if(in_array("customers-delete", $all_permission))
                                 {{ Form::open(['route' => ['customer.destroy', $customer->id], 'method' => 'DELETE'] ) }}
@@ -276,6 +276,11 @@
             {
                 "orderable": false,
                 'targets': [0, 9]
+            },
+            {
+                "visible": false,
+                "searchable": false,
+                "targets": [8]
             },
             {
                 'render': function(data, type, row, meta){

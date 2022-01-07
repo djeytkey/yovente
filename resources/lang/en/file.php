@@ -444,7 +444,7 @@ return [
 	"Payable Amount" => "Payable Amount",
 	"Change" => "Change",
 	"Back" => "Back",
-	"Role Permission" => "Role Permission",
+	"Role & Permission" => "Role & Permission",
 	"Exclusive: Poduct price = Actual product price + Tax. Inclusive: Actual product price = Product price - Tax" => "Exclusive: Poduct price = Actual product price + Tax. Inclusive: Actual product price = Product price - Tax",
 	"Accounting" => "Accounting",
 	"Account" => "Account",

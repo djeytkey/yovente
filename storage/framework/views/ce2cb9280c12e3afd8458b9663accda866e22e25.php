@@ -50,7 +50,7 @@
                                     <input type="text" name="phone_number" required value="<?php echo e($lims_customer_data->phone_number); ?>" class="form-control">
                                     <?php if($errors->has('phone_number')): ?>
                                    <span>
-                                       <strong><?php echo e($errors->first('phone_number')); ?></strong>
+                                       <strong class="has-error"><?php echo e($errors->first('phone_number')); ?></strong>
                                     </span>
                                     <?php endif; ?>
                                 </div>
@@ -73,18 +73,7 @@
                                     <input type="text" name="city" required value="<?php echo e($lims_customer_data->city); ?>" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label><?php echo e(trans('file.State')); ?></label>
-                                    <input type="text" name="state" value="<?php echo e($lims_customer_data->state); ?>" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label><?php echo e(trans('file.Postal Code')); ?></label>
-                                    <input type="text" name="postal_code" value="<?php echo e($lims_customer_data->postal_code); ?>" class="form-control">
-                                </div>
-                            </div>
+                            
                             <?php if(!$lims_customer_data->user_id): ?>
                             <div class="col-md-6 mt-3">
                                 <div class="form-group">
@@ -93,19 +82,14 @@
                                 </div>
                             </div>
                             <?php endif; ?>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label><?php echo e(trans('file.Country')); ?></label>
-                                    <input type="text" name="country" value="<?php echo e($lims_customer_data->country); ?>" class="form-control">
-                                </div>
-                            </div>
+                            
                             <div class="col-md-6 user-input">
                                 <div class="form-group">
                                     <label><?php echo e(trans('file.UserName')); ?> *</label>
                                     <input type="text" name="name" class="form-control">
                                     <?php if($errors->has('name')): ?>
                                    <span>
-                                       <strong><?php echo e($errors->first('name')); ?></strong>
+                                       <strong class="has-error"><?php echo e($errors->first('name')); ?></strong>
                                     </span>
                                     <?php endif; ?>
                                 </div>

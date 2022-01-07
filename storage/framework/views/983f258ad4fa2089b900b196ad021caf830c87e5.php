@@ -734,8 +734,8 @@
                                     <li id="payment-report-menu">
                                         <?php echo Form::open(['route' => 'report.paymentByDate', 'method' => 'post', 'id' => 'payment-report-form']); ?>
 
-                                        <input type="hidden" name="start_date" value="<?php echo e('01' . '-' . date('m-Y')); ?>" />
-                                        <input type="hidden" name="end_date" value="<?php echo e(date('d-m-Y')); ?>" />
+                                        <input type="hidden" name="start_date" value="<?php echo e(date('Y-m') . '-' . '01'); ?>" />
+                                        <input type="hidden" name="end_date" value="<?php echo e(date('Y-m-d')); ?>" />
                                         <a id="payment-report-link" href=""><?php echo e(trans('file.Payment Report')); ?></a>
                                         <?php echo Form::close(); ?>
 
@@ -904,7 +904,7 @@
                             ?>
                             <?php if($role->id <= 2): ?>
                                 <li id="role-menu"><a
-                                        href="<?php echo e(route('role.index')); ?>"><?php echo e(trans('file.Role Permission')); ?></a>
+                                        href="<?php echo e(route('role.index')); ?>"><?php echo e(trans('file.Role & Permission')); ?></a>
                                 </li>
                             <?php endif; ?>
                             <?php if($general_setting_permission_active): ?>

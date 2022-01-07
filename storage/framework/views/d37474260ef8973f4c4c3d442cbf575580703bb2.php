@@ -176,6 +176,7 @@
                                                         <input type="hidden" class="sale-unit-operator" value="<?php echo e($unit_operator); ?>"/>
                                                         <input type="hidden" class="sale-unit-operation-value" value="<?php echo e($unit_operation_value); ?>"/>
                                                         <input type="hidden" class="net_unit_price" name="net_unit_price[]" value="<?php echo e($product_sale->net_unit_price); ?>" />
+                                                        <input type="hidden" class="original_price" name="original_price[]" value="<?php echo e($product_sale->original_price); ?>" />
                                                         <input type="hidden" class="discount-value" name="discount[]" value="<?php echo e($product_sale->discount); ?>" />
                                                         <input type="hidden" class="tax-rate" name="tax_rate[]" value="<?php echo e($product_sale->tax_rate); ?>"/>
                                                         <?php if($tax): ?>
@@ -192,8 +193,8 @@
                                                 <tfoot class="tfoot active">
                                                     <th colspan="2"><?php echo e(trans('file.Total')); ?></th>
                                                     <th id="total-qty"><?php echo e($lims_sale_data->total_qty); ?></th>
-                                                    <th></th>
-                                                    <th></th>
+                                                    <th style="text-align: right;"><?php echo e(trans('file.Delivery Rate')); ?></th>
+                                                    <th id="taux-livraison"><?php echo e(number_format((float)$lims_sale_data->livraison, 2, '.', '')); ?></th>
                                                     <th id="total-discount"><?php echo e(number_format((float)$lims_sale_data->total_discount, 2, '.', '')); ?></th>
                                                     <th id="total-tax"><?php echo e(number_format((float)$lims_sale_data->total_tax, 2, '.', '')); ?></th>
                                                     <th id="total"><?php echo e(number_format((float)$lims_sale_data->total_price, 2, '.', '')); ?></th>
@@ -245,6 +246,7 @@
                                             <input type="hidden" name="coupon_active" value="0" />
                                         <?php endif; ?>
                                         <div class="form-group">
+                                            <input type="hidden" name="livraison" value="<?php echo e($lims_sale_data->livraison); ?>" />
                                             <input type="hidden" name="grand_total" value="<?php echo e($lims_sale_data->grand_total); ?>" />
                                         </div>
                                     </div>
@@ -749,6 +751,7 @@ function productSearch(data){
         },
         success: function(data) {
             var flag = 1;
+            alert(data);
             $(".product-code").each(function(i) {
                 if ($(this).val() == data[1]) {
                     rowindex = i;
@@ -783,6 +786,7 @@ function productSearch(data){
                 cols += '<input type="hidden" name="product_variant_id[]" value="' + data[10] + '"/>';
                 cols += '<input type="hidden" class="sale-unit" name="sale_unit[]" value="' + temp_unit_name[0] + '"/>';
                 cols += '<input type="hidden" class="net_unit_price" name="net_unit_price[]" />';
+                cols += '<input type="hidden" class="original_price" name="original_price[]"  value="' + data[2] + '"/>';
                 cols += '<input type="hidden" class="discount-value" name="discount[]" />';
                 cols += '<input type="hidden" class="tax-rate" name="tax_rate[]" value="' + data[3] + '"/>';
                 cols += '<input type="hidden" class="tax-value" name="tax[]" />';
@@ -980,11 +984,14 @@ function calculateTotal() {
 
     //Sum of subtotal
     var total = 0;
+    var taux_livraison = parseFloat($("#taux-livraison").text());
     $(".sub-total").each(function() {
         total += parseFloat($(this).text());
     });
+    total = total + taux_livraison;
     $("#total").text(total.toFixed(2));
     $('input[name="total_price"]').val(total.toFixed(2));
+    $('input[name="livraison"]').val(taux_livraison.toFixed(2));
 
     calculateGrandTotal();
 }

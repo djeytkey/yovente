@@ -60,7 +60,7 @@
                                 </li>
                                 @endif
                                 <li class="divider"></li>
-                                @if(in_array("users-delete", $all_permission))
+                                @if((in_array("users-delete", $all_permission)) && $user->role_id > 2)
                                 {{ Form::open(['route' => ['user.destroy', $user->id], 'method' => 'DELETE'] ) }}
                                 <li>
                                     <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> {{trans('file.delete')}}</button>

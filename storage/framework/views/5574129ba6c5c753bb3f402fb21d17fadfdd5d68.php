@@ -22,7 +22,7 @@
                                         <input type="text" name="name" required class="form-control">
                                         <?php if($errors->has('name')): ?>
                                        <span>
-                                           <strong><?php echo e($errors->first('name')); ?></strong>
+                                           <strong class="has-error"><?php echo e($errors->first('name')); ?></strong>
                                         </span>
                                         <?php endif; ?>
                                     </div>
@@ -35,7 +35,7 @@
                                             </div>
                                             <?php if($errors->has('password')): ?>
                                             <span>
-                                               <strong><?php echo e($errors->first('password')); ?></strong>
+                                               <strong class="has-error"><?php echo e($errors->first('password')); ?></strong>
                                             </span>
                                             <?php endif; ?>
                                         </div>
@@ -45,7 +45,7 @@
                                         <input type="email" name="email" placeholder="example@example.com" required class="form-control">
                                         <?php if($errors->has('email')): ?>
                                        <span>
-                                           <strong><?php echo e($errors->first('email')); ?></strong>
+                                           <strong class="has-error"><?php echo e($errors->first('email')); ?></strong>
                                         </span>
                                         <?php endif; ?>
                                     </div>
@@ -54,7 +54,7 @@
                                         <input type="text" name="phone_number" required class="form-control">
                                         <?php if($errors->has('phone_number')): ?>
                                             <span>
-                                               <strong><?php echo e($errors->first('phone_number')); ?></strong>
+                                               <strong class="has-error"><?php echo e($errors->first('phone_number')); ?></strong>
                                             </span>
                                         <?php endif; ?>
                                     </div>

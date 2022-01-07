@@ -351,12 +351,38 @@
     });
 
     $("#print-btn").on("click", function(){
-          var divToPrint=document.getElementById('purchase-details');
+        str=document.getElementById('purchase-details').innerHTML;
+        newwin=window.open('','printwin','left=100,top=100,width=400,height=400');
+        newwin.document.write('<HTML>\n<HEAD>\n');
+        newwin.document.write('<TITLE>Print Page</TITLE>\n');
+        newwin.document.write('<script>\n');
+        newwin.document.write('function chkstate(){\n');
+        newwin.document.write('if(document.readyState=="complete"){\n');
+        newwin.document.write('window.close()\n');
+        newwin.document.write('}\n');
+        newwin.document.write('else{\n');
+        newwin.document.write('setTimeout("chkstate()",2000)\n');
+        newwin.document.write('}\n');
+        newwin.document.write('}\n');
+        newwin.document.write('function print_win(){\n');
+        newwin.document.write('window.print();\n');
+        newwin.document.write('chkstate();\n');
+        newwin.document.write('}\n');
+        newwin.document.write('<\/script>\n');
+        newwin.document.write('</HEAD>\n');
+        newwin.document.write('<BODY onload="print_win()">\n');
+        newwin.document.write(str);
+        newwin.document.write('</BODY>\n');
+        newwin.document.write('</HTML>\n');
+        newwin.document.close();
+          /*var divToPrint=document.getElementById('purchase-details');
           var newWin=window.open('','Print-Window');
           newWin.document.open();
           newWin.document.write('<link rel="stylesheet" href="<?php echo asset('public/vendor/bootstrap/css/bootstrap.min.css') ?>" type="text/css"><style type="text/css">@media  print {.modal-dialog { max-width: 1000px;} }</style><body onload="window.print()">'+divToPrint.innerHTML+'</body>');
           newWin.document.close();
-          setTimeout(function(){newWin.close();},10);
+          setTimeout(function() {
+              newWin.close();
+          } ,10);*/
     });
 
     $(document).on("click", "table.purchase-list tbody .add-payment", function(event) {

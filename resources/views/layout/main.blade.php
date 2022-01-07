@@ -789,8 +789,8 @@
                                 @if ($payment_report_active)
                                     <li id="payment-report-menu">
                                         {!! Form::open(['route' => 'report.paymentByDate', 'method' => 'post', 'id' => 'payment-report-form']) !!}
-                                        <input type="hidden" name="start_date" value="{{ '01' . '-' . date('m-Y') }}" />
-                                        <input type="hidden" name="end_date" value="{{ date('d-m-Y') }}" />
+                                        <input type="hidden" name="start_date" value="{{ date('Y-m') . '-' . '01' }}" />
+                                        <input type="hidden" name="end_date" value="{{ date('Y-m-d') }}" />
                                         <a id="payment-report-link" href="">{{ trans('file.Payment Report') }}</a>
                                         {!! Form::close() !!}
                                     </li>
@@ -954,7 +954,7 @@
                             ?>
                             @if ($role->id <= 2)
                                 <li id="role-menu"><a
-                                        href="{{ route('role.index') }}">{{ trans('file.Role Permission') }}</a>
+                                        href="{{ route('role.index') }}">{{ trans('file.Role & Permission') }}</a>
                                 </li>
                             @endif
                             @if ($general_setting_permission_active)

@@ -61,7 +61,7 @@
                                 </li>
                                 <?php endif; ?>
                                 <li class="divider"></li>
-                                <?php if(in_array("users-delete", $all_permission)): ?>
+                                <?php if((in_array("users-delete", $all_permission)) && $user->role_id > 2): ?>
                                 <?php echo e(Form::open(['route' => ['user.destroy', $user->id], 'method' => 'DELETE'] )); ?>
 
                                 <li>

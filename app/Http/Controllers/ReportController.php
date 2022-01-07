@@ -1454,7 +1454,7 @@ class ReportController extends Controller
 
     public function paymentReportByDate(Request $request)
     {
-        dd($request);
+        //dd($request);
         $data = $request->all();
         $start_date = $data['start_date'];
         $end_date = $data['end_date'];

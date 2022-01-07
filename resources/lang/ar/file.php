@@ -445,7 +445,7 @@ return [
 	"Payable Amount" => "المبلغ المستحق",
 	"Change" => "يتغيرون",
 	"Back" => "الى الخلف",	
-	"Role Permission" => "إذن الدور",
+	"Role Permission" => "الدور والإذن",
 	"Exclusive: Poduct price = Actual product price + Tax. Inclusive: Actual product price = Product price - Tax" => "حصريًا: سعر المنتج = سعر المنتج الفعلي + الضريبة. شامل: سعر المنتج الفعلي = سعر المنتج - الضريبة.",
 	"Accounting" => "محاسبة",
 	"Account" => "الحساب",

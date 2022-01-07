@@ -72,30 +72,14 @@
                                     <input type="text" name="city" required class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label><?php echo e(trans('file.State')); ?></label>
-                                    <input type="text" name="state" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label><?php echo e(trans('file.Postal Code')); ?></label>
-                                    <input type="text" name="postal_code" class="form-control">
-                                </div>
-                            </div>
+                            
                             <div class="col-md-6 mt-3">
                                 <div class="form-group">
                                     <label><?php echo e(trans('file.Add User')); ?></label>&nbsp;
                                     <input type="checkbox" name="user" value="1" />
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label><?php echo e(trans('file.Country')); ?></label>
-                                    <input type="text" name="country" class="form-control">
-                                </div>
-                            </div>
+                            
                             <div class="col-md-6 user-input">
                                 <div class="form-group">
                                     <label><?php echo e(trans('file.UserName')); ?> *</label>

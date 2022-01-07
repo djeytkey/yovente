@@ -783,40 +783,7 @@
                                                         </div>
                                                     </div>
                                                 </span>
-                                                <span>
-                                                    <div aria-checked="false" aria-disabled="false">
-                                                        <div class="checkbox">
-                                                            <?php if(in_array('money-transfer', $all_permission)): ?>
-                                                                <input type="checkbox" value="1" id="money-transfer"
-                                                                    name="money-transfer" checked>
-                                                            <?php else: ?>
-                                                                <input type="checkbox" value="1" id="money-transfer"
-                                                                    name="money-transfer">
-                                                            <?php endif; ?>
-                                                            <label for="money-transfer"
-                                                                class="padding05"><?php echo e(trans('file.Money Transfer')); ?>
-
-                                                                &nbsp;&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                </span>
-                                                <span>
-                                                    <div aria-checked="false" aria-disabled="false">
-                                                        <div class="checkbox">
-                                                            <?php if(in_array('balance-sheet', $all_permission)): ?>
-                                                                <input type="checkbox" value="1" id="balance-sheet"
-                                                                    name="balance-sheet" checked>
-                                                            <?php else: ?>
-                                                                <input type="checkbox" value="1" id="balance-sheet"
-                                                                    name="balance-sheet">
-                                                            <?php endif; ?>
-                                                            <label for="balance-sheet"
-                                                                class="padding05"><?php echo e(trans('file.Balance Sheet')); ?>
-
-                                                                &nbsp;&nbsp;</label>
-                                                        </div>
-                                                    </div>
-                                                </span>
+                                                
                                                 <span>
                                                     <div aria-checked="false" aria-disabled="false">
                                                         <div class="checkbox">

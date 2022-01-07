@@ -905,7 +905,7 @@
                                                         </div>
                                                     </div>
                                                 </span>
-                                                <span>
+                                                {{-- <span>
                                                     <div aria-checked="false" aria-disabled="false">
                                                         <div class="checkbox">
                                                             @if (in_array('money-transfer', $all_permission))
@@ -936,7 +936,7 @@
                                                                 &nbsp;&nbsp;</label>
                                                         </div>
                                                     </div>
-                                                </span>
+                                                </span> --}}
                                                 <span>
                                                     <div aria-checked="false" aria-disabled="false">
                                                         <div class="checkbox">

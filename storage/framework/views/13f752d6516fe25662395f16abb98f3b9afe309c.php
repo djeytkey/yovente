@@ -656,7 +656,7 @@ function productSearch(data) {
         },
         success: function(data) {
             var flag = 1;
-            alert(data);
+            //alert(data);
             $(".product-code").each(function(i) {
                 if ($(this).val() == data[1]) {
                     rowindex = i;

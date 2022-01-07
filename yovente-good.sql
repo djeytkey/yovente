@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 07 jan. 2022 à 22:45
+-- Généré le : jeu. 06 jan. 2022 à 22:22
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.20RC1
 
@@ -114,7 +114,7 @@ CREATE TABLE `billers` (
 --
 
 INSERT INTO `billers` (`id`, `name`, `image`, `company_name`, `vat_number`, `email`, `phone_number`, `address`, `city`, `state`, `postal_code`, `country`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Yovente', 'YoventeSARL.png', 'Yovente S.A.R.L', NULL, 'yovente@yovente.com', '0622222222', 'Adresse Yovente', 'Benslimane', NULL, NULL, NULL, 1, '2022-01-07 21:33:14', '2022-01-07 21:33:14');
+(1, 'Biller 1', 'CompanyBiller1.png', 'Company Biller 1', NULL, 'biller1@yovente.com', '0622222222', 'Adresse Biller 1', 'Errachidia', NULL, NULL, NULL, 1, '2022-01-03 15:59:23', '2022-01-03 15:59:23');
 
 -- --------------------------------------------------------
 
@@ -136,10 +136,10 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `title`, `image`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Çıkrıkçı', '20220107095635.jpg', 1, '2022-01-07 20:56:35', '2022-01-07 20:56:35'),
-(2, 'Dilber', '20220107095651.jpg', 1, '2022-01-07 20:56:51', '2022-01-07 20:56:51'),
-(3, 'Le Mirega', '20220107095703.jpg', 1, '2022-01-07 20:57:03', '2022-01-07 20:57:03'),
-(4, 'Tubanur Özdemir', '20220107095716.jpg', 1, '2022-01-07 20:57:16', '2022-01-07 20:57:16');
+(1, 'Tubanur Özdemir', '20220102040528.jpg', 1, '2022-01-02 15:05:28', '2022-01-02 15:05:28'),
+(2, 'Le Mirega', '20220102040539.jpg', 1, '2022-01-02 15:05:39', '2022-01-02 15:05:39'),
+(3, 'Dilber', '20220102040547.jpg', 1, '2022-01-02 15:05:47', '2022-01-02 15:05:47'),
+(4, 'Çıkrıkçı', '20220102040554.jpg', 1, '2022-01-02 15:05:54', '2022-01-02 15:05:54');
 
 -- --------------------------------------------------------
 
@@ -156,6 +156,14 @@ CREATE TABLE `cash_registers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `cash_registers`
+--
+
+INSERT INTO `cash_registers` (`id`, `cash_in_hand`, `user_id`, `warehouse_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 500, 1, 1, 1, '2022-01-03 23:28:29', '2022-01-03 23:28:29'),
+(2, 0, 1, 2, 1, '2022-01-06 14:39:21', '2022-01-06 14:39:21');
 
 -- --------------------------------------------------------
 
@@ -178,9 +186,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `image`, `parent_id`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Ensemble', '20220107104119.jpg', NULL, 1, '2022-01-07 21:41:19', '2022-01-07 21:41:19'),
-(2, 'Robe Hijab', '20220107104130.jpg', NULL, 1, '2022-01-07 21:41:30', '2022-01-07 21:41:30'),
-(3, 'Tunique', '20220107104142.jpg', NULL, 1, '2022-01-07 21:41:42', '2022-01-07 21:41:42');
+(1, 'Ensemble', '20220103042802.jpg', NULL, 1, '2022-01-03 15:28:02', '2022-01-03 15:28:02'),
+(2, 'Robe Hijab', '20220103042814.jpg', NULL, 1, '2022-01-03 15:28:14', '2022-01-03 15:28:14'),
+(3, 'Tunique', '20220103042825.jpg', NULL, 1, '2022-01-03 15:28:25', '2022-01-03 15:28:25');
 
 -- --------------------------------------------------------
 
@@ -257,7 +265,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `customer_group_id`, `user_id`, `name`, `company_name`, `email`, `phone_number`, `tax_no`, `address`, `city`, `state`, `postal_code`, `country`, `deposit`, `expense`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, 'Salma BOUKJIJ', 'Salma Company', 'salma@yovente.com', '0611111111', NULL, 'Adresse Salma BOUKJIJ', 'Benslimane', NULL, NULL, NULL, NULL, NULL, 1, '2022-01-07 21:01:16', '2022-01-07 21:01:16');
+(1, 1, NULL, 'Customer 1', NULL, NULL, '0611111111', NULL, 'Just here for Customer 1', 'Meknès', NULL, NULL, NULL, NULL, NULL, 1, '2022-01-03 15:57:51', '2022-01-03 15:57:51');
 
 -- --------------------------------------------------------
 
@@ -279,7 +287,7 @@ CREATE TABLE `customer_groups` (
 --
 
 INSERT INTO `customer_groups` (`id`, `name`, `percentage`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Global', '0', 1, '2022-01-07 20:55:51', '2022-01-07 20:55:51');
+(1, 'Global', '0', 1, '2022-01-02 15:04:35', '2022-01-02 15:04:35');
 
 -- --------------------------------------------------------
 
@@ -499,6 +507,13 @@ CREATE TABLE `hrm_settings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `hrm_settings`
+--
+
+INSERT INTO `hrm_settings` (`id`, `checkin`, `checkout`, `created_at`, `updated_at`) VALUES
+(1, '10:00am', '6:00pm', '2019-01-02 02:20:08', '2019-01-02 04:20:53');
 
 -- --------------------------------------------------------
 
@@ -731,7 +746,7 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`id`, `payment_reference`, `user_id`, `purchase_id`, `sale_id`, `cash_register_id`, `account_id`, `amount`, `change`, `paying_method`, `payment_note`, `created_at`, `updated_at`) VALUES
-(1, 'ppr-20220107-113448', 1, 1, NULL, NULL, 1, 1750, 0, 'Cash', NULL, '2022-01-07 22:34:48', '2022-01-07 22:34:48');
+(2, 'ppr-20220106-035539', 1, 2, NULL, NULL, 1, 2100, 0, 'Cash', NULL, '2022-01-06 14:55:39', '2022-01-06 14:55:39');
 
 -- --------------------------------------------------------
 
@@ -955,7 +970,7 @@ CREATE TABLE `pos_setting` (
 --
 
 INSERT INTO `pos_setting` (`id`, `customer_id`, `warehouse_id`, `biller_id`, `product_number`, `keybord_active`, `stripe_public_key`, `stripe_secret_key`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 3, 1, 'Stripe_Publishable_key', 'Stripe_Secret_key', '2022-01-07 22:32:23', '2022-01-07 22:32:23');
+(1, 11, 2, 1, 4, 0, 'pk_test_ITN7KOYiIsHSCQ0UMRcgaYUB', 'sk_test_TtQQaawhEYRwa3mU9CzttrEy', '2018-09-02 03:17:04', '2020-04-17 13:59:54');
 
 -- --------------------------------------------------------
 
@@ -1004,7 +1019,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `code`, `type`, `barcode_symbology`, `brand_id`, `category_id`, `unit_id`, `purchase_unit_id`, `sale_unit_id`, `cost`, `price`, `qty`, `alert_quantity`, `promotion`, `promotion_price`, `starting_date`, `last_date`, `tax_id`, `tax_method`, `image`, `file`, `is_variant`, `is_batch`, `is_diffPrice`, `featured`, `product_list`, `qty_list`, `price_list`, `product_details`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Product 1 Tunique', 'P-22-546', 'standard', 'C39', 4, 3, 1, 1, 1, '70', '150', 25, 10, NULL, NULL, NULL, NULL, NULL, NULL, '1641591753620robe-hijab-1.jpg,1641591753623robe-hijab-1-1.jpg', NULL, 1, NULL, 0, 0, NULL, NULL, NULL, '', 1, '2022-01-07 21:42:53', '2022-01-07 22:33:32');
+(1, 'Product 1 Tunique', 'P-22-693', 'standard', 'C39', 1, 3, 1, 1, 1, '70', '150', 30, 10, NULL, NULL, NULL, NULL, NULL, 1, '1641224145340robe-hijab-1.jpg,1641224145342robe-hijab-1-1.jpg', NULL, 1, NULL, 0, 0, NULL, NULL, NULL, '<p>Return within @60 days@. For detailed information.</p>\r\n<p><strong>Editor&rsquo;s Note:</strong></p>\r\n<p>This formal scarf by AlwayShawl is a nice way to add a fashionable sense to every outfit. Wear yours with low-key accessories, to create an updated, figure-flattering look.</p>\r\n<p><strong>Fabric Info:</strong>&nbsp;Elasticity of the material enables strength and durability. Light weight of the fabric keeps the condition better for longer use.</p>\r\n<p>Polyester</p>\r\n<p><strong>Delivery:</strong>&nbsp;This item will be dispatched in 24 hours</p>', 1, '2022-01-03 15:34:01', '2022-01-06 21:40:58');
 
 -- --------------------------------------------------------
 
@@ -1068,9 +1083,10 @@ CREATE TABLE `product_purchases` (
 --
 
 INSERT INTO `product_purchases` (`id`, `purchase_id`, `product_id`, `product_batch_id`, `variant_id`, `qty`, `recieved`, `purchase_unit_id`, `net_unit_cost`, `discount`, `tax_rate`, `tax`, `total`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, NULL, 3, 5, 5, 1, 70, 0, 0, 0, 350, '2022-01-07 22:33:32', '2022-01-07 22:33:32'),
-(2, 1, 1, NULL, 1, 10, 10, 1, 70, 0, 0, 0, 700, '2022-01-07 22:33:32', '2022-01-07 22:33:32'),
-(3, 1, 1, NULL, 5, 10, 10, 1, 70, 0, 0, 0, 700, '2022-01-07 22:33:32', '2022-01-07 22:33:32');
+(5, 2, 1, NULL, 4, 5, 5, 1, 70, 0, 0, 0, 350, '2022-01-03 16:39:03', '2022-01-03 16:39:03'),
+(6, 2, 1, NULL, 3, 5, 5, 1, 70, 0, 0, 0, 350, '2022-01-03 16:39:04', '2022-01-03 16:39:04'),
+(7, 2, 1, NULL, 2, 10, 10, 1, 70, 0, 0, 0, 700, '2022-01-03 16:39:04', '2022-01-03 16:39:04'),
+(8, 2, 1, NULL, 1, 10, 10, 1, 70, 0, 0, 0, 700, '2022-01-03 16:39:04', '2022-01-03 16:39:04');
 
 -- --------------------------------------------------------
 
@@ -1142,6 +1158,14 @@ CREATE TABLE `product_sales` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Déchargement des données de la table `product_sales`
+--
+
+INSERT INTO `product_sales` (`id`, `sale_id`, `product_id`, `product_batch_id`, `variant_id`, `qty`, `sale_unit_id`, `net_unit_price`, `original_price`, `discount`, `tax_rate`, `tax`, `total`, `created_at`, `updated_at`) VALUES
+(11, 4, 1, NULL, 1, 1, 1, 220, 170, 0, 0, 0, 220, '2022-01-06 22:21:30', '2022-01-06 22:21:30'),
+(12, 4, 1, NULL, 4, 1, 1, 200, 150, 0, 0, 0, 200, '2022-01-06 22:21:30', '2022-01-06 22:21:30');
+
 -- --------------------------------------------------------
 
 --
@@ -1187,9 +1211,10 @@ CREATE TABLE `product_variants` (
 --
 
 INSERT INTO `product_variants` (`id`, `product_id`, `variant_id`, `position`, `item_code`, `additional_price`, `qty`, `created_at`, `updated_at`) VALUES
-(9, 1, 1, 2, 'XL-P-22-546', NULL, 10, '2022-01-07 22:26:22', '2022-01-07 22:33:32'),
-(10, 1, 5, 1, 'XXL-P-22-546', NULL, 10, '2022-01-07 22:26:22', '2022-01-07 22:33:32'),
-(11, 1, 3, 3, 'M-P-22-546', NULL, 5, '2022-01-07 22:26:22', '2022-01-07 22:33:32');
+(1, 1, 1, 1, 'XL-P-22-693', 20, 10, '2022-01-03 15:55:42', '2022-01-06 21:40:58'),
+(2, 1, 2, 2, 'L-P-22-693', NULL, 10, '2022-01-03 15:55:42', '2022-01-06 17:01:47'),
+(3, 1, 3, 3, 'M-P-22-693', NULL, 5, '2022-01-03 15:55:42', '2022-01-06 16:57:34'),
+(4, 1, 4, 4, 'S-P-22-693', NULL, 5, '2022-01-03 15:55:42', '2022-01-06 16:57:34');
 
 -- --------------------------------------------------------
 
@@ -1214,9 +1239,10 @@ CREATE TABLE `product_warehouse` (
 --
 
 INSERT INTO `product_warehouse` (`id`, `product_id`, `product_batch_id`, `variant_id`, `warehouse_id`, `qty`, `price`, `created_at`, `updated_at`) VALUES
-(1, '1', NULL, 3, 1, 5, NULL, '2022-01-07 22:33:32', '2022-01-07 22:33:32'),
-(2, '1', NULL, 1, 1, 10, NULL, '2022-01-07 22:33:32', '2022-01-07 22:33:32'),
-(3, '1', NULL, 5, 1, 10, NULL, '2022-01-07 22:33:32', '2022-01-07 22:33:32');
+(1, '1', NULL, 4, 1, 5, NULL, '2022-01-03 16:11:06', '2022-01-06 16:57:35'),
+(2, '1', NULL, 3, 1, 5, NULL, '2022-01-03 16:11:06', '2022-01-06 16:57:34'),
+(3, '1', NULL, 2, 1, 10, NULL, '2022-01-03 16:11:07', '2022-01-06 16:57:34'),
+(4, '1', NULL, 1, 1, 10, NULL, '2022-01-03 16:11:07', '2022-01-06 16:57:34');
 
 -- --------------------------------------------------------
 
@@ -1254,7 +1280,7 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`id`, `reference_no`, `user_id`, `warehouse_id`, `supplier_id`, `item`, `total_qty`, `total_discount`, `total_tax`, `total_cost`, `order_tax_rate`, `order_tax`, `order_discount`, `shipping_cost`, `grand_total`, `paid_amount`, `status`, `payment_status`, `document`, `note`, `created_at`, `updated_at`) VALUES
-(1, 'pr-20220107-113331', 1, 1, 1, 3, 25, 0, 0, 1750, 0, 0, NULL, NULL, 1750, 1750, 1, 2, NULL, NULL, '2022-01-07 22:33:31', '2022-01-07 22:34:48');
+(2, 'pr-20220103-053903', 1, 1, 1, 4, 30, 0, 0, 2100, 0, 0, NULL, NULL, 2100, 2100, 1, 2, NULL, NULL, '2022-01-03 16:39:03', '2022-01-06 14:55:39');
 
 -- --------------------------------------------------------
 
@@ -1389,9 +1415,10 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `description`, `guard_name`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'Administrateur du système', 'web', 1, '2018-06-01 23:46:44', '2022-01-07 20:39:04'),
-(4, 'Vendeur', 'Rôle Vendeur', 'web', 1, '2018-06-02 00:05:27', '2022-01-07 20:38:33'),
-(5, 'Client', 'Rôle Client', 'web', 1, '2020-11-05 06:43:16', '2022-01-07 20:38:48');
+(1, 'Admin', 'admin can access all data...', 'web', 1, '2018-06-01 23:46:44', '2018-06-02 23:13:05'),
+(2, 'Owner', 'Owner of shop...', 'web', 1, '2018-10-22 02:38:13', '2018-10-22 02:38:13'),
+(4, 'staff', 'staff has specific acess...', 'web', 1, '2018-06-02 00:05:27', '2018-06-02 00:05:27'),
+(5, 'Customer', NULL, 'web', 1, '2020-11-05 06:43:16', '2020-11-15 00:24:15');
 
 -- --------------------------------------------------------
 
@@ -1501,7 +1528,96 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (101, 1),
 (102, 1),
 (103, 1),
-(104, 1);
+(104, 1),
+(4, 2),
+(5, 2),
+(6, 2),
+(7, 2),
+(8, 2),
+(9, 2),
+(10, 2),
+(11, 2),
+(12, 2),
+(13, 2),
+(14, 2),
+(15, 2),
+(24, 2),
+(25, 2),
+(26, 2),
+(27, 2),
+(28, 2),
+(29, 2),
+(30, 2),
+(31, 2),
+(32, 2),
+(33, 2),
+(34, 2),
+(35, 2),
+(36, 2),
+(37, 2),
+(38, 2),
+(39, 2),
+(40, 2),
+(41, 2),
+(42, 2),
+(43, 2),
+(44, 2),
+(45, 2),
+(46, 2),
+(47, 2),
+(48, 2),
+(49, 2),
+(50, 2),
+(51, 2),
+(52, 2),
+(53, 2),
+(54, 2),
+(55, 2),
+(56, 2),
+(57, 2),
+(58, 2),
+(59, 2),
+(60, 2),
+(61, 2),
+(62, 2),
+(63, 2),
+(64, 2),
+(65, 2),
+(66, 2),
+(70, 2),
+(71, 2),
+(72, 2),
+(73, 2),
+(74, 2),
+(75, 2),
+(76, 2),
+(77, 2),
+(78, 2),
+(79, 2),
+(80, 2),
+(81, 2),
+(82, 2),
+(83, 2),
+(84, 2),
+(85, 2),
+(86, 2),
+(87, 2),
+(88, 2),
+(89, 2),
+(90, 2),
+(91, 2),
+(92, 2),
+(93, 2),
+(94, 2),
+(95, 2),
+(96, 2),
+(98, 2),
+(99, 2),
+(100, 2),
+(101, 2),
+(102, 2),
+(103, 2),
+(104, 2);
 
 -- --------------------------------------------------------
 
@@ -1540,6 +1656,13 @@ CREATE TABLE `sales` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Déchargement des données de la table `sales`
+--
+
+INSERT INTO `sales` (`id`, `reference_no`, `user_id`, `cash_register_id`, `customer_id`, `warehouse_id`, `biller_id`, `item`, `total_qty`, `total_discount`, `total_tax`, `total_price`, `livraison`, `grand_total`, `order_tax_rate`, `order_tax`, `order_discount`, `coupon_id`, `coupon_discount`, `shipping_cost`, `sale_status`, `payment_status`, `document`, `paid_amount`, `sale_note`, `staff_note`, `created_at`, `updated_at`) VALUES
+(4, 'sr-20220106-112130', 1, 1, 1, 1, 1, 2, 2, 0, 0, 470, 50, 470, 0, 0, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, '2022-01-06 22:21:30', '2022-01-06 22:21:30');
+
 -- --------------------------------------------------------
 
 --
@@ -1561,6 +1684,13 @@ CREATE TABLE `stock_counts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `stock_counts`
+--
+
+INSERT INTO `stock_counts` (`id`, `reference_no`, `warehouse_id`, `category_id`, `brand_id`, `user_id`, `type`, `initial_file`, `final_file`, `note`, `is_adjusted`, `created_at`, `updated_at`) VALUES
+(1, 'scr-20220106-034125', 1, NULL, NULL, 1, 'full', '20220106-034125.csv', NULL, NULL, 0, '2022-01-06 14:41:25', '2022-01-06 14:41:25');
 
 -- --------------------------------------------------------
 
@@ -1591,7 +1721,7 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `name`, `image`, `company_name`, `vat_number`, `email`, `phone_number`, `address`, `city`, `state`, `postal_code`, `country`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Supplier 1', NULL, 'Supplier 1 Company', NULL, 'supplier1@yovente.com', '0655555555', 'Adresse Supplier 1', 'Casablanca', NULL, NULL, NULL, 1, '2022-01-07 22:28:29', '2022-01-07 22:28:29');
+(1, 'Supplier 1', 'CompanySupplier1.png', 'Company Supplier 1', NULL, 'supplier1@yovente.com', '0633333333', 'Adresse Supplier 1', 'Casablanca', NULL, NULL, NULL, 1, '2022-01-03 16:03:05', '2022-01-03 16:03:05');
 
 -- --------------------------------------------------------
 
@@ -1656,7 +1786,9 @@ CREATE TABLE `units` (
 --
 
 INSERT INTO `units` (`id`, `unit_code`, `unit_name`, `base_unit`, `operator`, `operation_value`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'pce', 'Pièce', NULL, '*', 1, 1, '2022-01-07 20:57:28', '2022-01-07 20:57:28');
+(1, 'pce', 'Pièce', NULL, '*', 1, 1, '2022-01-02 15:06:05', '2022-01-02 15:06:05'),
+(2, 'douzaine', 'Douzaine', 1, '*', 12, 1, '2022-01-02 15:06:16', '2022-01-02 15:06:16'),
+(3, 'carton', 'Carton', 1, '*', 20, 1, '2022-01-02 15:06:31', '2022-01-02 15:06:31');
 
 -- --------------------------------------------------------
 
@@ -1686,8 +1818,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `phone`, `company_name`, `role_id`, `biller_id`, `warehouse_id`, `is_active`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, 'Tarik', 'tarik.engineering@gmail.com', '$2y$10$HPt3Go.HX8PKm/9Tuh2h5uaW3yIVnf5qu9y.aWIv85AVZJbUU0slG', 'LhMr89rosIshfx3cTSqoec2pMqx5D7SAELbfFzcgWLspT67Ve67lbYO4PnZf', '0689385061', 'T@R!K', 1, NULL, NULL, 1, 0, '2018-06-02 03:24:15', '2022-01-02 16:12:16'),
-(23, 'Vendeur', 'vendeur@yovente.com', '$2y$10$ZpJbd7m8PzYsUguYOjJJzu9oE7YO/Z.9bB2HyVBR5PBew8XCoPBRW', NULL, '0633333333', NULL, 4, 1, 1, 1, 0, '2022-01-07 21:35:45', '2022-01-07 21:35:45');
+(1, 'Tarik', 'tarik.engineering@gmail.com', '$2y$10$HPt3Go.HX8PKm/9Tuh2h5uaW3yIVnf5qu9y.aWIv85AVZJbUU0slG', 'czurn8etRIeQB8rpMVuznwgHSzGCYvWLeBfn2C863C71zDGyDTAZRmEKrucO', '0689385061', 'T@R!K', 1, NULL, NULL, 1, 0, '2018-06-02 03:24:15', '2022-01-02 16:12:16'),
+(3, 'dhiman da', 'dhiman@gmail.com', '$2y$10$Fef6vu5E67nm11hX7V5a2u1ThNCQ6n9DRCvRF9TD7stk.Pmt2R6O.', '5ehQM6JIfiQfROgTbB5let0Z93vjLHS7rd9QD5RPNgOxli3xdo7fykU7vtTt', '212', 'lioncoders', 1, NULL, NULL, 0, 1, '2018-06-13 22:00:31', '2022-01-02 16:54:09'),
+(6, 'test', 'test@gmail.com', '$2y$10$TDAeHcVqHyCmurki0wjLZeIl1SngKX3WLOhyTiCoZG3souQfqv.LS', 'KpW1gYYlOFacumklO2IcRfSsbC3KcWUZzOI37gqoqM388Xie6KdhaOHIFEYm', '1234', '212312', 4, NULL, NULL, 0, 1, '2018-06-23 03:05:33', '2022-01-02 16:54:09'),
+(8, 'test', 'test@yahoo.com', '$2y$10$hlMigidZV0j2/IPkgE/xsOSb8WM2IRlsMv.1hg1NM7kfyd6bGX3hC', NULL, '31231', NULL, 4, NULL, NULL, 0, 1, '2018-06-24 22:35:49', '2022-01-02 16:54:09'),
+(9, 'staff', 'anda@gmail.com', '$2y$10$kxDbnynB6mB1e1w3pmtbSOlSxy/WwbLPY5TJpMi0Opao5ezfuQjQm', '4mpeALkXgGbBYEZuCTT6zaAlKvTYqyHMMKgrDXMA0nzSh7UnzUNpi1KgOEbg', '3123', NULL, 4, 5, 1, 0, 1, '2018-07-02 01:08:08', '2022-01-02 16:54:09'),
+(10, 'abul', 'abul@alpha.com', '$2y$10$5zgB2OOMyNBNVAd.QOQIju5a9fhNnTqPx5H6s4oFlXhNiF6kXEsPq', 'x7HlttI5bM0vSKViqATaowHFJkLS3PHwfvl7iJdFl5Z1SsyUgWCVbLSgAoi0', '1234', 'anda', 1, NULL, NULL, 0, 1, '2018-09-07 23:44:48', '2022-01-02 16:54:09'),
+(11, 'teststaff', 'a@a.com', '$2y$10$5KNBIIhZzvvZEQEhkHaZGu.Q8bbQNfqYvYgL5N55B8Pb4P5P/b/Li', 'DkHDEcCA0QLfsKPkUK0ckL0CPM6dPiJytNa0k952gyTbeAyMthW3vi7IRitp', '111', 'aa', 4, 5, 1, 0, 1, '2018-10-22 02:47:56', '2022-01-02 16:54:09'),
+(12, 'john', 'john@gmail.com', '$2y$10$P/pN2J/uyTYNzQy2kRqWwuSv7P2f6GE/ykBwtHdda7yci3XsfOKWe', 'O0f1WJBVjT5eKYl3Js5l1ixMMtoU6kqrH7hbHDx9I1UCcD9CmiSmCBzHbQZg', '10001', NULL, 4, 2, 2, 0, 1, '2018-12-30 00:48:37', '2022-01-02 16:54:09'),
+(13, 'jjj', 'test@test.com', '$2y$10$/Qx3gHWYWUhlF1aPfzXaCeZA7fRzfSEyCIOnk/dcC4ejO8PsoaalG', NULL, '1213', NULL, 1, NULL, NULL, 0, 1, '2019-01-03 00:08:31', '2022-01-02 16:54:09'),
+(19, 'shakalaka', 'shakalaka@gmail.com', '$2y$10$ketLWT0Ib/JXpo00eJlxoeSw.7leS8V1CUGInfbyOWT4F5.Xuo7S2', NULL, '1212', 'Digital image', 5, NULL, NULL, 0, 1, '2020-11-09 00:07:16', '2022-01-02 16:54:10'),
+(21, 'modon', 'modon@gmail.com', '$2y$10$7VpoeGMkP8QCvL5zLwFW..6MYJ5MRumDLDoX.TTQtClS561rpFHY.', NULL, '2222', 'modon company', 5, NULL, NULL, 0, 1, '2020-11-13 07:12:08', '2022-01-02 16:54:17'),
+(22, 'dhiman', 'dhiman@gmail.com', '$2y$10$3mPygsC6wwnDtw/Sg85IpuExtUhgaHx52Lwp7Rz0.FNfuFdfKVpRq', NULL, '+8801111111101', 'lioncoders', 5, NULL, NULL, 0, 1, '2020-11-15 06:14:58', '2022-01-02 16:54:17');
 
 -- --------------------------------------------------------
 
@@ -1707,11 +1849,10 @@ CREATE TABLE `variants` (
 --
 
 INSERT INTO `variants` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'XL', '2022-01-07 21:42:53', '2022-01-07 21:42:53'),
-(2, 'L', '2022-01-07 21:42:53', '2022-01-07 21:42:53'),
-(3, 'M', '2022-01-07 21:42:53', '2022-01-07 21:42:53'),
-(4, 'S', '2022-01-07 21:42:53', '2022-01-07 21:42:53'),
-(5, 'XXL', '2022-01-07 22:26:22', '2022-01-07 22:26:22');
+(1, 'XL', '2022-01-03 15:55:42', '2022-01-03 15:55:42'),
+(2, 'L', '2022-01-03 15:55:42', '2022-01-03 15:55:42'),
+(3, 'M', '2022-01-03 15:55:42', '2022-01-03 15:55:42'),
+(4, 'S', '2022-01-03 15:55:42', '2022-01-03 15:55:42');
 
 -- --------------------------------------------------------
 
@@ -1735,7 +1876,8 @@ CREATE TABLE `warehouses` (
 --
 
 INSERT INTO `warehouses` (`id`, `name`, `phone`, `email`, `address`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Entrepôt Benslimane', '0600000000', 'entrepotbenslimane@yovente.com', 'Adresse de l\'entrepôt de Benslimane', 1, '2022-01-07 20:55:19', '2022-01-07 20:55:19');
+(1, 'Entrepôt Benslimane', '0600000000', NULL, 'Adresse Entrepôt Benslimane', 1, '2022-01-02 15:04:06', '2022-01-02 15:04:06'),
+(2, 'Entrepôt Fes', '0611111111', NULL, 'Adresse Entrepôt Fes', 1, '2022-01-02 15:04:23', '2022-01-02 15:04:23');
 
 --
 -- Index pour les tables déchargées
@@ -2153,7 +2295,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT pour la table `cash_registers`
 --
 ALTER TABLE `cash_registers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `categories`
@@ -2189,7 +2331,7 @@ ALTER TABLE `customer_groups`
 -- AUTO_INCREMENT pour la table `deliveries`
 --
 ALTER TABLE `deliveries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `departments`
@@ -2279,7 +2421,7 @@ ALTER TABLE `money_transfers`
 -- AUTO_INCREMENT pour la table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `payment_with_cheque`
@@ -2339,7 +2481,7 @@ ALTER TABLE `product_batches`
 -- AUTO_INCREMENT pour la table `product_purchases`
 --
 ALTER TABLE `product_purchases`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `product_quotation`
@@ -2357,7 +2499,7 @@ ALTER TABLE `product_returns`
 -- AUTO_INCREMENT pour la table `product_sales`
 --
 ALTER TABLE `product_sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `product_transfer`
@@ -2369,19 +2511,19 @@ ALTER TABLE `product_transfer`
 -- AUTO_INCREMENT pour la table `product_variants`
 --
 ALTER TABLE `product_variants`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `product_warehouse`
 --
 ALTER TABLE `product_warehouse`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `purchase_product_return`
@@ -2417,13 +2559,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `stock_counts`
 --
 ALTER TABLE `stock_counts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `suppliers`
@@ -2447,25 +2589,25 @@ ALTER TABLE `transfers`
 -- AUTO_INCREMENT pour la table `units`
 --
 ALTER TABLE `units`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pour la table `variants`
 --
 ALTER TABLE `variants`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `warehouses`
 --
 ALTER TABLE `warehouses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
