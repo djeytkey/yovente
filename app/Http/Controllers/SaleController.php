@@ -341,7 +341,7 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+        //dd($request);
         $data = $request->all();
         if(isset($request->reference_no)) {
             $this->validate($request, [

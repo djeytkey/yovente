@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 07 jan. 2022 à 22:45
--- Version du serveur : 5.7.24
--- Version de PHP : 7.4.20RC1
+-- Généré le : sam. 08 jan. 2022 à 13:55
+-- Version du serveur : 5.7.33
+-- Version de PHP : 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -156,6 +156,13 @@ CREATE TABLE `cash_registers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `cash_registers`
+--
+
+INSERT INTO `cash_registers` (`id`, `cash_in_hand`, `user_id`, `warehouse_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 0, 1, 1, 1, '2022-01-08 12:42:44', '2022-01-08 12:42:44');
 
 -- --------------------------------------------------------
 
@@ -731,7 +738,9 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`id`, `payment_reference`, `user_id`, `purchase_id`, `sale_id`, `cash_register_id`, `account_id`, `amount`, `change`, `paying_method`, `payment_note`, `created_at`, `updated_at`) VALUES
-(1, 'ppr-20220107-113448', 1, 1, NULL, NULL, 1, 1750, 0, 'Cash', NULL, '2022-01-07 22:34:48', '2022-01-07 22:34:48');
+(1, 'ppr-20220107-113448', 1, 1, NULL, NULL, 1, 1750, 0, 'Cash', NULL, '2022-01-07 22:34:48', '2022-01-07 22:34:48'),
+(2, 'ppr-20220108-013940', 1, 2, NULL, NULL, 1, 3600, 0, 'Cash', NULL, '2022-01-08 12:39:40', '2022-01-08 12:39:40'),
+(3, 'spr-20220108-015053', 1, NULL, 1, 1, 1, 680, 0, 'Cash', NULL, '2022-01-08 12:50:53', '2022-01-08 12:50:53');
 
 -- --------------------------------------------------------
 
@@ -1004,7 +1013,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `code`, `type`, `barcode_symbology`, `brand_id`, `category_id`, `unit_id`, `purchase_unit_id`, `sale_unit_id`, `cost`, `price`, `qty`, `alert_quantity`, `promotion`, `promotion_price`, `starting_date`, `last_date`, `tax_id`, `tax_method`, `image`, `file`, `is_variant`, `is_batch`, `is_diffPrice`, `featured`, `product_list`, `qty_list`, `price_list`, `product_details`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Product 1 Tunique', 'P-22-546', 'standard', 'C39', 4, 3, 1, 1, 1, '70', '150', 25, 10, NULL, NULL, NULL, NULL, NULL, NULL, '1641591753620robe-hijab-1.jpg,1641591753623robe-hijab-1-1.jpg', NULL, 1, NULL, 0, 0, NULL, NULL, NULL, '', 1, '2022-01-07 21:42:53', '2022-01-07 22:33:32');
+(1, 'Product 1 Tunique', 'P-22-546', 'standard', 'C39', 4, 3, 1, 1, 1, '70', '150', 25, 10, NULL, NULL, NULL, NULL, NULL, NULL, '1641591753620robe-hijab-1.jpg,1641591753623robe-hijab-1-1.jpg', NULL, 1, NULL, 0, 0, NULL, NULL, NULL, '', 1, '2022-01-07 21:42:53', '2022-01-07 22:33:32'),
+(2, 'Product 2 Tunique', 'P-22-582', 'standard', 'C39', 2, 3, 1, 1, 1, '90', '170', 40, 10, NULL, NULL, NULL, NULL, NULL, NULL, '1641648820537z-desenliwebp.jpg', NULL, 1, NULL, 0, 0, NULL, NULL, NULL, '', 1, '2022-01-08 12:34:13', '2022-01-08 12:39:22');
 
 -- --------------------------------------------------------
 
@@ -1070,7 +1080,10 @@ CREATE TABLE `product_purchases` (
 INSERT INTO `product_purchases` (`id`, `purchase_id`, `product_id`, `product_batch_id`, `variant_id`, `qty`, `recieved`, `purchase_unit_id`, `net_unit_cost`, `discount`, `tax_rate`, `tax`, `total`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, NULL, 3, 5, 5, 1, 70, 0, 0, 0, 350, '2022-01-07 22:33:32', '2022-01-07 22:33:32'),
 (2, 1, 1, NULL, 1, 10, 10, 1, 70, 0, 0, 0, 700, '2022-01-07 22:33:32', '2022-01-07 22:33:32'),
-(3, 1, 1, NULL, 5, 10, 10, 1, 70, 0, 0, 0, 700, '2022-01-07 22:33:32', '2022-01-07 22:33:32');
+(3, 1, 1, NULL, 5, 10, 10, 1, 70, 0, 0, 0, 700, '2022-01-07 22:33:32', '2022-01-07 22:33:32'),
+(4, 2, 2, NULL, 2, 10, 10, 1, 90, 0, 0, 0, 900, '2022-01-08 12:39:22', '2022-01-08 12:39:22'),
+(5, 2, 2, NULL, 1, 15, 15, 1, 90, 0, 0, 0, 1350, '2022-01-08 12:39:22', '2022-01-08 12:39:22'),
+(6, 2, 2, NULL, 5, 15, 15, 1, 90, 0, 0, 0, 1350, '2022-01-08 12:39:22', '2022-01-08 12:39:22');
 
 -- --------------------------------------------------------
 
@@ -1142,6 +1155,15 @@ CREATE TABLE `product_sales` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Déchargement des données de la table `product_sales`
+--
+
+INSERT INTO `product_sales` (`id`, `sale_id`, `product_id`, `product_batch_id`, `variant_id`, `qty`, `sale_unit_id`, `net_unit_price`, `original_price`, `discount`, `tax_rate`, `tax`, `total`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, NULL, 2, 1, 1, 200, 170, 0, 0, 0, 200, '2022-01-08 12:46:24', '2022-01-08 12:46:24'),
+(2, 1, 2, NULL, 1, 1, 1, 210, 170, 0, 0, 0, 210, '2022-01-08 12:46:24', '2022-01-08 12:46:24'),
+(3, 1, 2, NULL, 5, 1, 1, 220, 170, 0, 0, 0, 220, '2022-01-08 12:46:24', '2022-01-08 12:46:24');
+
 -- --------------------------------------------------------
 
 --
@@ -1189,7 +1211,10 @@ CREATE TABLE `product_variants` (
 INSERT INTO `product_variants` (`id`, `product_id`, `variant_id`, `position`, `item_code`, `additional_price`, `qty`, `created_at`, `updated_at`) VALUES
 (9, 1, 1, 2, 'XL-P-22-546', NULL, 10, '2022-01-07 22:26:22', '2022-01-07 22:33:32'),
 (10, 1, 5, 1, 'XXL-P-22-546', NULL, 10, '2022-01-07 22:26:22', '2022-01-07 22:33:32'),
-(11, 1, 3, 3, 'M-P-22-546', NULL, 5, '2022-01-07 22:26:22', '2022-01-07 22:33:32');
+(11, 1, 3, 3, 'M-P-22-546', NULL, 5, '2022-01-07 22:26:22', '2022-01-07 22:33:32'),
+(12, 2, 5, 1, 'XXL-P-22-582', NULL, 15, '2022-01-08 12:34:13', '2022-01-08 12:39:22'),
+(13, 2, 1, 2, 'XL-P-22-582', NULL, 15, '2022-01-08 12:34:13', '2022-01-08 12:39:22'),
+(14, 2, 2, 3, 'L-P-22-582', NULL, 10, '2022-01-08 12:34:13', '2022-01-08 12:39:22');
 
 -- --------------------------------------------------------
 
@@ -1216,7 +1241,10 @@ CREATE TABLE `product_warehouse` (
 INSERT INTO `product_warehouse` (`id`, `product_id`, `product_batch_id`, `variant_id`, `warehouse_id`, `qty`, `price`, `created_at`, `updated_at`) VALUES
 (1, '1', NULL, 3, 1, 5, NULL, '2022-01-07 22:33:32', '2022-01-07 22:33:32'),
 (2, '1', NULL, 1, 1, 10, NULL, '2022-01-07 22:33:32', '2022-01-07 22:33:32'),
-(3, '1', NULL, 5, 1, 10, NULL, '2022-01-07 22:33:32', '2022-01-07 22:33:32');
+(3, '1', NULL, 5, 1, 10, NULL, '2022-01-07 22:33:32', '2022-01-07 22:33:32'),
+(4, '2', NULL, 2, 1, 10, NULL, '2022-01-08 12:39:22', '2022-01-08 12:39:22'),
+(5, '2', NULL, 1, 1, 15, NULL, '2022-01-08 12:39:22', '2022-01-08 12:39:22'),
+(6, '2', NULL, 5, 1, 15, NULL, '2022-01-08 12:39:22', '2022-01-08 12:39:22');
 
 -- --------------------------------------------------------
 
@@ -1254,7 +1282,8 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`id`, `reference_no`, `user_id`, `warehouse_id`, `supplier_id`, `item`, `total_qty`, `total_discount`, `total_tax`, `total_cost`, `order_tax_rate`, `order_tax`, `order_discount`, `shipping_cost`, `grand_total`, `paid_amount`, `status`, `payment_status`, `document`, `note`, `created_at`, `updated_at`) VALUES
-(1, 'pr-20220107-113331', 1, 1, 1, 3, 25, 0, 0, 1750, 0, 0, NULL, NULL, 1750, 1750, 1, 2, NULL, NULL, '2022-01-07 22:33:31', '2022-01-07 22:34:48');
+(1, 'pr-20220107-113331', 1, 1, 1, 3, 25, 0, 0, 1750, 0, 0, NULL, NULL, 1750, 1750, 1, 2, NULL, NULL, '2022-01-07 22:33:31', '2022-01-07 22:34:48'),
+(2, 'pr-20220108-013922', 1, 1, 1, 3, 40, 0, 0, 3600, 0, 0, NULL, NULL, 3600, 3600, 1, 2, NULL, NULL, '2022-01-08 12:39:22', '2022-01-08 12:39:40');
 
 -- --------------------------------------------------------
 
@@ -1539,6 +1568,13 @@ CREATE TABLE `sales` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `sales`
+--
+
+INSERT INTO `sales` (`id`, `reference_no`, `user_id`, `cash_register_id`, `customer_id`, `warehouse_id`, `biller_id`, `item`, `total_qty`, `total_discount`, `total_tax`, `total_price`, `livraison`, `grand_total`, `order_tax_rate`, `order_tax`, `order_discount`, `coupon_id`, `coupon_discount`, `shipping_cost`, `sale_status`, `payment_status`, `document`, `paid_amount`, `sale_note`, `staff_note`, `created_at`, `updated_at`) VALUES
+(1, 'sr-20220108-014624', 1, 1, 1, 1, 1, 3, 3, 0, 0, 680, 50, 680, 0, 0, NULL, NULL, NULL, NULL, 2, 4, NULL, 680, NULL, NULL, '2022-01-08 12:46:24', '2022-01-08 12:50:53');
 
 -- --------------------------------------------------------
 
@@ -2153,7 +2189,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT pour la table `cash_registers`
 --
 ALTER TABLE `cash_registers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `categories`
@@ -2279,7 +2315,7 @@ ALTER TABLE `money_transfers`
 -- AUTO_INCREMENT pour la table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `payment_with_cheque`
@@ -2321,7 +2357,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT pour la table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `product_adjustments`
@@ -2339,7 +2375,7 @@ ALTER TABLE `product_batches`
 -- AUTO_INCREMENT pour la table `product_purchases`
 --
 ALTER TABLE `product_purchases`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `product_quotation`
@@ -2357,7 +2393,7 @@ ALTER TABLE `product_returns`
 -- AUTO_INCREMENT pour la table `product_sales`
 --
 ALTER TABLE `product_sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `product_transfer`
@@ -2369,19 +2405,19 @@ ALTER TABLE `product_transfer`
 -- AUTO_INCREMENT pour la table `product_variants`
 --
 ALTER TABLE `product_variants`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `product_warehouse`
 --
 ALTER TABLE `product_warehouse`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `purchase_product_return`
@@ -2417,7 +2453,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `stock_counts`
