@@ -77,9 +77,7 @@
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/jquery.dataTables.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/dataTables.bootstrap4.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/dataTables.buttons.min.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/buttons.bootstrap4.min.js'); ?>">
-        ">
-    </script>
+    <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/buttons.bootstrap4.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/buttons.colVis.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/buttons.html5.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/buttons.print.min.js'); ?>"></script>
@@ -170,6 +168,11 @@
                                     <?php endif; ?>
                                 <?php endif; ?>
                                 
+                                <?php if($stock_count_active): ?>
+                                    <li id="stock-count-menu"><a
+                                            href="<?php echo e(route('stock-count.index')); ?>"><?php echo e(trans('file.Stock Count')); ?></a>
+                                    </li>
+                                <?php endif; ?>
                             </ul>
                         </li>
                     <?php endif; ?>
@@ -915,11 +918,7 @@
                             <li id="user-menu"><a
                                 href="<?php echo e(route('user.profile', ['id' => Auth::id()])); ?>"><?php echo e(trans('file.User Profile')); ?></a>
                             </li>
-                            <?php if($send_notification_permission_active): ?>
-                                <li id="notification-menu">
-                                    <a href="" id="send-notification"><?php echo e(trans('file.Send Notification')); ?></a>
-                                </li>
-                            <?php endif; ?>
+                            
                             <?php if($warehouse_permission_active): ?>
                                 <li id="warehouse-menu"><a
                                         href="<?php echo e(route('warehouse.index')); ?>"><?php echo e(trans('file.Warehouse')); ?></a></li>
@@ -945,31 +944,11 @@
                                 <li id="tax-menu"><a href="<?php echo e(route('tax.index')); ?>"><?php echo e(trans('file.Tax')); ?></a>
                                 </li>
                             <?php endif; ?>                            
-                            <?php if($create_sms_permission_active): ?>
-                                <li id="create-sms-menu"><a
-                                        href="<?php echo e(route('setting.createSms')); ?>"><?php echo e(trans('file.Create SMS')); ?></a>
-                                </li>
-                            <?php endif; ?>
-                            <?php if($backup_database_permission_active): ?>
-                                <li><a href="<?php echo e(route('setting.backup')); ?>"><?php echo e(trans('file.Backup Database')); ?></a>
-                                </li>
-                            <?php endif; ?>                            
-                            <?php if($mail_setting_permission_active): ?>
-                                <li id="mail-setting-menu"><a
-                                        href="<?php echo e(route('setting.mail')); ?>"><?php echo e(trans('file.Mail Setting')); ?></a></li>
-                            <?php endif; ?>
-                            <?php if($sms_setting_permission_active): ?>
-                                <li id="sms-setting-menu"><a
-                                        href="<?php echo e(route('setting.sms')); ?>"><?php echo e(trans('file.SMS Setting')); ?></a></li>
-                            <?php endif; ?>
-                            <?php if($pos_setting_permission_active): ?>
-                                <li id="pos-setting-menu"><a href="<?php echo e(route('setting.pos')); ?>">POS
-                                        <?php echo e(trans('file.settings')); ?></a></li>
-                            <?php endif; ?>
-                            <?php if($hrm_setting_permission_active): ?>
-                                <li id="hrm-setting-menu"><a href="<?php echo e(route('setting.hrm')); ?>">
-                                        <?php echo e(trans('file.HRM Setting')); ?></a></li>
-                            <?php endif; ?>
+                            
+                                                        
+                            
+                            
+                            
                         </ul>
                     </li>
                 </ul>
@@ -1097,6 +1076,14 @@
                                                 class="dripicons-vibrate"></i> <?php echo e(trans('file.My Holiday')); ?></a>
                                     </li>
                                 <?php endif; ?>
+
+                                <?php if($backup_database_permission_active): ?>
+                                    <li>
+                                        <a href="<?php echo e(route('setting.backup')); ?>"><i
+                                            class="dripicons-archive"></i> <?php echo e(trans('file.Backup Database')); ?></a>
+                                    </li>
+                                <?php endif; ?>
+                                
                                 <?php if($empty_database_permission_active): ?>
                                     <li>
                                         <a onclick="return confirm('Are you sure want to delete? If you do this all of your data will be lost.')"

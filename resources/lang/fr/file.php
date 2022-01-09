@@ -588,5 +588,6 @@ return [
 	"System Logo" => "Logo du système",
 	"This product has different price for different warehouse" => "Ce produit a un prix différent pour différents entrepôts",
 	"Backup Database" => "Sauvegarder la base de données",
+	"Database backup created successfully" => "Sauvegarde de la base de données créée avec succès",
 ];
 ?>

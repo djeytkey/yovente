@@ -1451,8 +1451,8 @@ class SaleController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->except('document');
-        //return dd($data);
+        //dd($request);        
+        $data = $request->except('document');        
         $document = $request->document;
         if ($document) {
             $v = Validator::make(
@@ -1484,6 +1484,7 @@ class SaleController extends Controller
         $qty = $data['qty'];
         $sale_unit = $data['sale_unit'];
         $net_unit_price = $data['net_unit_price'];
+        $original_price = $data['original_price'];
         $discount = $data['discount'];
         $tax_rate = $data['tax_rate'];
         $tax = $data['tax'];
@@ -1640,6 +1641,7 @@ class SaleController extends Controller
             $product_sale['qty'] = $mail_data['qty'][$key] = $qty[$key];
             $product_sale['sale_unit_id'] = $sale_unit_id;
             $product_sale['net_unit_price'] = $net_unit_price[$key];
+            $product_sale['original_price'] = $original_price[$key];
             $product_sale['discount'] = $discount[$key];
             $product_sale['tax_rate'] = $tax_rate[$key];
             $product_sale['tax'] = $tax[$key];

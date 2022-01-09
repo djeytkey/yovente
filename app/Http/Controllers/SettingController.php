@@ -94,6 +94,29 @@ class SettingController extends Controller
             return redirect()->back()->with('not_permitted', 'This feature is disable for demo!');
 
         // Database configuration
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+
+        $database = env('DB_DATABASE');
+        $user = env('DB_USERNAME');
+        $pass = env('DB_PASSWORD');
+        $host = env('DB_HOST');
+        $dir = public_path().'/'.$database . '_backup_' . date('d-m-Y-H-i-s') . '.sql';
+
+        exec("mysqldump --user={$user} --password={$pass} --host={$host} {$database} --result-file={$dir} 2>&1", $output);
+
+        var_dump($output);
+
+        return redirect('/')->with('message', trans("file.Database backup created successfully"));
+    }
+
+    /*public function backup()
+    {
+        if(!env('USER_VERIFIED'))
+            return redirect()->back()->with('not_permitted', 'This feature is disable for demo!');
+
+        // Database configuration
         $host = env('DB_HOST');
         $username = env('DB_USERNAME');
         $password = env('DB_PASSWORD');
@@ -155,17 +178,20 @@ class SettingController extends Controller
         if(!empty($sqlScript))
         {
             // Save the SQL script to a backup file
-            $backup_file_name = public_path().'/'.$database_name . '_backup_' . time() . '.sql';
+            //$backup_file_name = public_path().'/'.$database_name . '_backup_' . time() . '.sql';
+            $backup_file_name = public_path().'/'.$database_name . '_backup_' . date('d-m-Y-H-i-s') . '.sql';
             //return $backup_file_name;
             $fileHandler = fopen($backup_file_name, 'w+');
             $number_of_lines = fwrite($fileHandler, $sqlScript);
             fclose($fileHandler);
 
             $zip = new ZipArchive();
-            $zipFileName = $database_name . '_backup_' . time() . '.zip';
+            //$zipFileName = $database_name . '_backup_' . time() . '.zip';
+            $zipFileName = $database_name . '_backup_' . date('d-m-Y-H-i-s') . '.zip';
             $zip->open(public_path() . '/' . $zipFileName, ZipArchive::CREATE);
-            $zip->addFile($backup_file_name, $database_name . '_backup_' . time() . '.sql');
-            $zip->close();
+            //$zip->addFile($backup_file_name, $database_name . '_backup_' . time() . '.sql');
+            $zip->addFile($backup_file_name, $database_name . '_backup_' . date('d-m-Y-H-i-s') . '.sql');
+            $zip->close();*/
 
             // Download the SQL backup file to the browser
             /*header('Content-Description: File Transfer');
@@ -180,9 +206,9 @@ class SettingController extends Controller
             flush();
             readfile($backup_file_name);
             exec('rm ' . $backup_file_name); */
-        }
+        /*}
         return redirect('public/' . $zipFileName);
-    }
+    }*/
 
     public function changeTheme($theme)
     {

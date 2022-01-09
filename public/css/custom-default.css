@@ -6,6 +6,10 @@ nav.navbar a.menu-btn:hover {
 	padding: 0 15px;
 }
 
+.page {
+	min-height: calc(100vh - 63px) !important;
+}
+
 .side-navbar {
 	/*background-color: #fafbfe;*/
 	background-color: #222d32;

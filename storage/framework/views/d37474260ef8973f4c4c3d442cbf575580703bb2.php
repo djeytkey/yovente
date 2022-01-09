@@ -96,6 +96,7 @@
                                                     <tr>
                                                     <?php 
                                                         $product_data = DB::table('products')->find($product_sale->product_id);
+                                                        $product_price = $product_sale->net_unit_price;
                                                         if($product_sale->variant_id){
                                                             $product_variant_data = \App\ProductVariant::select('id', 'item_code')->FindExactProduct($product_data->id, $product_sale->variant_id)->first();
                                                             $product_variant_id = $product_variant_data->id;
@@ -815,6 +816,44 @@ function productSearch(data){
         }
     });
 }
+
+/*function edit()
+{
+    var row_product_name = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(1)').text();
+    var row_product_code = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(2)').text();
+    $('#modal_header').text(row_product_name + '(' + row_product_code + ')');
+
+    var qty = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.qty').val();
+    $('input[name="edit_qty"]').val(qty);
+
+    $('input[name="edit_discount"]').val(parseFloat(product_discount[rowindex]).toFixed(2));
+
+    var tax_name_all = <?php echo json_encode($tax_name_all) ?>;
+    pos = tax_name_all.indexOf(tax_name[rowindex]);
+    $('select[name="edit_tax_rate"]').val(pos);
+
+    pos = product_code.indexOf(row_product_code);
+    if(product_type[pos] == 'standard'){
+        unitConversion();
+        temp_unit_name = (unit_name[rowindex]).split(',');
+        temp_unit_name.pop();
+        temp_unit_operator = (unit_operator[rowindex]).split(',');
+        temp_unit_operator.pop();
+        temp_unit_operation_value = (unit_operation_value[rowindex]).split(',');
+        temp_unit_operation_value.pop();
+        $('select[name="edit_unit"]').empty();
+        $.each(temp_unit_name, function(key, value) {
+            $('select[name="edit_unit"]').append('<option value="' + key + '">' + value + '</option>');
+        });
+        $("#edit_unit").show();
+    }
+    else{
+        row_product_price = product_price[rowindex];
+        $("#edit_unit").hide();
+    }
+    $('input[name="edit_unit_price"]').val(row_product_price.toFixed(2));
+    $('.selectpicker').selectpicker('refresh');
+}*/
 
 function edit(){
     var row_product_name = $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('td:nth-child(1)').text();

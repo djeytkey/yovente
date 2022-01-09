@@ -77,9 +77,7 @@
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/jquery.dataTables.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/dataTables.bootstrap4.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/dataTables.buttons.min.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/buttons.bootstrap4.min.js'); ?>">
-        ">
-    </script>
+    <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/buttons.bootstrap4.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/buttons.colVis.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/buttons.html5.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo asset('public/vendor/datatable/buttons.print.min.js'); ?>"></script>
@@ -181,12 +179,12 @@
                                     <li id="adjustment-create-menu"><a
                                             href="{{ route('qty_adjustment.create') }}">{{ trans('file.Add Adjustment') }}</a>
                                     </li>
-                                @endif
+                                @endif --}}
                                 @if ($stock_count_active)
                                     <li id="stock-count-menu"><a
                                             href="{{ route('stock-count.index') }}">{{ trans('file.Stock Count') }}</a>
                                     </li>
-                                @endif --}}
+                                @endif
                             </ul>
                         </li>
                     @endif
@@ -965,11 +963,11 @@
                             <li id="user-menu"><a
                                 href="{{ route('user.profile', ['id' => Auth::id()]) }}">{{ trans('file.User Profile') }}</a>
                             </li>
-                            @if ($send_notification_permission_active)
+                            {{-- @if ($send_notification_permission_active)
                                 <li id="notification-menu">
                                     <a href="" id="send-notification">{{ trans('file.Send Notification') }}</a>
                                 </li>
-                            @endif
+                            @endif --}}
                             @if ($warehouse_permission_active)
                                 <li id="warehouse-menu"><a
                                         href="{{ route('warehouse.index') }}">{{ trans('file.Warehouse') }}</a></li>
@@ -995,31 +993,31 @@
                                 <li id="tax-menu"><a href="{{ route('tax.index') }}">{{ trans('file.Tax') }}</a>
                                 </li>
                             @endif                            
-                            @if ($create_sms_permission_active)
+                            {{-- @if ($create_sms_permission_active)
                                 <li id="create-sms-menu"><a
                                         href="{{ route('setting.createSms') }}">{{ trans('file.Create SMS') }}</a>
                                 </li>
-                            @endif
-                            @if ($backup_database_permission_active)
+                            @endif --}}
+                            {{-- @if ($backup_database_permission_active)
                                 <li><a href="{{ route('setting.backup') }}">{{ trans('file.Backup Database') }}</a>
                                 </li>
-                            @endif                            
-                            @if ($mail_setting_permission_active)
+                            @endif --}}                            
+                            {{-- @if ($mail_setting_permission_active)
                                 <li id="mail-setting-menu"><a
                                         href="{{ route('setting.mail') }}">{{ trans('file.Mail Setting') }}</a></li>
                             @endif
                             @if ($sms_setting_permission_active)
                                 <li id="sms-setting-menu"><a
                                         href="{{ route('setting.sms') }}">{{ trans('file.SMS Setting') }}</a></li>
-                            @endif
-                            @if ($pos_setting_permission_active)
+                            @endif --}}
+                            {{-- @if ($pos_setting_permission_active)
                                 <li id="pos-setting-menu"><a href="{{ route('setting.pos') }}">POS
                                         {{ trans('file.settings') }}</a></li>
-                            @endif
-                            @if ($hrm_setting_permission_active)
+                            @endif --}}
+                            {{-- @if ($hrm_setting_permission_active)
                                 <li id="hrm-setting-menu"><a href="{{ route('setting.hrm') }}">
                                         {{ trans('file.HRM Setting') }}</a></li>
-                            @endif
+                            @endif --}}
                         </ul>
                     </li>
                 </ul>
@@ -1191,6 +1189,14 @@
                                                 class="dripicons-vibrate"></i> {{ trans('file.My Holiday') }}</a>
                                     </li>
                                 @endif
+
+                                @if ($backup_database_permission_active)
+                                    <li>
+                                        <a href="{{ route('setting.backup') }}"><i
+                                            class="dripicons-archive"></i> {{ trans('file.Backup Database') }}</a>
+                                    </li>
+                                @endif
+                                
                                 @if ($empty_database_permission_active)
                                     <li>
                                         <a onclick="return confirm('Are you sure want to delete? If you do this all of your data will be lost.')"

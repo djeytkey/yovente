@@ -594,5 +594,6 @@ return [
 	"Batch No" => "Batch No",
 	"Expired Date" => "Expired Date",
 	"This product has batch and expired date" => "This product has batch and expired date",
+	"Database backup created successfully" => "Database backup created successfully",
 ];
 ?>

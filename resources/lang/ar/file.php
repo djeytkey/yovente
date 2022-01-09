@@ -588,6 +588,7 @@ return [
 	"System Logo" => "شعار النظام",
 	"This product has different price for different warehouse" => "هذا المنتج له سعر مختلف لمستودعات مختلفة",
 	"Backup Database" => "قاعدة بيانات النسخ الاحتياطي",
+	"Database backup created successfully" => "تم إنشاء نسخة احتياطية لقاعدة البيانات بنجاح",
 	
 ];
 ?>
