@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : dim. 09 jan. 2022 à 22:27
+-- Généré le : sam. 15 jan. 2022 à 23:41
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.20RC1
 
@@ -162,7 +162,8 @@ CREATE TABLE `cash_registers` (
 --
 
 INSERT INTO `cash_registers` (`id`, `cash_in_hand`, `user_id`, `warehouse_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 0, 1, 1, 1, '2022-01-08 12:42:44', '2022-01-08 12:42:44');
+(1, 0, 1, 1, 1, '2022-01-08 12:42:44', '2022-01-08 12:42:44'),
+(2, 0, 23, 1, 1, '2022-01-15 23:40:24', '2022-01-15 23:40:24');
 
 -- --------------------------------------------------------
 
@@ -264,7 +265,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `customer_group_id`, `user_id`, `name`, `company_name`, `email`, `phone_number`, `tax_no`, `address`, `city`, `state`, `postal_code`, `country`, `deposit`, `expense`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, 'Salma BOUKJIJ', 'Salma Company', 'salma@yovente.com', '0611111111', NULL, 'Adresse Salma BOUKJIJ', 'Benslimane', NULL, NULL, NULL, NULL, NULL, 1, '2022-01-07 21:01:16', '2022-01-07 21:01:16');
+(1, 1, 24, 'Salma BOUKJIJ', 'Salma Company', 'salma@yovente.com', '0611111111', NULL, 'Adresse Salma BOUKJIJ', 'Benslimane', NULL, NULL, NULL, NULL, NULL, 1, '2022-01-07 21:01:16', '2022-01-15 20:13:17');
 
 -- --------------------------------------------------------
 
@@ -1013,8 +1014,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `code`, `type`, `barcode_symbology`, `brand_id`, `category_id`, `unit_id`, `purchase_unit_id`, `sale_unit_id`, `cost`, `price`, `qty`, `alert_quantity`, `promotion`, `promotion_price`, `starting_date`, `last_date`, `tax_id`, `tax_method`, `image`, `file`, `is_variant`, `is_batch`, `is_diffPrice`, `featured`, `product_list`, `qty_list`, `price_list`, `product_details`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Product 1 Tunique', 'P-22-546', 'standard', 'C39', 4, 3, 1, 1, 1, '70', '150', 25, 10, NULL, NULL, NULL, NULL, NULL, NULL, '1641591753620robe-hijab-1.jpg,1641591753623robe-hijab-1-1.jpg', NULL, 1, NULL, 0, 0, NULL, NULL, NULL, '', 1, '2022-01-07 21:42:53', '2022-01-07 22:33:32'),
-(2, 'Product 2 Tunique', 'P-22-582', 'standard', 'C39', 2, 3, 1, 1, 1, '90', '190', 38, 10, NULL, NULL, NULL, NULL, NULL, NULL, '1641648820537z-desenliwebp.jpg', NULL, 1, NULL, 0, 0, NULL, NULL, NULL, '', 1, '2022-01-08 12:34:13', '2022-01-09 22:18:09');
+(1, 'Product 1 Tunique', 'P-22-546', 'standard', 'C39', 4, 3, 1, 1, 1, '70', '150', 25, 10, NULL, NULL, NULL, NULL, NULL, NULL, '1641591753620robe-hijab-1.jpg,1641591753623robe-hijab-1-1.jpg', NULL, 1, NULL, 0, 0, NULL, NULL, NULL, '<p>Product Details Goes here !</p>', 1, '2022-01-07 21:42:53', '2022-01-15 23:23:13'),
+(2, 'Product 2 Tunique', 'P-22-582', 'standard', 'C39', 2, 3, 1, 1, 1, '90', '190', 38, 10, NULL, NULL, NULL, NULL, NULL, NULL, '1641648820537z-desenliwebp.jpg', NULL, 1, NULL, 0, 0, NULL, NULL, NULL, '<p>Product Details Goes here !</p>', 1, '2022-01-08 12:34:13', '2022-01-15 23:22:58');
 
 -- --------------------------------------------------------
 
@@ -1161,7 +1162,8 @@ CREATE TABLE `product_sales` (
 
 INSERT INTO `product_sales` (`id`, `sale_id`, `product_id`, `product_batch_id`, `variant_id`, `qty`, `sale_unit_id`, `net_unit_price`, `original_price`, `discount`, `tax_rate`, `tax`, `total`, `created_at`, `updated_at`) VALUES
 (8, 2, 2, NULL, 1, 1, 1, 220, 170, 0, 0, 0, 220, '2022-01-09 17:40:27', '2022-01-09 17:52:23'),
-(9, 2, 2, NULL, 2, 1, 1, 200, 170, 0, 0, 0, 200, '2022-01-09 17:40:27', '2022-01-09 17:52:24');
+(9, 2, 2, NULL, 2, 1, 1, 200, 170, 0, 0, 0, 200, '2022-01-09 17:40:27', '2022-01-09 17:52:24'),
+(10, 3, 1, NULL, 5, 1, 1, 200, 150, 0, 0, 0, 200, '2022-01-15 23:41:02', '2022-01-15 23:41:02');
 
 -- --------------------------------------------------------
 
@@ -1529,7 +1531,12 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (101, 1),
 (102, 1),
 (103, 1),
-(104, 1);
+(104, 1),
+(7, 4),
+(12, 4),
+(13, 4),
+(14, 4),
+(24, 4);
 
 -- --------------------------------------------------------
 
@@ -1573,7 +1580,8 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`id`, `reference_no`, `user_id`, `cash_register_id`, `customer_id`, `warehouse_id`, `biller_id`, `item`, `total_qty`, `total_discount`, `total_tax`, `total_price`, `livraison`, `grand_total`, `order_tax_rate`, `order_tax`, `order_discount`, `coupon_id`, `coupon_discount`, `shipping_cost`, `sale_status`, `payment_status`, `document`, `paid_amount`, `sale_note`, `staff_note`, `created_at`, `updated_at`) VALUES
-(2, 'sr-20220109-062332', 1, 1, 1, 1, 1, 2, 2, 0, 0, 470, 50, 470, 0, 0, 0, NULL, NULL, 0, 1, 2, NULL, 550, NULL, NULL, '2022-01-09 17:23:32', '2022-01-09 22:05:28');
+(2, 'sr-20220109-062332', 1, 1, 1, 1, 1, 2, 2, 0, 0, 470, 50, 470, 0, 0, 0, NULL, NULL, 0, 1, 2, NULL, 550, NULL, NULL, '2022-01-09 17:23:32', '2022-01-09 22:05:28'),
+(3, 'sr-20220116-124102', 23, 2, 1, 1, 1, 1, 1, 0, 0, 250, 50, 250, 0, 0, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, '2022-01-15 23:41:02', '2022-01-15 23:41:02');
 
 -- --------------------------------------------------------
 
@@ -1723,8 +1731,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `phone`, `company_name`, `role_id`, `biller_id`, `warehouse_id`, `is_active`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, 'Tarik', 'tarik.engineering@gmail.com', '$2y$10$HPt3Go.HX8PKm/9Tuh2h5uaW3yIVnf5qu9y.aWIv85AVZJbUU0slG', 'LhMr89rosIshfx3cTSqoec2pMqx5D7SAELbfFzcgWLspT67Ve67lbYO4PnZf', '0689385061', 'T@R!K', 1, NULL, NULL, 1, 0, '2018-06-02 03:24:15', '2022-01-02 16:12:16'),
-(23, 'Vendeur', 'vendeur@yovente.com', '$2y$10$ZpJbd7m8PzYsUguYOjJJzu9oE7YO/Z.9bB2HyVBR5PBew8XCoPBRW', NULL, '0633333333', NULL, 4, 1, 1, 1, 0, '2022-01-07 21:35:45', '2022-01-07 21:35:45');
+(1, 'Tarik', 'tarik.engineering@gmail.com', '$2y$10$HPt3Go.HX8PKm/9Tuh2h5uaW3yIVnf5qu9y.aWIv85AVZJbUU0slG', 'ck8Lcdo83b4AXvZ9LRNFhLETIvVFlFOpckyK4A2xgjsuotVUsDqntOaMoFrI', '0689385061', 'T@R!K', 1, NULL, NULL, 1, 0, '2018-06-02 03:24:15', '2022-01-02 16:12:16'),
+(23, 'Vendeur', 'vendeur@yovente.com', '$2y$10$ZpJbd7m8PzYsUguYOjJJzu9oE7YO/Z.9bB2HyVBR5PBew8XCoPBRW', NULL, '0633333333', NULL, 4, 1, 1, 1, 0, '2022-01-07 21:35:45', '2022-01-07 21:35:45'),
+(24, 'Salma', 'salma@yovente.com', '$2y$10$0e2hSyrAl2X1W2XqAdnvUOVGLPK8f8xZmLhT8ItTYdqedqe2VcJbq', NULL, '0611111111', 'Salma Company', 5, NULL, NULL, 1, 0, '2022-01-15 20:13:17', '2022-01-15 20:13:17');
 
 -- --------------------------------------------------------
 
@@ -2190,7 +2199,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT pour la table `cash_registers`
 --
 ALTER TABLE `cash_registers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `categories`
@@ -2316,7 +2325,7 @@ ALTER TABLE `money_transfers`
 -- AUTO_INCREMENT pour la table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `payment_with_cheque`
@@ -2388,13 +2397,13 @@ ALTER TABLE `product_quotation`
 -- AUTO_INCREMENT pour la table `product_returns`
 --
 ALTER TABLE `product_returns`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `product_sales`
 --
 ALTER TABLE `product_sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `product_transfer`
@@ -2436,7 +2445,7 @@ ALTER TABLE `quotations`
 -- AUTO_INCREMENT pour la table `returns`
 --
 ALTER TABLE `returns`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `return_purchases`
@@ -2454,13 +2463,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `stock_counts`
 --
 ALTER TABLE `stock_counts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `suppliers`
@@ -2490,7 +2499,7 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `variants`
