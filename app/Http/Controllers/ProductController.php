@@ -34,7 +34,7 @@ class ProductController extends Controller
                 $all_permission[] = $permission->name;
             if(empty($all_permission))
                 $all_permission[] = 'dummy text';
-            return view('product.index', compact('all_permission'));
+            return view('product.index', compact('all_permission', 'role'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
@@ -52,7 +52,7 @@ class ProductController extends Controller
             8 => 'price',
             9 => 'cost',
             10 => 'stock_worth'
-        );
+        );       
         
         $totalData = Product::where('is_active', true)->count();
         $totalFiltered = $totalData; 

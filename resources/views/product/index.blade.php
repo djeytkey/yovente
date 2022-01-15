@@ -89,8 +89,8 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-5" id="slider-content"></div>
-                <div class="col-md-5 offset-1" id="product-content"></div>
-                <div class="col-md-6 mt-2" id="product-warehouse-section">
+                <div class="col-md-5 offset-1 mt-5" id="product-content"></div>
+                <div class="col-md-6 mt-5" id="product-warehouse-section">
                     <h5>{{trans('file.Warehouse Quantity')}}</h5>
                     <table class="table table-bordered table-hover product-warehouse-list">
                         <thead>
@@ -99,7 +99,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-6 mt-2" id="product-variant-warehouse-section">
+                <div class="col-md-6 mt-5" id="product-variant-warehouse-section">
                     <h5>{{trans('file.Warehouse quantity of product variants')}}</h5>
                     <table class="table table-bordered table-hover product-variant-warehouse-list">
                         <thead>
@@ -181,8 +181,15 @@
     function productDetails(product, imagedata) {
         product[11] = product[11].replace(/@/g, '"');
         htmltext = slidertext = '';
+        var user_role = "{{ $role->id }}";
 
-        htmltext = '<p><strong>{{trans("file.Type")}}: </strong>'+product[0]+'</p><p><strong>{{trans("file.name")}}: </strong>'+product[1]+'</p><p><strong>{{trans("file.Code")}}: </strong>'+product[2]+ '</p><p><strong>{{trans("file.Brand")}}: </strong>'+product[3]+'</p><p><strong>{{trans("file.category")}}: </strong>'+product[4]+'</p><p><strong>{{trans("file.Quantity")}}: </strong>'+product[16]+'</p><p><strong>{{trans("file.Unit")}}: </strong>'+product[5]+'</p><p><strong>{{trans("file.Cost")}}: </strong>'+product[6]+'</p><p><strong>{{trans("file.Price")}}: </strong>'+product[7]+'</p><p><strong>{{trans("file.Tax")}}: </strong>'+product[8]+'</p><p><strong>{{trans("file.Tax Method")}} : </strong>'+product[9]+'</p><p><strong>{{trans("file.Alert Quantity")}} : </strong>'+product[10]+'</p><p><strong>{{trans("file.Product Details")}}: </strong></p>'+product[11];
+        if (user_role == '1') {
+            htmltext = '<table><tr><td><strong>{{trans("file.Type")}}: </strong></td><td>'+product[0]+'</td></tr><tr><td><strong>{{trans("file.name")}}: </strong></td><td>'+product[1]+'</td></tr><tr><td><strong>{{trans("file.Code")}}: </strong></td><td>'+product[2]+'</td></tr><tr><td><strong>{{trans("file.Brand")}}: </strong></td><td>'+product[3]+'</td></tr><tr><td><strong>{{trans("file.category")}}: </strong></td><td>'+product[4]+'</td></tr><tr><td><strong>{{trans("file.Quantity")}}: </strong></td><td>'+product[16]+'</td></tr><tr><td><strong>{{trans("file.Unit")}}: </strong></td><td>'+product[5]+'</td></tr><tr><td><strong>{{trans("file.Cost")}}: </strong></td><td>'+product[6]+'</td></tr><tr><td><strong>{{trans("file.Price")}}: </strong></td><td>'+product[7]+'</td></tr><tr><td><strong>{{trans("file.Tax")}}: </strong></td><td>'+product[8]+'</td></tr><tr><td><strong>{{trans("file.Tax Method")}} : </strong></td><td>'+product[9]+'</td></tr><tr><td><strong>{{trans("file.Alert Quantity")}} : </strong></td><td>'+product[10]+'</td></tr><tr><td><strong>{{trans("file.Product Details")}}: </strong></td><td>'+product[11]+'</td></tr></table>';
+            //htmltext = '<p><strong>{{trans("file.Type")}}: </strong>'+product[0]+'</p><p><strong>{{trans("file.name")}}: </strong>'+product[1]+'</p><p><strong>{{trans("file.Code")}}: </strong>'+product[2]+ '</p><p><strong>{{trans("file.Brand")}}: </strong>'+product[3]+'</p><p><strong>{{trans("file.category")}}: </strong>'+product[4]+'</p><p><strong>{{trans("file.Quantity")}}: </strong>'+product[16]+'</p><p><strong>{{trans("file.Unit")}}: </strong>'+product[5]+'</p><p><strong>{{trans("file.Cost")}}: </strong>'+product[6]+'</p><p><strong>{{trans("file.Price")}}: </strong>'+product[7]+'</p><p><strong>{{trans("file.Tax")}}: </strong>'+product[8]+'</p><p><strong>{{trans("file.Tax Method")}} : </strong>'+product[9]+'</p><p><strong>{{trans("file.Alert Quantity")}} : </strong>'+product[10]+'</p><p><strong>{{trans("file.Product Details")}}: </strong></p>'+product[11];
+        } else {
+            htmltext = '<table><tr><td><strong>{{trans("file.name")}}: </strong></td><td>'+product[1]+'</td></tr><tr><td><strong>{{trans("file.Code")}}: </strong></td><td>'+product[2]+'</td></tr><tr><td><strong>{{trans("file.Brand")}}: </strong></td><td>'+product[3]+'</td></tr><tr><td><strong>{{trans("file.category")}}: </strong></td><td>'+product[4]+'</td></tr><tr><td><strong>{{trans("file.Quantity")}}: </strong></td><td>'+product[16]+'</td></tr><tr><td><strong>{{trans("file.Unit")}}: </strong></td><td>'+product[5]+'</td></tr><tr><td><strong>{{trans("file.Price")}}: </strong></td><td>'+product[7]+'</td></tr><tr><td><strong>{{trans("file.Product Details")}}: </strong></td><td>'+product[11]+'</td></tr></table>';
+            //htmltext = '<p><strong>{{trans("file.name")}}: </strong>'+product[1]+'</p><p><strong>{{trans("file.Code")}}: </strong>'+product[2]+ '</p><p><strong>{{trans("file.Brand")}}: </strong>'+product[3]+'</p><p><strong>{{trans("file.category")}}: </strong>'+product[4]+'</p><p><strong>{{trans("file.Quantity")}}: </strong>'+product[16]+'</p><p><strong>{{trans("file.Unit")}}: </strong>'+product[5]+'</p><p><strong>{{trans("file.Price")}}: </strong>'+product[7]+'</p><p><strong>{{trans("file.Product Details")}}: </strong></p>'+product[11];
+        }
 
         if(product[17]) {
             var product_image = product[17].split(",");
@@ -296,9 +303,15 @@
         $('#slider-content').html(slidertext);
         $('#product-details').modal('show');
         $('#product-img-slider').carousel(0);
+
+        if (user_role !== '1') {
+            $('#product-warehouse-section').remove();
+        }
+
     }
 
     $(document).ready(function() {
+        var user_role = <?php echo $role->id ?>;
         var table = $('#product-data-table').DataTable( {
             responsive: true,
             fixedHeader: {
@@ -428,7 +441,7 @@
                     text: '{{trans("file.delete")}}',
                     className: 'buttons-delete',
                     action: function ( e, dt, node, config ) {
-                        if(user_verified == '1') {
+                        if((user_verified == '1') && (user_role == '1')) {
                             product_id.length = 0;
                             $(':checkbox:checked').each(function(i){
                                 if(i){
@@ -463,6 +476,15 @@
                 },
             ],
         } );
+
+        var tbl = $('#product-data-table').DataTable();
+        var buttons = tbl.buttons( [0,1,2,3,4] );
+
+        if (user_role > '1') {
+            tbl.column(9).visible(false);
+            tbl.column(10).visible(false);
+            buttons.remove();
+        }
 
     } );
 
