@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : sam. 15 jan. 2022 à 23:41
+-- Généré le : dim. 16 jan. 2022 à 23:13
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.20RC1
 
@@ -301,6 +301,9 @@ CREATE TABLE `deliveries` (
   `sale_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `packing` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `delivering` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `delivered` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `delivered_by` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `recieved_by` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `file` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -665,7 +668,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (132, '2021_05_26_153106_add_product_batch_id_to_product_quotation_table', 85),
 (134, '2022_01_03_205841_add_livraison_to_general_settings_table', 86),
 (135, '2022_01_06_181753_add_livraison_to_sales_table', 87),
-(136, '2022_01_06_182916_add_original_price_to_product_sales_table', 88);
+(136, '2022_01_06_182916_add_original_price_to_product_sales_table', 88),
+(138, '2022_01_16_181335_add_packing_delivering_delivered_to_deliveries_table', 89);
 
 -- --------------------------------------------------------
 
@@ -741,7 +745,7 @@ CREATE TABLE `payments` (
 INSERT INTO `payments` (`id`, `payment_reference`, `user_id`, `purchase_id`, `sale_id`, `cash_register_id`, `account_id`, `amount`, `change`, `paying_method`, `payment_note`, `created_at`, `updated_at`) VALUES
 (1, 'ppr-20220107-113448', 1, 1, NULL, NULL, 1, 1750, 0, 'Cash', NULL, '2022-01-07 22:34:48', '2022-01-07 22:34:48'),
 (2, 'ppr-20220108-013940', 1, 2, NULL, NULL, 1, 3600, 0, 'Cash', NULL, '2022-01-08 12:39:40', '2022-01-08 12:39:40'),
-(4, 'spr-20220109-065029', 1, NULL, 2, 1, 1, 550, 0, 'Cash', NULL, '2022-01-09 17:50:29', '2022-01-09 17:50:29');
+(4, 'spr-20220109-065029', 1, NULL, 2, 1, 1, 470, 0, 'Cash', NULL, '2022-01-09 17:50:29', '2022-01-09 17:50:29');
 
 -- --------------------------------------------------------
 
@@ -1163,7 +1167,8 @@ CREATE TABLE `product_sales` (
 INSERT INTO `product_sales` (`id`, `sale_id`, `product_id`, `product_batch_id`, `variant_id`, `qty`, `sale_unit_id`, `net_unit_price`, `original_price`, `discount`, `tax_rate`, `tax`, `total`, `created_at`, `updated_at`) VALUES
 (8, 2, 2, NULL, 1, 1, 1, 220, 170, 0, 0, 0, 220, '2022-01-09 17:40:27', '2022-01-09 17:52:23'),
 (9, 2, 2, NULL, 2, 1, 1, 200, 170, 0, 0, 0, 200, '2022-01-09 17:40:27', '2022-01-09 17:52:24'),
-(10, 3, 1, NULL, 5, 1, 1, 200, 150, 0, 0, 0, 200, '2022-01-15 23:41:02', '2022-01-15 23:41:02');
+(10, 3, 1, NULL, 5, 1, 1, 200, 150, 0, 0, 0, 200, '2022-01-15 23:41:02', '2022-01-15 23:41:02'),
+(11, 4, 2, NULL, 1, 1, 1, 290, 190, 0, 0, 0, 290, '2022-01-16 17:04:19', '2022-01-16 17:04:19');
 
 -- --------------------------------------------------------
 
@@ -1580,8 +1585,9 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`id`, `reference_no`, `user_id`, `cash_register_id`, `customer_id`, `warehouse_id`, `biller_id`, `item`, `total_qty`, `total_discount`, `total_tax`, `total_price`, `livraison`, `grand_total`, `order_tax_rate`, `order_tax`, `order_discount`, `coupon_id`, `coupon_discount`, `shipping_cost`, `sale_status`, `payment_status`, `document`, `paid_amount`, `sale_note`, `staff_note`, `created_at`, `updated_at`) VALUES
-(2, 'sr-20220109-062332', 1, 1, 1, 1, 1, 2, 2, 0, 0, 470, 50, 470, 0, 0, 0, NULL, NULL, 0, 1, 2, NULL, 550, NULL, NULL, '2022-01-09 17:23:32', '2022-01-09 22:05:28'),
-(3, 'sr-20220116-124102', 23, 2, 1, 1, 1, 1, 1, 0, 0, 250, 50, 250, 0, 0, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, '2022-01-15 23:41:02', '2022-01-15 23:41:02');
+(2, 'sr-20220109-062332', 1, 1, 1, 1, 1, 2, 2, 0, 0, 470, 50, 470, 0, 0, 0, NULL, NULL, 0, 1, 4, NULL, 470, NULL, NULL, '2022-01-09 17:23:32', '2022-01-09 22:05:28'),
+(3, 'sr-20220116-124102', 23, 2, 1, 1, 1, 1, 1, 0, 0, 250, 50, 250, 0, 0, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, '2022-01-15 23:41:02', '2022-01-15 23:41:02'),
+(4, 'sr-20220116-060419', 23, 2, 1, 1, 1, 1, 1, 0, 0, 340, 50, 340, 0, 0, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL, NULL, NULL, '2022-01-16 17:04:19', '2022-01-16 17:04:19');
 
 -- --------------------------------------------------------
 
@@ -2235,7 +2241,7 @@ ALTER TABLE `customer_groups`
 -- AUTO_INCREMENT pour la table `deliveries`
 --
 ALTER TABLE `deliveries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `departments`
@@ -2313,7 +2319,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT pour la table `money_transfers`
@@ -2403,7 +2409,7 @@ ALTER TABLE `product_returns`
 -- AUTO_INCREMENT pour la table `product_sales`
 --
 ALTER TABLE `product_sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `product_transfer`
@@ -2463,7 +2469,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT pour la table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `stock_counts`

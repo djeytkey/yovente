@@ -38,23 +38,6 @@ class HomeController extends Controller
 
     public function index()
     {
-        //return phpinfo();
-        //return Printing::printers();
-        /*$printerId = '69993185';
-        $content = 'Hello world';
-        $printJob = Printing::newPrintTask()
-        ->printer($printerId)
-        ->content($content)
-        ->send();*/
-        //return 'printed successfully';
-        /*$connector = new NetworkPrintConnector("192.168.1.87",9100);
-        //return dd($connector);
-        $printer = new Printer($connector);
-        try {
-            $printer -> text("Hello World");
-        } finally {
-            $printer -> close();
-        }*/
         if(Auth::user()->role_id == 5) { // Role Client
             $customer = Customer::select('id')->where('user_id', Auth::id())->first();
             $lims_sale_data = Sale::with('warehouse')->where('customer_id', $customer->id)->orderBy('created_at', 'desc')->get();
@@ -75,8 +58,19 @@ class HomeController extends Controller
         $yearly_sale_amount = [];
 
         $general_setting = DB::table('general_settings')->latest()->first();
-        if(Auth::user()->role_id > 2 && $general_setting->staff_access == 'own') {
-            $product_sale_data = Sale::join('product_sales', 'sales.id','=', 'product_sales.sale_id')
+        if(Auth::user()->role_id > 2 && $general_setting->staff_access == 'own') { // Role Vendeur
+            $sales_count = Sale::where('sales.user_id', Auth::id())->get();
+            
+
+
+
+
+
+            return '<code>'.$sales_count.'</code>';
+
+
+
+            /*$product_sale_data = Sale::join('product_sales', 'sales.id','=', 'product_sales.sale_id')
                 ->select(DB::raw('product_sales.product_id, product_sales.product_batch_id, sum(product_sales.qty) as sold_qty, sum(product_sales.total) as sold_amount'))
                 ->where('sales.user_id', Auth::id())
                 ->whereDate('product_sales.created_at', '>=' , $start_date)
@@ -124,9 +118,9 @@ class HomeController extends Controller
             $recent_sale = Sale::orderBy('id', 'desc')->where('user_id', Auth::id())->take(5)->get();
             $recent_purchase = Purchase::orderBy('id', 'desc')->where('user_id', Auth::id())->take(5)->get();
             $recent_quotation = Quotation::orderBy('id', 'desc')->where('user_id', Auth::id())->take(5)->get();
-            $recent_payment = Payment::orderBy('id', 'desc')->where('user_id', Auth::id())->take(5)->get();
+            $recent_payment = Payment::orderBy('id', 'desc')->where('user_id', Auth::id())->take(5)->get();*/
         }
-        else {
+        else { // Role Admin
             $product_sale_data = Product_Sale::select(DB::raw('product_id, product_batch_id, sum(qty) as sold_qty, sum(total) as sold_amount'))->whereDate('created_at', '>=' , $start_date)->whereDate('created_at', '<=' , $end_date)->groupBy('product_id', 'product_batch_id')->get();
 
             $product_revenue = 0;
