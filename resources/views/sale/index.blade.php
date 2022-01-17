@@ -350,8 +350,9 @@
                         <label>{{trans('file.Status')}} *</label>
                         <select name="status" required class="form-control selectpicker">
                             <option value="1">{{trans('file.Packing')}}</option>
-                            <option value="2">{{trans('file.Delivering')}}</option>
-                            <option value="3">{{trans('file.Delivered')}}</option>
+                            <option value="2">{{trans('file.Pickup')}}</option>
+                            <option value="3">{{trans('file.Delivering')}}</option>
+                            <option value="4">{{trans('file.Delivered')}}</option>
                         </select>
                     </div>
                     <div class="col-md-6 mt-2 form-group">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : dim. 16 jan. 2022 à 23:13
+-- Généré le : lun. 17 jan. 2022 à 23:45
 -- Version du serveur : 5.7.24
 -- Version de PHP : 7.4.20RC1
 
@@ -300,10 +300,12 @@ CREATE TABLE `deliveries` (
   `reference_no` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `sale_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `sold_by` int(11) DEFAULT NULL,
   `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `packing` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `delivering` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `delivered` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `packing` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pickup` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `delivering` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `delivered` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `delivered_by` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `recieved_by` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `file` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -312,6 +314,13 @@ CREATE TABLE `deliveries` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `deliveries`
+--
+
+INSERT INTO `deliveries` (`id`, `reference_no`, `sale_id`, `user_id`, `sold_by`, `address`, `packing`, `pickup`, `delivering`, `delivered`, `delivered_by`, `recieved_by`, `file`, `note`, `status`, `created_at`, `updated_at`) VALUES
+(5, 'dr-20220118-124238', 3, 1, 23, 'Adresse Salma BOUKJIJ Benslimane', '18-01-2022', '18-01-2022', NULL, NULL, NULL, NULL, NULL, NULL, '2', '2022-01-17 23:42:42', '2022-01-17 23:43:08');
 
 -- --------------------------------------------------------
 
@@ -669,7 +678,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (134, '2022_01_03_205841_add_livraison_to_general_settings_table', 86),
 (135, '2022_01_06_181753_add_livraison_to_sales_table', 87),
 (136, '2022_01_06_182916_add_original_price_to_product_sales_table', 88),
-(138, '2022_01_16_181335_add_packing_delivering_delivered_to_deliveries_table', 89);
+(142, '2022_01_16_181335_add_packing_delivering_delivered_to_deliveries_table', 89);
 
 -- --------------------------------------------------------
 
@@ -1541,7 +1550,8 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (12, 4),
 (13, 4),
 (14, 4),
-(24, 4);
+(24, 4),
+(99, 4);
 
 -- --------------------------------------------------------
 
@@ -2241,7 +2251,7 @@ ALTER TABLE `customer_groups`
 -- AUTO_INCREMENT pour la table `deliveries`
 --
 ALTER TABLE `deliveries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `departments`
@@ -2319,7 +2329,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT pour la table `money_transfers`

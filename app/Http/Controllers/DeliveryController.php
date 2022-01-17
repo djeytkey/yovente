@@ -23,7 +23,7 @@ class DeliveryController extends Controller
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('delivery')) {
     		if(Auth::user()->role_id > 2 && config('staff_access') == 'own')
-                $lims_delivery_all = Delivery::orderBy('id', 'desc')->where('user_id', Auth::id())->get();
+                $lims_delivery_all = Delivery::orderBy('id', 'desc')->where('sold_by', Auth::id())->get();
             else
                 $lims_delivery_all = Delivery::orderBy('id', 'desc')->get();
     		return view('delivery.index', compact('lims_delivery_all'));
@@ -62,8 +62,20 @@ class DeliveryController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request);
     	$data = $request->except('file');
     	$delivery = Delivery::firstOrNew(['reference_no' => $data['reference_no'] ]);
+        if ($delivery->exists) {
+            $data['packing'] = $delivery->packing;
+            $data['pickup'] = $delivery->pickup;
+            $data['delivering'] = $delivery->delivering;
+            $data['delivered'] = $delivery->delivered;
+        } else {
+            $data['packing'] = null;
+            $data['pickup'] = null;
+            $data['delivering'] = null;
+            $data['delivered'] = null;
+        }
     	$document = $request->file;
         if ($document) {
             $ext = pathinfo($document->getClientOriginalName(), PATHINFO_EXTENSION);
@@ -71,6 +83,31 @@ class DeliveryController extends Controller
             $document->move('public/documents/delivery', $documentName);
             $delivery->file = $documentName;
         }
+        
+        switch ($data['status']) {
+            case "1":
+                $data['packing'] = date("d-m-Y");
+                $data['pickup'] = null;
+                $data['delivering'] = null;
+                $data['delivered'] = null;
+                break;
+            case "2":
+                $data['pickup'] = date("d-m-Y");
+                $data['delivering'] = null;
+                $data['delivered'] = null;
+                break;
+            case "3":
+                $data['delivering'] = date("d-m-Y");
+                $data['delivered'] = null;
+                break;
+            case "4":
+                $data['delivered'] = date("d-m-Y");
+                break;
+        }
+        $delivery->packing = $data['packing'];
+        $delivery->pickup = $data['pickup'];
+        $delivery->delivering = $data['delivering'];
+        $delivery->delivered = $data['delivered'];
         $delivery->sale_id = $data['sale_id'];
         $delivery->user_id = Auth::id();
         $delivery->address = $data['address'];
@@ -78,8 +115,9 @@ class DeliveryController extends Controller
         $delivery->recieved_by = $data['recieved_by'];
         $delivery->status = $data['status'];
         $delivery->note = $data['note'];
-        $delivery->save();
         $lims_sale_data = Sale::find($data['sale_id']);
+        $delivery->sold_by = $lims_sale_data->user_id;
+        $delivery->save();
         $lims_customer_data = Customer::find($lims_sale_data->customer_id);
         $message = 'Delivery created successfully';
         if($lims_customer_data->email && $data['status'] != 1){

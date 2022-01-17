@@ -14,9 +14,11 @@ class AddPackingDeliveringDeliveredToDeliveriesTable extends Migration
     public function up()
     {
         Schema::table('deliveries', function (Blueprint $table) {
-            $table->string('packing')->after('address');
-            $table->string('delivering')->after('packing');
-            $table->string('delivered')->after('delivering');
+            $table->string('packing')->after('address')->nullable();
+            $table->string('pickup')->after('packing')->nullable();
+            $table->string('delivering')->after('pickup')->nullable();
+            $table->string('delivered')->after('delivering')->nullable();
+            $table->integer('sold_by')->after('user_id')->nullable();
         });
     }
 
@@ -29,8 +31,10 @@ class AddPackingDeliveringDeliveredToDeliveriesTable extends Migration
     {
         Schema::table('deliveries', function (Blueprint $table) {
             $table->dropColumn('packing');
+            $table->dropColumn('pickup');
             $table->dropColumn('delivering');
             $table->dropColumn('delivered');
+            $table->dropColumn('sold_by');
         });
     }
 }

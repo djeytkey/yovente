@@ -25,24 +25,72 @@
                 <?php 
                     $customer_sale = DB::table('sales')->join('customers', 'sales.customer_id', '=', 'customers.id')->where('sales.id', $delivery->sale_id)->select('sales.reference_no','customers.name')->get();
 
-                    if($delivery->status == 1)
-                        $status = trans('file.Packing');
-                    elseif($delivery->status == 2)
-                        $status = trans('file.Delivering');
-                    else
-                        $status = trans('file.Delivered');
+                    $packing = trans('file.Packing');
+                    $packing_date = $delivery->packing;
+
+                    $pickup = trans('file.Pickup');
+                    $pickup_date = $delivery->pickup;
+
+                    $delivering = trans('file.Delivering');
+                    $delivering_date = $delivery->delivering;
+
+                    $delivered = trans('file.Delivered');
+                    $delivered_date = $delivery->delivered;
+
+                    switch ($delivery->status) {
+                        case "1":
+                            $status = trans('file.Packing');
+                            $packing_date = $delivery->packing;
+                            break;
+                        case "2":
+                            $status = trans('file.Pickup');
+                            $pickup_date = $delivery->pickup;
+                            break;
+                        case "3":
+                            $status = trans('file.Delivering');
+                            $delivering_date = $delivery->delivering;
+                            break;
+                        case "4":
+                            $status = trans('file.Delivered');
+                            $delivered_date = $delivery->delivered;
+                            break;
+                    }
                     
                     $barcode = \DNS2D::getBarcodePNG($delivery->reference_no, 'QRCODE');
                 ?>
-                <tr class="delivery-link" data-barcode="<?php echo e($barcode); ?>" data-delivery='["<?php echo e(date($general_setting->date_format, strtotime($delivery->created_at->toDateString()))); ?>", "<?php echo e($delivery->reference_no); ?>", "<?php echo e($delivery->sale->reference_no); ?>", "<?php echo e($status); ?>", "<?php echo e($delivery->id); ?>", "<?php echo e($delivery->sale->customer->name); ?>", "<?php echo e($delivery->sale->customer->phone_number); ?>", "<?php echo e($delivery->sale->customer->address); ?>", "<?php echo e($delivery->sale->customer->city); ?>", "<?php echo e($delivery->note); ?>", "<?php echo e($delivery->user->name); ?>", "<?php echo e($delivery->delivered_by); ?>", "<?php echo e($delivery->recieved_by); ?>"]'>
+                
+                <tr class="delivery-link" data-barcode="<?php echo e($barcode); ?>" data-delivery='[
+                    "<?php echo e(date($general_setting->date_format, strtotime($delivery->created_at->toDateString()))); ?>", 
+                    "<?php echo e($delivery->reference_no); ?>", 
+                    "<?php echo e($delivery->sale->reference_no); ?>", 
+                    "<?php echo e($packing); ?>", 
+                    "<?php echo e($packing_date); ?>", 
+                    "<?php echo e($pickup); ?>", 
+                    "<?php echo e($pickup_date); ?>", 
+                    "<?php echo e($delivering); ?>", 
+                    "<?php echo e($delivering_date); ?>", 
+                    "<?php echo e($delivered); ?>", 
+                    "<?php echo e($delivered_date); ?>", 
+                    "<?php echo e($delivery->id); ?>", 
+                    "<?php echo e($delivery->sale->customer->name); ?>", 
+                    "<?php echo e($delivery->sale->customer->phone_number); ?>", 
+                    "<?php echo e($delivery->sale->customer->address); ?>", 
+                    "<?php echo e($delivery->sale->customer->city); ?>", 
+                    "<?php echo e($delivery->note); ?>", 
+                    "<?php echo e($delivery->user->name); ?>", 
+                    "<?php echo e($delivery->delivered_by); ?>", 
+                    "<?php echo e($delivery->recieved_by); ?>"
+                ]'>                
                     <td><?php echo e($key); ?></td>
                     <td><?php echo e($delivery->reference_no); ?></td>
                     <td><?php echo e($customer_sale[0]->reference_no); ?></td>
                     <td><?php echo e($customer_sale[0]->name); ?></td>
                     <td><?php echo e($delivery->address); ?></td>
                     <?php if($delivery->status == 1): ?>
-                    <td><div class="badge badge-info"><?php echo e($status); ?></div></td>
+                    <td><div class="badge badge-warning"><?php echo e($status); ?></div></td>
                     <?php elseif($delivery->status == 2): ?>
+                    <td><div class="badge badge-info"><?php echo e($status); ?></div></td>
+                    <?php elseif($delivery->status == 3): ?>
                     <td><div class="badge badge-primary"><?php echo e($status); ?></div></td>
                     <?php else: ?>
                     <td><div class="badge badge-success"><?php echo e($status); ?></div></td>
@@ -229,23 +277,43 @@
     });
 
     function deliveryDetails(delivery, barcode) {
-        $('input[name="delivery_id"]').val(delivery[4]);
+        $('input[name="delivery_id"]').val(delivery[11]);
         $("#delivery-content tbody").remove();
         var newBody = $("<tbody>");
-        var rows = '';
+        var rows = status = '';
+        var packing = delivery[3];
+        var packing_date = delivery[4];
+        var pickup = delivery[5];
+        var pickup_date = delivery[6];
+        var delivering = delivery[7];
+        var delivering_date = delivery[8];
+        var delivered = delivery[9];
+        var delivered_date = delivery[10];
+        if (packing_date !== '') {
+            status += '<div class="col-md-3 badge badge-warning lh-1-5">'+packing+'<br>'+packing_date+'</div>';
+        }
+        if (pickup_date !== '') {
+            status += '<div class="col-md-3 badge badge-info lh-1-5">'+pickup+'<br>'+pickup_date+'</div>';
+        }
+        if (delivering_date !== '') {
+            status += '<div class="col-md-3 badge badge-primary lh-1-5">'+delivering+'<br>'+delivering_date+'</div>';
+        }
+        if (delivered_date !== '') {
+            status += '<div class="col-md-3 badge badge-success lh-1-5">'+delivered+'<br>'+delivered_date+'</div>';
+        }
         rows += '<tr><td>Date</td><td>'+delivery[0]+'</td></tr>';
         rows += '<tr><td>Delivery Reference</td><td>'+delivery[1]+'</td></tr>';
         rows += '<tr><td>Sale Reference</td><td>'+delivery[2]+'</td></tr>';
-        rows += '<tr><td>Status</td><td>'+delivery[3]+'</td></tr>';
-        rows += '<tr><td>Customer Name</td><td>'+delivery[5]+'</td></tr>';
-        rows += '<tr><td>Address</td><td>'+delivery[7]+', '+delivery[8]+'</td></tr>';
-        rows += '<tr><td>Phone Number</td><td>'+delivery[6]+'</td></tr>';
-        rows += '<tr><td>Note</td><td>'+delivery[9]+'</td></tr>';
+        rows += '<tr><td>Status</td><td>'+status+'</td></tr>';
+        rows += '<tr><td>Customer Name</td><td>'+delivery[12]+'</td></tr>';
+        rows += '<tr><td>Address</td><td>'+delivery[14]+', '+delivery[15]+'</td></tr>';
+        rows += '<tr><td>Phone Number</td><td>'+delivery[13]+'</td></tr>';
+        rows += '<tr><td>Note</td><td>'+delivery[16]+'</td></tr>';
 
         newBody.append(rows);
         $("table#delivery-content").append(newBody);
 
-        $.get('delivery/product_delivery/' + delivery[4], function(data) {
+        $.get('delivery/product_delivery/' + delivery[11], function(data) {
             $(".product-delivery-list tbody").remove();
             var code = data[0];
             var description = data[1];
@@ -264,9 +332,9 @@
             $("table.product-delivery-list").append(newBody);
         });
 
-        var htmlfooter = '<div class="col-md-4 form-group"><p>Prepared By: '+delivery[10]+'</p></div>';
-        htmlfooter += '<div class="col-md-4 form-group"><p>Delivered By: '+delivery[11]+'</p></div>';
-        htmlfooter += '<div class="col-md-4 form-group"><p>Recieved By: '+delivery[12]+'</p></div>';
+        var htmlfooter = '<div class="col-md-4 form-group"><p>Prepared By: '+delivery[17]+'</p></div>';
+        htmlfooter += '<div class="col-md-4 form-group"><p>Delivered By: '+delivery[18]+'</p></div>';
+        htmlfooter += '<div class="col-md-4 form-group"><p>Recieved By: '+delivery[19]+'</p></div>';
         htmlfooter += '<br><br><br><br>';
         htmlfooter += '<div class="col-md-2 offset-md-5"><img style="max-width:850px;height:100%;max-height:130px" src="data:image/png;base64,'+barcode+'" alt="barcode" /></div>';
 

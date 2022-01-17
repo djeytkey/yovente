@@ -59,18 +59,13 @@ class HomeController extends Controller
 
         $general_setting = DB::table('general_settings')->latest()->first();
         if(Auth::user()->role_id > 2 && $general_setting->staff_access == 'own') { // Role Vendeur
-            $sales_count = Sale::where('sales.user_id', Auth::id())->get();
-            
+            /*$sales_count = Sale::where('sales.user_id', Auth::id())->get();
+
+            return '<code>'.$sales_count.'</code>';*/
 
 
 
-
-
-            return '<code>'.$sales_count.'</code>';
-
-
-
-            /*$product_sale_data = Sale::join('product_sales', 'sales.id','=', 'product_sales.sale_id')
+            $product_sale_data = Sale::join('product_sales', 'sales.id','=', 'product_sales.sale_id')
                 ->select(DB::raw('product_sales.product_id, product_sales.product_batch_id, sum(product_sales.qty) as sold_qty, sum(product_sales.total) as sold_amount'))
                 ->where('sales.user_id', Auth::id())
                 ->whereDate('product_sales.created_at', '>=' , $start_date)
@@ -118,7 +113,7 @@ class HomeController extends Controller
             $recent_sale = Sale::orderBy('id', 'desc')->where('user_id', Auth::id())->take(5)->get();
             $recent_purchase = Purchase::orderBy('id', 'desc')->where('user_id', Auth::id())->take(5)->get();
             $recent_quotation = Quotation::orderBy('id', 'desc')->where('user_id', Auth::id())->take(5)->get();
-            $recent_payment = Payment::orderBy('id', 'desc')->where('user_id', Auth::id())->take(5)->get();*/
+            $recent_payment = Payment::orderBy('id', 'desc')->where('user_id', Auth::id())->take(5)->get();
         }
         else { // Role Admin
             $product_sale_data = Product_Sale::select(DB::raw('product_id, product_batch_id, sum(qty) as sold_qty, sum(total) as sold_amount'))->whereDate('created_at', '>=' , $start_date)->whereDate('created_at', '<=' , $end_date)->groupBy('product_id', 'product_batch_id')->get();

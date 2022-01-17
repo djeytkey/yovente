@@ -423,6 +423,7 @@ return [
 	'Due' => 'Due',
 	'Paid' => 'Paid',
 	'Packing' => 'Packing',
+	'Pickup' => 'Pickup',
 	'Delivered' => 'Delivered',
 	'Delivering' => 'Delivering',
 	'Ordered' => 'Ordered',
