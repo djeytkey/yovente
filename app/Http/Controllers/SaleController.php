@@ -1233,6 +1233,7 @@ class SaleController extends Controller
     public function productSaleData($id)
     {
         $lims_product_sale_data = Product_Sale::where('sale_id', $id)->get();
+        $taux_livraison = Sale::where('id', $id)->first();
         foreach ($lims_product_sale_data as $key => $product_sale_data) {
             $product = Product::find($product_sale_data->product_id);
             if($product_sale_data->variant_id) {
@@ -1259,6 +1260,9 @@ class SaleController extends Controller
             $product_sale[5][$key] = $product_sale_data->discount;
             $product_sale[6][$key] = $product_sale_data->total;
         }
+
+        $product_sale[8] = $taux_livraison->livraison;
+
         return $product_sale;
     }
 

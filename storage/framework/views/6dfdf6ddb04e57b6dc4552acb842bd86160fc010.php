@@ -102,7 +102,7 @@
                                                     <th id="total-discount">0.00</th>
                                                     <th id="total-tax">0.00</th>
                                                     <th id="total">0.00</th>
-                                                    <th><i class="dripicons-trash"></i></th>
+                                                    <th></th>
                                                 </tfoot>
                                             </table>
                                         </div>
@@ -577,7 +577,7 @@ $('button[name="update_btn"]').on("click", function() {
     var tax_rate_all = <?php echo json_encode($tax_rate_all) ?>;
     tax_rate[rowindex] = parseFloat(tax_rate_all[$('select[name="edit_tax_rate"]').val()]);
     tax_name[rowindex] = $('select[name="edit_tax_rate"] option:selected').text();
-    if(product_type[pos] == 'standard'){
+    if(product_type[pos] == 'standard') {
         var row_unit_operator = unit_operator[rowindex].slice(0, unit_operator[rowindex].indexOf(","));
         var row_unit_operation_value = unit_operation_value[rowindex].slice(0, unit_operation_value[rowindex].indexOf(","));
         if (row_unit_operator == '*') {

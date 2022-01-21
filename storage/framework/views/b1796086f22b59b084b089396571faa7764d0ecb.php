@@ -126,7 +126,7 @@
                 <thead>
                     <th>#</th>
                     <th><?php echo e(trans('file.product')); ?></th>
-                    <th><?php echo e(trans('file.Batch No')); ?></th>
+                                        
                     <th><?php echo e(trans('file.Qty')); ?></th>
                     <th><?php echo e(trans('file.Unit')); ?></th>
                     <th><?php echo e(trans('file.Unit Price')); ?></th>
@@ -359,8 +359,9 @@
                         <label><?php echo e(trans('file.Status')); ?> *</label>
                         <select name="status" required class="form-control selectpicker">
                             <option value="1"><?php echo e(trans('file.Packing')); ?></option>
-                            <option value="2"><?php echo e(trans('file.Delivering')); ?></option>
-                            <option value="3"><?php echo e(trans('file.Delivered')); ?></option>
+                            <option value="2"><?php echo e(trans('file.Pickup')); ?></option>
+                            <option value="3"><?php echo e(trans('file.Delivering')); ?></option>
+                            <option value="4"><?php echo e(trans('file.Delivered')); ?></option>
                         </select>
                     </div>
                     <div class="col-md-6 mt-2 form-group">
@@ -909,34 +910,42 @@
             var tax_rate = data[4];
             var discount = data[5];
             var subtotal = data[6];
-            var batch_no = data[7];
+            //var batch_no = data[7];
+            var livraison = data[8];
             var newBody = $("<tbody>");
             $.each(name_code, function(index){
                 var newRow = $("<tr>");
                 var cols = '';
                 cols += '<td><strong>' + (index+1) + '</strong></td>';
                 cols += '<td>' + name_code[index] + '</td>';
-                cols += '<td>' + batch_no[index] + '</td>';
+                //cols += '<td>' + batch_no[index] + '</td>';
                 cols += '<td>' + qty[index] + '</td>';
                 cols += '<td>' + unit_code[index] + '</td>';
                 cols += '<td>' + parseFloat(subtotal[index] / qty[index]).toFixed(2) + '</td>';
                 cols += '<td>' + tax[index] + '(' + tax_rate[index] + '%)' + '</td>';
-                cols += '<td>' + discount[index] + '</td>';
-                cols += '<td>' + subtotal[index] + '</td>';
+                cols += '<td>' + parseFloat(discount[index]).toFixed(2) + '</td>';
+                cols += '<td>' + parseFloat(subtotal[index]).toFixed(2) + '</td>';
                 newRow.append(cols);
                 newBody.append(newRow);
             });
 
             var newRow = $("<tr>");
             cols = '';
-            cols += '<td colspan=6><strong><?php echo e(trans("file.Total")); ?>:</strong></td>';
-            cols += '<td>' + sale[14] + '</td>';
-            cols += '<td>' + sale[15] + '</td>';
-            cols += '<td>' + sale[16] + '</td>';
+            cols += '<td colspan=7><strong><?php echo e(trans("file.Delivery Rate")); ?>:</strong></td>';
+            cols += '<td>' + parseFloat(livraison).toFixed(2) + '</td>';
             newRow.append(cols);
             newBody.append(newRow);
 
             var newRow = $("<tr>");
+            cols = '';
+            cols += '<td colspan=5><strong><?php echo e(trans("file.Total")); ?>:</strong></td>';
+            cols += '<td>' + parseFloat(sale[14]).toFixed(2) + '</td>';
+            cols += '<td>' + parseFloat(sale[15]).toFixed(2) + '</td>';
+            cols += '<td>' + parseFloat(sale[16]).toFixed(2) + '</td>';
+            newRow.append(cols);
+            newBody.append(newRow);
+
+            /*var newRow = $("<tr>");
             cols = '';
             cols += '<td colspan=8><strong><?php echo e(trans("file.Order Tax")); ?>:</strong></td>';
             cols += '<td>' + sale[17] + '(' + sale[18] + '%)' + '</td>';
@@ -963,32 +972,37 @@
             cols += '<td colspan=8><strong><?php echo e(trans("file.Shipping Cost")); ?>:</strong></td>';
             cols += '<td>' + sale[20] + '</td>';
             newRow.append(cols);
-            newBody.append(newRow);
+            newBody.append(newRow);*/
 
             var newRow = $("<tr>");
             cols = '';
-            cols += '<td colspan=8><strong><?php echo e(trans("file.grand total")); ?>:</strong></td>';
-            cols += '<td>' + sale[21] + '</td>';
+            cols += '<td colspan=7><strong><?php echo e(trans("file.grand total")); ?>:</strong></td>';
+            cols += '<td>' + parseFloat(sale[21]).toFixed(2) + '</td>';
             newRow.append(cols);
             newBody.append(newRow);
 
             var newRow = $("<tr>");
             cols = '';
-            cols += '<td colspan=8><strong><?php echo e(trans("file.Paid Amount")); ?>:</strong></td>';
-            cols += '<td>' + sale[22] + '</td>';
+            paidamount = '-';
+            cols += '<td colspan=7><strong><?php echo e(trans("file.Paid Amount")); ?>:</strong></td>';
+            if (sale[22] !== "") {
+                paidamount = parseFloat(sale[22]).toFixed(2);
+            }
+            cols += '<td>' + paidamount + '</td>';
             newRow.append(cols);
             newBody.append(newRow);
 
             var newRow = $("<tr>");
             cols = '';
-            cols += '<td colspan=8><strong><?php echo e(trans("file.Due")); ?>:</strong></td>';
+            cols += '<td colspan=7><strong><?php echo e(trans("file.Due")); ?>:</strong></td>';
             cols += '<td>' + parseFloat(sale[21] - sale[22]).toFixed(2) + '</td>';
             newRow.append(cols);
             newBody.append(newRow);
 
             $("table.product-sale-list").append(newBody);
         });
-        var htmlfooter = '<p><strong><?php echo e(trans("file.Sale Note")); ?>:</strong> '+sale[23]+'</p><p><strong><?php echo e(trans("file.Staff Note")); ?>:</strong> '+sale[24]+'</p><strong><?php echo e(trans("file.Created By")); ?>:</strong><br>'+sale[25]+'<br>'+sale[26];
+        //var htmlfooter = '<p><strong><?php echo e(trans("file.Sale Note")); ?>:</strong> '+sale[23]+'</p><p><strong><?php echo e(trans("file.Staff Note")); ?>:</strong> '+sale[24]+'</p><strong><?php echo e(trans("file.Created By")); ?>:</strong><br>'+sale[25]+'<br>'+sale[26];
+        var htmlfooter = '<div class="row"><div class="col-md-4"><strong><?php echo e(trans("file.Sale Note")); ?>:</strong></div><div class="col-md-4"><strong><?php echo e(trans("file.Staff Note")); ?>:</strong></div><div class="col-md-4"><strong><?php echo e(trans("file.Created By")); ?>:</strong></div></div><div class="row"><div class="col-md-4">'+sale[23]+'</div><div class="col-md-4">'+sale[24]+'</div><div class="col-md-4">'+sale[25]+'<br>'+sale[26]+'</div></div>';
         $('#sale-content').html(htmltext);
         $('#sale-footer').html(htmlfooter);
         $('#sale-details').modal('show');

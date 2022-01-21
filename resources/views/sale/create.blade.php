@@ -104,7 +104,7 @@
                                                     <th id="total-discount">0.00</th>
                                                     <th id="total-tax">0.00</th>
                                                     <th id="total">0.00</th>
-                                                    <th><i class="dripicons-trash"></i></th>
+                                                    <th></th>
                                                 </tfoot>
                                             </table>
                                         </div>

@@ -90,6 +90,7 @@
                                                     $temp_unit_name = [];
                                                     $temp_unit_operator = [];
                                                     $temp_unit_operation_value = [];
+                                                    $product_price = 0;
                                                     ?>
                                                     @foreach($lims_product_sale_data as $product_sale)
                                                     <tr>
@@ -198,7 +199,7 @@
                                                     <th id="total-discount">{{ number_format((float)$lims_sale_data->total_discount, 2, '.', '') }}</th>
                                                     <th id="total-tax">{{ number_format((float)$lims_sale_data->total_tax, 2, '.', '')}}</th>
                                                     <th id="total">{{ number_format((float)$lims_sale_data->total_price, 2, '.', '') }}</th>
-                                                    <th><i class="dripicons-trash"></i></th>
+                                                    <th></th>
                                                 </tfoot>
                                             </table>
                                         </div>
