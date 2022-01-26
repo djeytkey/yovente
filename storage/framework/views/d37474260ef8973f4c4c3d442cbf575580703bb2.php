@@ -17,13 +17,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.reference')); ?></label>
                                             <p><strong><?php echo e($lims_sale_data->reference_no); ?></strong></p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.customer')); ?> *</label>
                                             <input type="hidden" name="customer_id_hidden" value="<?php echo e($lims_sale_data->customer_id); ?>" />
@@ -34,9 +34,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.Warehouse')); ?> *</label>
                                             <input type="hidden" name="warehouse_id_hidden" value="<?php echo e($lims_sale_data->warehouse_id); ?>" />
@@ -47,7 +45,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.Biller')); ?> *</label>
                                             <input type="hidden" name="biller_id_hidden" value="<?php echo e($lims_sale_data->biller_id); ?>" />
@@ -91,6 +89,7 @@
                                                     $temp_unit_name = [];
                                                     $temp_unit_operator = [];
                                                     $temp_unit_operation_value = [];
+                                                    $product_price = 0;
                                                     ?>
                                                     <?php $__currentLoopData = $lims_product_sale_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product_sale): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <tr>
@@ -199,7 +198,7 @@
                                                     <th id="total-discount"><?php echo e(number_format((float)$lims_sale_data->total_discount, 2, '.', '')); ?></th>
                                                     <th id="total-tax"><?php echo e(number_format((float)$lims_sale_data->total_tax, 2, '.', '')); ?></th>
                                                     <th id="total"><?php echo e(number_format((float)$lims_sale_data->total_price, 2, '.', '')); ?></th>
-                                                    <th><i class="dripicons-trash"></i></th>
+                                                    <th></th>
                                                 </tfoot>
                                             </table>
                                         </div>
@@ -249,6 +248,7 @@
                                         <div class="form-group">
                                             <input type="hidden" name="livraison" value="<?php echo e($lims_sale_data->livraison); ?>" />
                                             <input type="hidden" name="grand_total" value="<?php echo e($lims_sale_data->grand_total); ?>" />
+                                            <input type="hidden" name="sale_status" value="<?php echo e($lims_sale_data->sale_status); ?>" />
                                         </div>
                                     </div>
                                 </div>
@@ -294,16 +294,7 @@
                                             <?php endif; ?>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label><?php echo e(trans('file.Sale Status')); ?> *</label>
-                                            <input type="hidden" name="sale_status_hidden" value="<?php echo e($lims_sale_data->sale_status); ?>" />
-                                            <select name="sale_status" class="form-control">
-                                                <option value="1"><?php echo e(trans('file.Completed')); ?></option>
-                                                <option value="2"><?php echo e(trans('file.Pending')); ?></option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                                                        
                                     <?php if($lims_sale_data->coupon_id): ?>
                                     <div class="col-md-4">
                                         <div class="form-group">

@@ -764,7 +764,11 @@
         'columnDefs': [
             {
                 "orderable": false,
-                'targets': [0, 3, 4, 5, 6, 9, 10]
+                'targets': [0, 3, 4, 5, 6, 9, 10],
+            },
+            {
+                'targets': [0, 5],
+                className: 'noVis'
             },
             {
                 'render': function(data, type, row, meta){
@@ -863,7 +867,8 @@
             {
                 extend: 'colvis',
                 text: '{{trans("file.Column visibility")}}',
-                columns: ':gt(0)'
+                columns: ':not(.noVis)'
+                //columns: ':gt(0)'
             },
         ],
         drawCallback: function () {

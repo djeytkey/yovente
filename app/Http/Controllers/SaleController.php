@@ -1511,8 +1511,8 @@ class SaleController extends Controller
             $data['payment_status'] = 2;
         else
             $data['payment_status'] = 4;
-        $lims_sale_data = Sale::find($id);
-        $lims_product_sale_data = Product_Sale::where('sale_id', $id)->get();
+        $lims_sale_data = Sale::find($id); //
+        $lims_product_sale_data = Product_Sale::where('sale_id', $id)->get(); //Get ls élément de la vente
         $product_id = $data['product_id'];
         $product_batch_id = $data['product_batch_id'];
         $product_code = $data['product_code'];
@@ -1527,7 +1527,7 @@ class SaleController extends Controller
         $total = $data['subtotal'];
         $old_product_id = [];
         $product_sale = [];
-        foreach ($lims_product_sale_data as  $key => $product_sale_data) {
+        foreach ($lims_product_sale_data as  $key => $product_sale_data) { //Boucler sur les article de la vente
             $old_product_id[] = $product_sale_data->product_id;
             $old_product_variant_id[] = null;
             $lims_product_data = Product::find($product_sale_data->product_id);
@@ -1590,6 +1590,8 @@ class SaleController extends Controller
             elseif( !(in_array($old_product_id[$key], $product_id)) )
                 $product_sale_data->delete();
         }
+
+        // Jusqu'ici, on a supprimé les articles de la vente
         foreach ($product_id as $key => $pro_id) {
             $lims_product_data = Product::find($pro_id);
             $product_sale['variant_id'] = null;
@@ -1683,27 +1685,35 @@ class SaleController extends Controller
             $product_sale['tax'] = $tax[$key];
             $product_sale['total'] = $mail_data['total'][$key] = $total[$key];
             
+            //First if
             if($product_sale['variant_id'] && in_array($product_variant_id[$key], $old_product_variant_id)) {
                 Product_Sale::where([
                     ['product_id', $pro_id],
                     ['variant_id', $product_sale['variant_id']],
                     ['sale_id', $id]
                 ])->update($product_sale);
-            }
+                $json_string = json_encode($product_sale, JSON_PRETTY_PRINT);
+                //return "First if : <pre>".$json_string."</pre>";
+            } //second if
             elseif( $product_sale['variant_id'] === null && (in_array($pro_id, $old_product_id)) ) {
                 Product_Sale::where([
                     ['sale_id', $id],
                     ['product_id', $pro_id]
                 ])->update($product_sale);
-            }
-            else
+                $json_string = json_encode($product_sale, JSON_PRETTY_PRINT);
+                //return "Second if : <pre>".$json_string."</pre>";
+            } //third if
+            else {
                 Product_Sale::create($product_sale);
+                $json_string = json_encode($product_sale, JSON_PRETTY_PRINT);
+                //return "Third if : <pre>".$json_string."</pre>";
+            }
         }
         $lims_sale_data->update($data);
         $lims_customer_data = Customer::find($data['customer_id']);
         $message = 'Sale updated successfully';
         //collecting mail data
-        if($lims_customer_data->email){
+        /*if($lims_customer_data->email){
             $mail_data['email'] = $lims_customer_data->email;
             $mail_data['reference_no'] = $lims_sale_data->reference_no;
             $mail_data['sale_status'] = $lims_sale_data->sale_status;
@@ -1727,7 +1737,7 @@ class SaleController extends Controller
                     $message = 'Sale updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
                 }
             }
-        }
+        }*/
 
         return redirect('sales')->with('message', $message);
     }

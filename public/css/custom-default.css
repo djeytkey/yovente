@@ -2,6 +2,10 @@ nav.navbar a.menu-btn:hover {
     background: #7c5cc4;
 }
 
+.noVis {
+	display: none;
+}
+
 .pos-page .container-fluid {
 	padding: 0 15px;
 }
@@ -29,6 +33,10 @@ nav.navbar a.menu-btn:hover {
 
 .has-error {
 	color: red;
+}
+
+#product-details p {
+    margin-bottom: 0;
 }
 
 .table td.fit, 

@@ -16,13 +16,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>{{trans('file.reference')}}</label>
                                             <p><strong>{{ $lims_sale_data->reference_no }}</strong></p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>{{trans('file.customer')}} *</label>
                                             <input type="hidden" name="customer_id_hidden" value="{{ $lims_sale_data->customer_id }}" />
@@ -33,9 +33,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>{{trans('file.Warehouse')}} *</label>
                                             <input type="hidden" name="warehouse_id_hidden" value="{{$lims_sale_data->warehouse_id}}" />
@@ -46,7 +44,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>{{trans('file.Biller')}} *</label>
                                             <input type="hidden" name="biller_id_hidden" value="{{$lims_sale_data->biller_id}}" />
@@ -249,6 +247,7 @@
                                         <div class="form-group">
                                             <input type="hidden" name="livraison" value="{{$lims_sale_data->livraison}}" />
                                             <input type="hidden" name="grand_total" value="{{$lims_sale_data->grand_total}}" />
+                                            <input type="hidden" name="sale_status" value="{{$lims_sale_data->sale_status}}" />
                                         </div>
                                     </div>
                                 </div>
@@ -294,7 +293,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <div class="form-group">
                                             <label>{{trans('file.Sale Status')}} *</label>
                                             <input type="hidden" name="sale_status_hidden" value="{{$lims_sale_data->sale_status}}" />
@@ -303,7 +302,7 @@
                                                 <option value="2">{{trans('file.Pending')}}</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}                                    
                                     @if($lims_sale_data->coupon_id)
                                     <div class="col-md-4">
                                         <div class="form-group">

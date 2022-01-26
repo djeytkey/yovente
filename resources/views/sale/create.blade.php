@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>
                                                 {{trans('file.Reference No')}}
@@ -29,7 +29,7 @@
                                         </span>
                                         @endif
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>{{trans('file.customer')}} *</label>
                                             <select required name="customer_id" id="customer_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select customer...">
@@ -41,7 +41,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>{{trans('file.Warehouse')}} *</label>
                                             <select required name="warehouse_id" id="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select warehouse...">
@@ -51,7 +51,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>{{trans('file.Biller')}} *</label>
                                             <select required name="biller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Biller...">
@@ -143,6 +143,7 @@
                                             <input type="hidden" name="grand_total" />
                                             <input type="hidden" name="pos" value="0" />
                                             <input type="hidden" name="coupon_active" value="0" />
+                                            <input type="hidden" name="sale_status" value="1" />
                                         </div>
                                     </div>
                                 </div>
@@ -187,15 +188,15 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <div class="form-group">
                                             <label>{{trans('file.Sale Status')}} *</label>
                                             <select name="sale_status" class="form-control">
-                                                <option value="2">{{trans('file.Pending')}}</option>
+                                                <option value="2">{{trans('file.Pending')}}</option>                                                
                                                 <option value="1">{{trans('file.Completed')}}</option>                                                
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>{{trans('file.Payment Status')}} *</label>
