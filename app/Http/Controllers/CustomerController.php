@@ -87,17 +87,17 @@ class CustomerController extends Controller
         
         $lims_customer_data['name'] = $lims_customer_data['customer_name'];
         
-        if($lims_customer_data['email']) {
-            try{
-                Mail::send( 'mail.customer_create', $lims_customer_data, function( $message ) use ($lims_customer_data)
-                {
-                    $message->to( $lims_customer_data['email'] )->subject( 'New Customer' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'Customer created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }   
-        }
+        // if($lims_customer_data['email']) {
+        //     try{
+        //         Mail::send( 'mail.customer_create', $lims_customer_data, function( $message ) use ($lims_customer_data)
+        //         {
+        //             $message->to( $lims_customer_data['email'] )->subject( 'New Customer' );
+        //         });
+        //     }
+        //     catch(\Exception $e){
+        //         $message = 'Customer created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        //     }   
+        // }
 
         Customer::create($lims_customer_data);
         if($lims_customer_data['pos'])
@@ -211,17 +211,17 @@ class CustomerController extends Controller
                $customer->is_active = true;
                $customer->save();
                $message = 'Customer Imported Successfully';
-               if($data['email']){
-                    try{
-                        Mail::send( 'mail.customer_create', $data, function( $message ) use ($data)
-                        {
-                            $message->to( $data['email'] )->subject( 'New Customer' );
-                        });
-                    }
-                    catch(\Exception $e){
-                        $message = 'Customer imported successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-                    }
-                }
+            //    if($data['email']){
+            //         try{
+            //             Mail::send( 'mail.customer_create', $data, function( $message ) use ($data)
+            //             {
+            //                 $message->to( $data['email'] )->subject( 'New Customer' );
+            //             });
+            //         }
+            //         catch(\Exception $e){
+            //             $message = 'Customer imported successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            //         }
+            //     }
             }
             return redirect('customer')->with('import_message', $message);
         }
@@ -263,20 +263,20 @@ class CustomerController extends Controller
         $lims_customer_data->save();
         Deposit::create($data);
         $message = 'Data inserted successfully';
-        if($lims_customer_data->email){
-            $data['name'] = $lims_customer_data->name;
-            $data['email'] = $lims_customer_data->email;
-            $data['balance'] = $lims_customer_data->deposit - $lims_customer_data->expense;
-            try{
-                Mail::send( 'mail.customer_deposit', $data, function( $message ) use ($data)
-                {
-                    $message->to( $data['email'] )->subject( 'Recharge Info' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'Data inserted successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }
-        }
+        // if($lims_customer_data->email){
+        //     $data['name'] = $lims_customer_data->name;
+        //     $data['email'] = $lims_customer_data->email;
+        //     $data['balance'] = $lims_customer_data->deposit - $lims_customer_data->expense;
+        //     try{
+        //         Mail::send( 'mail.customer_deposit', $data, function( $message ) use ($data)
+        //         {
+        //             $message->to( $data['email'] )->subject( 'Recharge Info' );
+        //         });
+        //     }
+        //     catch(\Exception $e){
+        //         $message = 'Data inserted successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        //     }
+        // }
         return redirect('customer')->with('create_message', $message);
     }
 

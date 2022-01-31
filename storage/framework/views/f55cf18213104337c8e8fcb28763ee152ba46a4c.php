@@ -92,7 +92,7 @@
                                     <div class="form-group">
                                         <label><?php echo e(trans('file.Brand')); ?></strong> </label>
                                         <div class="input-group">
-                                          <select name="brand_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Brand...">
+                                          <select name="brand_id" class="selectpicker form-control" data-live-search="true" title="Select Brand...">
                                             <?php $__currentLoopData = $lims_brand_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $brand): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($brand->id); ?>"><?php echo e($brand->title); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -104,7 +104,7 @@
                                     <div class="form-group">
                                         <label><?php echo e(trans('file.category')); ?> *</strong> </label>
                                         <div class="input-group">
-                                          <select name="category_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Category...">
+                                          <select name="category_id" required class="selectpicker form-control" data-live-search="true" title="Select Category...">
                                             <?php $__currentLoopData = $lims_category_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

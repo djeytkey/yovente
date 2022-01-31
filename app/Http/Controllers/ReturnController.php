@@ -374,17 +374,17 @@ class ReturnController extends Controller
             );
         }
         $message = 'Return created successfully';
-        if($mail_data['email']){
-            try{
-                Mail::send( 'mail.return_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Return Details' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'Return created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }
-        }
+        // if($mail_data['email']){
+        //     try{
+        //         Mail::send( 'mail.return_details', $mail_data, function( $message ) use ($mail_data)
+        //         {
+        //             $message->to( $mail_data['email'] )->subject( 'Return Details' );
+        //         });
+        //     }
+        //     catch(\Exception $e){
+        //         $message = 'Return created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        //     }
+        // }
         return redirect('return-sale')->with('message', $message);
     }
 
@@ -424,16 +424,16 @@ class ReturnController extends Controller
                 $mail_data['total'][$key] = $product_return_data->qty;
             }
 
-            try{
-                Mail::send( 'mail.return_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Return Details' );
-                });
-                $message = 'Mail sent successfully';
-            }
-            catch(\Exception $e){
-                $message = 'Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }
+            // try{
+            //     Mail::send( 'mail.return_details', $mail_data, function( $message ) use ($mail_data)
+            //     {
+            //         $message->to( $mail_data['email'] )->subject( 'Return Details' );
+            //     });
+            //     $message = 'Mail sent successfully';
+            // }
+            // catch(\Exception $e){
+            //     $message = 'Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            // }
         }
         else
             $message = 'Customer doesnt have email!';
@@ -705,17 +705,17 @@ class ReturnController extends Controller
         $mail_data['order_tax_rate'] = $lims_return_data->order_tax_rate;
         $mail_data['grand_total'] = $lims_return_data->grand_total;
         $message = 'Return updated successfully';
-        if($mail_data['email']){
-            try{
-                Mail::send( 'mail.return_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Return Details' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'Return updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }
-        }
+        // if($mail_data['email']){
+        //     try{
+        //         Mail::send( 'mail.return_details', $mail_data, function( $message ) use ($mail_data)
+        //         {
+        //             $message->to( $mail_data['email'] )->subject( 'Return Details' );
+        //         });
+        //     }
+        //     catch(\Exception $e){
+        //         $message = 'Return updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        //     }
+        // }
         return redirect('return-sale')->with('message', $message);
     }
 

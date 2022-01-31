@@ -94,7 +94,7 @@
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label>{{trans('file.Employee')}} *</label>
-                        <select class="form-control selectpicker" name="employee_id" required data-live-search="true" data-live-search-style="begins" title="Select Employee...">
+                        <select class="form-control selectpicker" name="employee_id" required data-live-search="true" title="Select Employee...">
                             @foreach($lims_employee_list as $employee)
                             <option value="{{$employee->id}}">{{$employee->name}}</option>
                             @endforeach
@@ -152,7 +152,7 @@
                     <div class="col-md-6 form-group">
                         <input type="hidden" name="payroll_id">
                         <label>{{trans('file.Employee')}} *</label>
-                        <select class="form-control selectpicker" name="employee_id" required data-live-search="true" data-live-search-style="begins" title="Select Employee...">
+                        <select class="form-control selectpicker" name="employee_id" required data-live-search="true" title="Select Employee...">
                             @foreach($lims_employee_list as $employee)
                             <option value="{{$employee->id}}">{{$employee->name}}</option>
                             @endforeach

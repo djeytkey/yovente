@@ -132,7 +132,7 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>{{trans('file.Expense Category')}} *</label>
-                            <select name="expense_category_id" class="selectpicker form-control" required data-live-search="true" data-live-search-style="begins" title="Select Expense Category...">
+                            <select name="expense_category_id" class="selectpicker form-control" required data-live-search="true" title="Select Expense Category...">
                                 @foreach($lims_expense_category_list as $expense_category)
                                 <option value="{{$expense_category->id}}">{{$expense_category->name . ' (' . $expense_category->code. ')'}}</option>
                                 @endforeach
@@ -140,7 +140,7 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label>{{trans('file.Warehouse')}} *</label>
-                            <select name="warehouse_id" class="selectpicker form-control" required data-live-search="true" data-live-search-style="begins" title="Select Warehouse...">
+                            <select name="warehouse_id" class="selectpicker form-control" required data-live-search="true" title="Select Warehouse...">
                                 @foreach($lims_warehouse_list as $warehouse)
                                 <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
                                 @endforeach

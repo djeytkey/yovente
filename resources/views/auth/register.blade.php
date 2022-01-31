@@ -77,7 +77,7 @@
                 <label for="register-company" class="label-material">{{trans('file.Company Name')}}</label>
               </div>
               <div class="form-group-material">
-                <select name="role_id" id="role-id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Role...">
+                <select name="role_id" id="role-id" required class="selectpicker form-control" data-live-search="true" title="Select Role...">
                   @foreach($lims_role_list as $role)
                       <option value="{{$role->id}}">{{$role->name}}</option>
                   @endforeach
@@ -89,7 +89,7 @@
                     <label for="customer-name" class="label-material">{{trans('file.name')}} *</label>
                   </div>
                   <div class="form-group-material">
-                    <select name="customer_group_id" required class="selectpicker form-control customer-field" data-live-search="true" data-live-search-style="begins" title="Select customer group...">
+                    <select name="customer_group_id" required class="selectpicker form-control customer-field" data-live-search="true" title="Select customer group...">
                       @foreach($lims_customer_group_list as $customer_group)
                           <option value="{{$customer_group->id}}">{{$customer_group->name}}</option>
                       @endforeach
@@ -121,14 +121,14 @@
                   </div>
               </div>
               <div class="form-group-material" id="biller-id">
-                <select name="biller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Biller*...">
+                <select name="biller_id" class="selectpicker form-control" data-live-search="true" title="Select Biller*...">
                   @foreach($lims_biller_list as $biller)
                       <option value="{{$biller->id}}">{{$biller->name}} ({{$biller->phone_number}})</option>
                   @endforeach
                 </select>
               </div>
               <div class="form-group-material" id="warehouse-id">
-                <select name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Warehouse*...">
+                <select name="warehouse_id" class="selectpicker form-control" data-live-search="true" title="Select Warehouse*...">
                   @foreach($lims_warehouse_list as $warehouse)
                       <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
                   @endforeach

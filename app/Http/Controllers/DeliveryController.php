@@ -120,25 +120,25 @@ class DeliveryController extends Controller
         $delivery->save();
         $lims_customer_data = Customer::find($lims_sale_data->customer_id);
         $message = 'Delivery created successfully';
-        if($lims_customer_data->email && $data['status'] != 1){
-            $mail_data['email'] = $lims_customer_data->email;
-            $mail_data['customer'] = $lims_customer_data->name;
-            $mail_data['sale_reference'] = $lims_sale_data->reference_no;
-            $mail_data['delivery_reference'] = $delivery->reference_no;
-            $mail_data['status'] = $data['status'];
-            $mail_data['address'] = $data['address'];
-            $mail_data['delivered_by'] = $data['delivered_by'];
-            //return $mail_data;
-            try{
-                Mail::send( 'mail.delivery_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Delivery Details' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'Delivery created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }  
-        }
+        // if($lims_customer_data->email && $data['status'] != 1){
+        //     $mail_data['email'] = $lims_customer_data->email;
+        //     $mail_data['customer'] = $lims_customer_data->name;
+        //     $mail_data['sale_reference'] = $lims_sale_data->reference_no;
+        //     $mail_data['delivery_reference'] = $delivery->reference_no;
+        //     $mail_data['status'] = $data['status'];
+        //     $mail_data['address'] = $data['address'];
+        //     $mail_data['delivered_by'] = $data['delivered_by'];
+        //     //return $mail_data;
+        //     try{
+        //         Mail::send( 'mail.delivery_details', $mail_data, function( $message ) use ($mail_data)
+        //         {
+        //             $message->to( $mail_data['email'] )->subject( 'Delivery Details' );
+        //         });
+        //     }
+        //     catch(\Exception $e){
+        //         $message = 'Delivery created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        //     }  
+        // }
         return redirect('delivery')->with('message', $message);
     }
 
@@ -204,16 +204,16 @@ class DeliveryController extends Controller
 
             //return $mail_data;
 
-            try{
-                Mail::send( 'mail.delivery_challan', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Delivery Challan' );
-                });
-                $message = 'Mail sent successfully';
-            }
-            catch(\Exception $e){
-                $message = 'Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }
+            // try{
+            //     Mail::send( 'mail.delivery_challan', $mail_data, function( $message ) use ($mail_data)
+            //     {
+            //         $message->to( $mail_data['email'] )->subject( 'Delivery Challan' );
+            //     });
+            //     $message = 'Mail sent successfully';
+            // }
+            // catch(\Exception $e){
+            //     $message = 'Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            // }
         }
         else
             $message = 'Customer does not have email!';
@@ -253,24 +253,24 @@ class DeliveryController extends Controller
         $lims_sale_data = Sale::find($lims_delivery_data->sale_id);
         $lims_customer_data = Customer::find($lims_sale_data->customer_id);
         $message = 'Delivery updated successfully';
-        if($lims_customer_data->email && $input['status'] != 1){
-            $mail_data['email'] = $lims_customer_data->email;
-            $mail_data['customer'] = $lims_customer_data->name;
-            $mail_data['sale_reference'] = $lims_sale_data->reference_no;
-            $mail_data['delivery_reference'] = $lims_delivery_data->reference_no;
-            $mail_data['status'] = $input['status'];
-            $mail_data['address'] = $input['address'];
-            $mail_data['delivered_by'] = $input['delivered_by'];
-            try{
-                Mail::send( 'mail.delivery_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Delivery Details' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'Delivery updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }   
-        }
+        // if($lims_customer_data->email && $input['status'] != 1){
+        //     $mail_data['email'] = $lims_customer_data->email;
+        //     $mail_data['customer'] = $lims_customer_data->name;
+        //     $mail_data['sale_reference'] = $lims_sale_data->reference_no;
+        //     $mail_data['delivery_reference'] = $lims_delivery_data->reference_no;
+        //     $mail_data['status'] = $input['status'];
+        //     $mail_data['address'] = $input['address'];
+        //     $mail_data['delivered_by'] = $input['delivered_by'];
+        //     try{
+        //         Mail::send( 'mail.delivery_details', $mail_data, function( $message ) use ($mail_data)
+        //         {
+        //             $message->to( $mail_data['email'] )->subject( 'Delivery Details' );
+        //         });
+        //     }
+        //     catch(\Exception $e){
+        //         $message = 'Delivery updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        //     }   
+        // }
     	return redirect('delivery')->with('message', $message);
     }
 

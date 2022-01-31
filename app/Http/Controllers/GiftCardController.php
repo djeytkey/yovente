@@ -69,30 +69,30 @@ class GiftCardController extends Controller
             $lims_user_data = User::find($data['user_id']);
             $data['email'] = $lims_user_data->email;
             $data['name'] = $lims_user_data->name;
-            try{
-                Mail::send( 'mail.gift_card_create', $data, function( $message ) use ($data)
-                {
-                    $message->to( $data['email'] )->subject( 'GiftCard' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'GiftCard created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }
+            // try{
+            //     Mail::send( 'mail.gift_card_create', $data, function( $message ) use ($data)
+            //     {
+            //         $message->to( $data['email'] )->subject( 'GiftCard' );
+            //     });
+            // }
+            // catch(\Exception $e){
+            //     $message = 'GiftCard created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            // }
         }
         else{
             $lims_customer_data = Customer::find($data['customer_id']);
             if($lims_customer_data->email){
                 $data['email'] = $lims_customer_data->email;
                 $data['name'] = $lims_customer_data->name;
-                try{
-                    Mail::send( 'mail.gift_card_create', $data, function( $message ) use ($data)
-                    {
-                        $message->to( $data['email'] )->subject( 'GiftCard' );
-                    });
-                }
-                catch(\Exception $e){
-                    $message = 'GiftCard created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-                }
+                // try{
+                //     Mail::send( 'mail.gift_card_create', $data, function( $message ) use ($data)
+                //     {
+                //         $message->to( $data['email'] )->subject( 'GiftCard' );
+                //     });
+                // }
+                // catch(\Exception $e){
+                //     $message = 'GiftCard created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+                // }
             }
         }
         return redirect('gift_cards')->with('message', $message);
@@ -157,15 +157,15 @@ class GiftCardController extends Controller
             $data['name'] = $lims_customer_data->name;
             $data['card_no'] = $lims_gift_card_data->card_no;
             $data['balance'] = $lims_gift_card_data->amount - $lims_gift_card_data->expense;
-            try{
-                Mail::send( 'mail.gift_card_recharge', $data, function( $message ) use ($data)
-                {
-                    $message->to( $data['email'] )->subject( 'GiftCard Recharge Info' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'GiftCard recharged successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }  
+            // try{
+            //     Mail::send( 'mail.gift_card_recharge', $data, function( $message ) use ($data)
+            //     {
+            //         $message->to( $data['email'] )->subject( 'GiftCard Recharge Info' );
+            //     });
+            // }
+            // catch(\Exception $e){
+            //     $message = 'GiftCard recharged successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            // }  
         }
         return redirect('gift_cards')->with('message', $message);
     }

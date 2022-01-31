@@ -596,5 +596,8 @@ return [
 	"Expired Date" => "Expired Date",
 	"This product has batch and expired date" => "This product has batch and expired date",
 	"Database backup created successfully" => "Database backup created successfully",
+	"It will be used for withdrawal" => "It will be used for withdrawal",
+	"FirstName" => "First Name",
+	"LastName" => "Last Name",
 ];
 ?>

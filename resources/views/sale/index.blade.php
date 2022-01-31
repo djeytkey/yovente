@@ -30,7 +30,7 @@
                     <div class="form-group row">
                         <label class="d-tc mt-2"><strong>{{trans('file.Choose Warehouse')}}</strong> &nbsp;</label>
                         <div class="d-tc">
-                            <select id="warehouse_id" name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" >
+                            <select id="warehouse_id" name="warehouse_id" class="selectpicker form-control" data-live-search="true" >
                                 <option value="0">{{trans('file.All Warehouse')}}</option>
                                 @foreach($lims_warehouse_list as $warehouse)
                                     @if($warehouse->id == $warehouse_id)
@@ -230,7 +230,7 @@
                     </div>
                     <div class="gift-card form-group">
                         <label> {{trans('file.Gift Card')}} *</label>
-                        <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Gift Card...">
+                        <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" title="Select Gift Card...">
                             @php 
                                 $balance = [];
                                 $expired_date = [];
@@ -317,7 +317,7 @@
                     </div>
                     <div class="gift-card form-group">
                         <label> {{trans('file.Gift Card')}} *</label>
-                        <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Gift Card...">
+                        <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" title="Select Gift Card...">
                             @foreach($lims_gift_card_list as $gift_card)
                                 <option value="{{$gift_card->id}}">{{$gift_card->card_no}}</option>
                             @endforeach

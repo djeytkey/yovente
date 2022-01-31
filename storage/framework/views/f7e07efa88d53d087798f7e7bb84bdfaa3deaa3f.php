@@ -27,7 +27,7 @@
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.Warehouse')); ?> *</label>
                                             <input type="hidden" name="warehouse_id_hidden" value="<?php echo e($lims_purchase_data->warehouse_id); ?>" />
-                                            <select required name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select warehouse...">
+                                            <select required name="warehouse_id" class="selectpicker form-control" data-live-search="true" title="Select warehouse...">
                                                 <?php $__currentLoopData = $lims_warehouse_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $warehouse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($warehouse->id); ?>"><?php echo e($warehouse->name); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -38,7 +38,7 @@
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.Supplier')); ?></label>
                                             <input type="hidden" name="supplier_id_hidden" value="<?php echo e($lims_purchase_data->supplier_id); ?>" />
-                                            <select name="supplier_id" class="selectpicker form-control" data-live-search="true" id="supplier-id" data-live-search-style="begins" title="Select supplier...">
+                                            <select name="supplier_id" class="selectpicker form-control" data-live-search="true" id="supplier-id" title="Select supplier...">
                                                 <?php $__currentLoopData = $lims_supplier_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $supplier): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($supplier->id); ?>"><?php echo e($supplier->name .' ('. $supplier->company_name .')'); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

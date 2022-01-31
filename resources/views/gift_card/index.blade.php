@@ -157,7 +157,7 @@
                   </div>
                   <div class="form-group user_list">
                       <label>{{trans('file.User')}} *</label>
-                      <select name="user_id" class="selectpicker form-control" required data-live-search="true" data-live-search-style="begins" title="Select User...">
+                      <select name="user_id" class="selectpicker form-control" required data-live-search="true" title="Select User...">
                           @foreach($lims_user_list as $user)
                           <option value="{{$user->id}}">{{$user->name .' ('.$user->email.')'}}</option>
                           @endforeach
@@ -165,7 +165,7 @@
                   </div>
                   <div class="form-group customer_list">
                       <label>{{trans('file.customer')}} *</label>
-                      <select name="customer_id" class="selectpicker form-control" required data-live-search="true" data-live-search-style="begins" title="Select Customer...">
+                      <select name="customer_id" class="selectpicker form-control" required data-live-search="true" title="Select Customer...">
                           @foreach($lims_customer_list as $customer)
                           <option value="{{$customer->id}}">{{$customer->name .' ('.$customer->phone_number.')'}}</option>
                           @endforeach
@@ -217,7 +217,7 @@
                 </div>
                 <div class="form-group user_list_edit">
                     <label>{{trans('file.User')}} *</label>
-                    <select name="user_id_edit" class="selectpicker form-control" required data-live-search="true" data-live-search-style="begins" title="Select User...">
+                    <select name="user_id_edit" class="selectpicker form-control" required data-live-search="true" title="Select User...">
                         @foreach($lims_user_list as $user)
                         <option value="{{$user->id}}">{{$user->name .' ('.$user->email.')'}}</option>
                         @endforeach
@@ -225,7 +225,7 @@
                 </div>
                 <div class="form-group customer_list_edit">
                     <label>{{trans('file.customer')}} *</label>
-                    <select name="customer_id_edit" class="selectpicker form-control" required data-live-search="true" data-live-search-style="begins" title="Select Customer...">
+                    <select name="customer_id_edit" class="selectpicker form-control" required data-live-search="true" title="Select Customer...">
                         @foreach($lims_customer_list as $customer)
                         <option value="{{$customer->id}}">{{$customer->name .' ('.$customer->phone_number.')'}}</option>
                         @endforeach

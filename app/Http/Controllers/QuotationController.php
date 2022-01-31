@@ -151,17 +151,17 @@ class QuotationController extends Controller
             ProductQuotation::create($product_quotation);
         }
         $message = 'Quotation created successfully';
-        if($lims_quotation_data->quotation_status == 2 && $mail_data['email']){
-            try{
-                Mail::send( 'mail.quotation_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Quotation Details' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'Quotation created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            } 
-        }
+        // if($lims_quotation_data->quotation_status == 2 && $mail_data['email']){
+        //     try{
+        //         Mail::send( 'mail.quotation_details', $mail_data, function( $message ) use ($mail_data)
+        //         {
+        //             $message->to( $mail_data['email'] )->subject( 'Quotation Details' );
+        //         });
+        //     }
+        //     catch(\Exception $e){
+        //         $message = 'Quotation created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        //     } 
+        // }
         return redirect('quotations')->with('message', $message);
     }
 
@@ -202,16 +202,16 @@ class QuotationController extends Controller
                 $mail_data['total'][$key] = $product_quotation_data->total;
             }
 
-            try{
-                Mail::send( 'mail.quotation_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Quotation Details' );
-                });
-                $message = 'Mail sent successfully';
-            }
-            catch(\Exception $e){
-                $message = 'Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }
+            // try{
+            //     Mail::send( 'mail.quotation_details', $mail_data, function( $message ) use ($mail_data)
+            //     {
+            //         $message->to( $mail_data['email'] )->subject( 'Quotation Details' );
+            //     });
+            //     $message = 'Mail sent successfully';
+            // }
+            // catch(\Exception $e){
+            //     $message = 'Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            // }
         }
         else
             $message = 'Customer doesnt have email!';
@@ -571,17 +571,17 @@ class QuotationController extends Controller
 
         $message = 'Quotation updated successfully';
 
-        if($lims_quotation_data->quotation_status == 2 && $mail_data['email']){
-            try{
-                Mail::send( 'mail.quotation_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Quotation Details' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'Quotation updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            } 
-        }
+        // if($lims_quotation_data->quotation_status == 2 && $mail_data['email']){
+        //     try{
+        //         Mail::send( 'mail.quotation_details', $mail_data, function( $message ) use ($mail_data)
+        //         {
+        //             $message->to( $mail_data['email'] )->subject( 'Quotation Details' );
+        //         });
+        //     }
+        //     catch(\Exception $e){
+        //         $message = 'Quotation updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        //     } 
+        // }
         return redirect('quotations')->with('message', $message);
     }
 

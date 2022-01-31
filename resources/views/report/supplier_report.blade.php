@@ -24,7 +24,7 @@
                         <label class="d-tc mt-2"><strong>{{trans('file.Choose Supplier')}}</strong> &nbsp;</label>
                         <div class="d-tc">
                             <input type="hidden" name="supplier_id_hidden" value="{{$supplier_id}}" />
-                            <select id="supplier_id" name="supplier_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" >
+                            <select id="supplier_id" name="supplier_id" class="selectpicker form-control" data-live-search="true" >
                                 @foreach($lims_supplier_list as $supplier)
                                 <option value="{{$supplier->id}}">{{$supplier->name}} ({{$supplier->phone_number}})</option>
                                 @endforeach

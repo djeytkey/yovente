@@ -25,7 +25,7 @@
                         <label class="d-tc mt-2"><strong><?php echo e(trans('file.Choose User')); ?></strong> &nbsp;</label>
                         <div class="d-tc">
                             <input type="hidden" name="user_id_hidden" value="<?php echo e($user_id); ?>" />
-                            <select id="user_id" name="user_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins">
+                            <select id="user_id" name="user_id" class="selectpicker form-control" data-live-search="true">
                                 <?php $__currentLoopData = $lims_user_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?> (<?php echo e($user->phone); ?>)</option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

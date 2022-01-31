@@ -1039,7 +1039,7 @@
                           ?>
                           <div class="col-md-6 form-group">
                               <label><?php echo e(trans('file.User')); ?> *</label>
-                              <select name="user_id" class="selectpicker form-control" required data-live-search="true" data-live-search-style="begins" title="Select user...">
+                              <select name="user_id" class="selectpicker form-control" required data-live-search="true" title="Select user...">
                                   <?php $__currentLoopData = $lims_user_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                   <option value="<?php echo e($user->id); ?>"><?php echo e($user->name . ' (' . $user->email. ')'); ?></option>
                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -1088,7 +1088,7 @@
                       <div class="row">
                         <div class="col-md-6 form-group">
                             <label><?php echo e(trans('file.Expense Category')); ?> *</label>
-                            <select name="expense_category_id" class="selectpicker form-control" required data-live-search="true" data-live-search-style="begins" title="Select Expense Category...">
+                            <select name="expense_category_id" class="selectpicker form-control" required data-live-search="true" title="Select Expense Category...">
                                 <?php $__currentLoopData = $lims_expense_category_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $expense_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($expense_category->id); ?>"><?php echo e($expense_category->name . ' (' . $expense_category->code. ')'); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -1096,7 +1096,7 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label><?php echo e(trans('file.Warehouse')); ?> *</label>
-                            <select name="warehouse_id" class="selectpicker form-control" required data-live-search="true" data-live-search-style="begins" title="Select Warehouse...">
+                            <select name="warehouse_id" class="selectpicker form-control" required data-live-search="true" title="Select Warehouse...">
                                 <?php $__currentLoopData = $lims_warehouse_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $warehouse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($warehouse->id); ?>"><?php echo e($warehouse->name); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -1239,7 +1239,7 @@
                     ?>
                       <div class="form-group">
                           <label><?php echo e(trans('file.Warehouse')); ?> *</label>
-                          <select name="warehouse_id" class="selectpicker form-control" required data-live-search="true" id="warehouse-id" data-live-search-style="begins" title="Select warehouse...">
+                          <select name="warehouse_id" class="selectpicker form-control" required data-live-search="true" id="warehouse-id" title="Select warehouse...">
                               <?php $__currentLoopData = $lims_warehouse_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $warehouse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               <option value="<?php echo e($warehouse->id); ?>"><?php echo e($warehouse->name); ?></option>
                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -1277,7 +1277,7 @@
                     ?>
                       <div class="form-group">
                           <label><?php echo e(trans('file.User')); ?> *</label>
-                          <select name="user_id" class="selectpicker form-control" required data-live-search="true" id="user-id" data-live-search-style="begins" title="Select user...">
+                          <select name="user_id" class="selectpicker form-control" required data-live-search="true" id="user-id" title="Select user...">
                               <?php $__currentLoopData = $lims_user_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               <option value="<?php echo e($user->id); ?>"><?php echo e($user->name . ' (' . $user->phone. ')'); ?></option>
                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -1315,7 +1315,7 @@
                     ?>
                       <div class="form-group">
                           <label><?php echo e(trans('file.customer')); ?> *</label>
-                          <select name="customer_id" class="selectpicker form-control" required data-live-search="true" id="customer-id" data-live-search-style="begins" title="Select customer...">
+                          <select name="customer_id" class="selectpicker form-control" required data-live-search="true" id="customer-id" title="Select customer...">
                               <?php $__currentLoopData = $lims_customer_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               <option value="<?php echo e($customer->id); ?>"><?php echo e($customer->name . ' (' . $customer->phone_number. ')'); ?></option>
                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -1353,7 +1353,7 @@
                     ?>
                       <div class="form-group">
                           <label><?php echo e(trans('file.Supplier')); ?> *</label>
-                          <select name="supplier_id" class="selectpicker form-control" required data-live-search="true" id="supplier-id" data-live-search-style="begins" title="Select Supplier...">
+                          <select name="supplier_id" class="selectpicker form-control" required data-live-search="true" id="supplier-id" title="Select Supplier...">
                               <?php $__currentLoopData = $lims_supplier_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $supplier): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               <option value="<?php echo e($supplier->id); ?>"><?php echo e($supplier->name . ' (' . $supplier->phone_number. ')'); ?></option>
                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

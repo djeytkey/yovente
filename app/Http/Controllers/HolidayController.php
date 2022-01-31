@@ -66,15 +66,15 @@ class HolidayController extends Controller
         $mail_data['name'] = $holiday->user->name;
         $mail_data['email'] = $holiday->user->email;
         
-        try {
-            Mail::send( 'mail.holiday_approve', $mail_data, function( $message ) use ($mail_data)
-            {
-                $message->to( $mail_data['email'] )->subject( 'Holiday Approved' );
-            });
-        }
-        catch(\Exception $e) {
-            return 'Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-        }
+        // try {
+        //     Mail::send( 'mail.holiday_approve', $mail_data, function( $message ) use ($mail_data)
+        //     {
+        //         $message->to( $mail_data['email'] )->subject( 'Holiday Approved' );
+        //     });
+        // }
+        // catch(\Exception $e) {
+        //     return 'Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        // }
     }
 
     public function myHoliday($year, $month)

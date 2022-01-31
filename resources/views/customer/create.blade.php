@@ -83,12 +83,12 @@
                                     <input type="text" name="postal_code" class="form-control">
                                 </div>
                             </div> --}}
-                            <div class="col-md-6 mt-3">
+                            {{-- <div class="col-md-6 mt-3">
                                 <div class="form-group">
                                     <label>{{trans('file.Add User')}}</label>&nbsp;
                                     <input type="checkbox" name="user" value="1" />
                                 </div>
-                            </div>
+                            </div> --}}
                             {{-- <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{trans('file.Country')}}</label>

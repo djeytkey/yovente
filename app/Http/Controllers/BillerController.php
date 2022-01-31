@@ -75,15 +75,15 @@ class BillerController extends Controller
         }
         Biller::create($lims_biller_data);
         $message = 'Data inserted successfully';
-        try{
-            Mail::send( 'mail.biller_create', $lims_biller_data, function( $message ) use ($lims_biller_data)
-            {
-                $message->to( $lims_biller_data['email'] )->subject( 'New Biller' );
-            });
-        }
-        catch(\Exception $e){
-            $message = 'Data inserted successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-        }  
+        // try{
+        //     Mail::send( 'mail.biller_create', $lims_biller_data, function( $message ) use ($lims_biller_data)
+        //     {
+        //         $message->to( $lims_biller_data['email'] )->subject( 'New Biller' );
+        //     });
+        // }
+        // catch(\Exception $e){
+        //     $message = 'Data inserted successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        // }
         return redirect('biller')->with('message', $message);
     }
 
@@ -175,17 +175,17 @@ class BillerController extends Controller
            $biller->is_active = true;
            $biller->save();
            $message = 'Biller Imported successfully';
-           if($data['email']){
-                try{
-                    Mail::send( 'mail.biller_create', $data, function( $message ) use ($data)
-                    {
-                        $message->to( $data['email'] )->subject( 'New Biller' );
-                    });
-                }
-                catch(\Exception $e){
-                    $message = 'Biller Imported successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-                }
-            }
+        //    if($data['email']){
+        //         try{
+        //             Mail::send( 'mail.biller_create', $data, function( $message ) use ($data)
+        //             {
+        //                 $message->to( $data['email'] )->subject( 'New Biller' );
+        //             });
+        //         }
+        //         catch(\Exception $e){
+        //             $message = 'Biller Imported successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        //         }
+        //     }
         }
         return redirect('biller')->with('message', $message);
         

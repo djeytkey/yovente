@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label><?php echo e(trans('file.Employee')); ?> *</label>
-                        <select class="form-control selectpicker" name="employee_id[]" required data-live-search="true" data-live-search-style="begins" title="Select Employee..." multiple>
+                        <select class="form-control selectpicker" name="employee_id[]" required data-live-search="true" title="Select Employee..." multiple>
                             <?php $__currentLoopData = $lims_employee_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $employee): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <option value="<?php echo e($employee->id); ?>"><?php echo e($employee->name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

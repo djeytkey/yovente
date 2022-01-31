@@ -783,7 +783,7 @@
                                             <?php if($lims_pos_setting_data): ?>
                                             <input type="hidden" name="warehouse_id_hidden" value="<?php echo e($lims_pos_setting_data->warehouse_id); ?>">
                                             <?php endif; ?>
-                                            <select required id="warehouse_id" name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select warehouse...">
+                                            <select required id="warehouse_id" name="warehouse_id" class="selectpicker form-control" data-live-search="true" title="Select warehouse...">
                                                 <?php $__currentLoopData = $lims_warehouse_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $warehouse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($warehouse->id); ?>"><?php echo e($warehouse->name); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -795,7 +795,7 @@
                                             <?php if($lims_pos_setting_data): ?>
                                             <input type="hidden" name="biller_id_hidden" value="<?php echo e($lims_pos_setting_data->biller_id); ?>">
                                             <?php endif; ?>
-                                            <select required id="biller_id" name="biller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Biller...">
+                                            <select required id="biller_id" name="biller_id" class="selectpicker form-control" data-live-search="true" title="Select Biller...">
                                             <?php $__currentLoopData = $lims_biller_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $biller): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option value="<?php echo e($biller->id); ?>"><?php echo e($biller->name . ' (' . $biller->company_name . ')'); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -809,7 +809,7 @@
                                             <?php endif; ?>
                                             <div class="input-group pos">
                                                 <?php if($customer_active): ?>
-                                                <select required name="customer_id" id="customer_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select customer..." style="width: 100px">
+                                                <select required name="customer_id" id="customer_id" class="selectpicker form-control" data-live-search="true" title="Select customer..." style="width: 100px">
                                                 <?php $deposit = [] ?>
                                                 <?php $__currentLoopData = $lims_customer_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php $deposit[$customer->id] = $customer->deposit - $customer->expense; ?>
@@ -819,7 +819,7 @@
                                                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addCustomer"><i class="dripicons-plus"></i></button>
                                                 <?php else: ?>
                                                 <?php $deposit = [] ?>
-                                                <select required name="customer_id" id="customer_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select customer...">
+                                                <select required name="customer_id" id="customer_id" class="selectpicker form-control" data-live-search="true" title="Select customer...">
                                                 <?php $__currentLoopData = $lims_customer_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php $deposit[$customer->id] = $customer->deposit - $customer->expense; ?>
                                                     <option value="<?php echo e($customer->id); ?>"><?php echo e($customer->name . ' (' . $customer->phone_number . ')'); ?></option>
@@ -996,7 +996,7 @@
                                         <div class="form-group col-md-12 gift-card">
                                             <label> <?php echo e(trans('file.Gift Card')); ?> *</label>
                                             <input type="hidden" name="gift_card_id">
-                                            <select id="gift_card_id_select" name="gift_card_id_select" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Gift Card..."></select>
+                                            <select id="gift_card_id_select" name="gift_card_id_select" class="selectpicker form-control" data-live-search="true" title="Select Gift Card..."></select>
                                         </div>
                                         <div class="form-group col-md-12 cheque">
                                             <label><?php echo e(trans('file.Cheque Number')); ?> *</label>
@@ -1562,7 +1562,7 @@
                         <div class="row">
                           <div class="col-md-6 form-group warehouse-section">
                               <label><?php echo e(trans('file.Warehouse')); ?> *</strong> </label>
-                              <select required name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select warehouse...">
+                              <select required name="warehouse_id" class="selectpicker form-control" data-live-search="true" title="Select warehouse...">
                                   <?php $__currentLoopData = $lims_warehouse_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $warehouse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                   <option value="<?php echo e($warehouse->id); ?>"><?php echo e($warehouse->name); ?></option>
                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

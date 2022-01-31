@@ -79,7 +79,7 @@
                   <div class="row">
                       <div class="col-md-6 form-group">
                           <label> {{trans('file.From Account')}} *</label>
-                          <select class="form-control selectpicker" name="from_account_id" data-live-search="true" data-live-search-style="begins" title="Select from account..." required>
+                          <select class="form-control selectpicker" name="from_account_id" data-live-search="true" title="Select from account..." required>
                           @foreach($lims_account_list as $account)
                               <option value="{{$account->id}}">{{$account->name}} [{{$account->account_no}}]</option>
                           @endforeach
@@ -87,7 +87,7 @@
                       </div>
                       <div class="col-md-6 form-group">
                           <label> {{trans('file.To Account')}} *</label>
-                          <select class="form-control selectpicker" name="to_account_id" data-live-search="true" data-live-search-style="begins" title="Select to account..." required>
+                          <select class="form-control selectpicker" name="to_account_id" data-live-search="true" title="Select to account..." required>
                           @foreach($lims_account_list as $account)
                               <option value="{{$account->id}}">{{$account->name}} [{{$account->account_no}}]</option>
                           @endforeach
@@ -123,7 +123,7 @@
                         <input type="hidden" name="id">
                       <div class="col-md-6 form-group">
                           <label> {{trans('file.From Account')}} *</label>
-                          <select class="form-control selectpicker" name="from_account_id" data-live-search="true" data-live-search-style="begins" title="Select from account..." required>
+                          <select class="form-control selectpicker" name="from_account_id" data-live-search="true" title="Select from account..." required>
                           @foreach($lims_account_list as $account)
                               <option value="{{$account->id}}">{{$account->name}} [{{$account->account_no}}]</option>
                           @endforeach
@@ -131,7 +131,7 @@
                       </div>
                       <div class="col-md-6 form-group">
                           <label> {{trans('file.To Account')}} *</label>
-                          <select class="form-control selectpicker" name="to_account_id" data-live-search="true" data-live-search-style="begins" title="Select to account..." required>
+                          <select class="form-control selectpicker" name="to_account_id" data-live-search="true" title="Select to account..." required>
                           @foreach($lims_account_list as $account)
                               <option value="{{$account->id}}">{{$account->name}} [{{$account->account_no}}]</option>
                           @endforeach

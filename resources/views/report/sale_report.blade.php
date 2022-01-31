@@ -29,7 +29,7 @@
                         <label class="d-tc mt-2"><strong>{{trans('file.Choose Warehouse')}}</strong> &nbsp;</label>
                         <div class="d-tc">
                             <input type="hidden" name="warehouse_id_hidden" value="{{$warehouse_id}}" />
-                            <select id="warehouse_id" name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" >
+                            <select id="warehouse_id" name="warehouse_id" class="selectpicker form-control" data-live-search="true" >
                                 <option value="0">{{trans('file.All Warehouse')}}</option>
                                 @foreach($lims_warehouse_list as $warehouse)
                                 <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>

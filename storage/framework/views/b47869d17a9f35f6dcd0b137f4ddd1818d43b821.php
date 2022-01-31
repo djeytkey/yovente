@@ -31,7 +31,7 @@
                     <div class="form-group row">
                         <label class="d-tc mt-2"><strong><?php echo e(trans('file.Choose Warehouse')); ?></strong> &nbsp;</label>
                         <div class="d-tc">
-                            <select id="warehouse_id" name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" >
+                            <select id="warehouse_id" name="warehouse_id" class="selectpicker form-control" data-live-search="true" >
                                 <option value="0"><?php echo e(trans('file.All Warehouse')); ?></option>
                                 <?php $__currentLoopData = $lims_warehouse_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $warehouse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if($warehouse->id == $warehouse_id): ?>
@@ -224,7 +224,7 @@
                     </div>
                     <div class="gift-card form-group">
                         <label> <?php echo e(trans('file.Gift Card')); ?> *</label>
-                        <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Gift Card...">
+                        <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" title="Select Gift Card...">
                             <?php 
                                 $balance = [];
                                 $expired_date = [];
@@ -313,7 +313,7 @@
                     </div>
                     <div class="gift-card form-group">
                         <label> <?php echo e(trans('file.Gift Card')); ?> *</label>
-                        <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Gift Card...">
+                        <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" title="Select Gift Card...">
                             <?php $__currentLoopData = $lims_gift_card_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gift_card): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($gift_card->id); ?>"><?php echo e($gift_card->card_no); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

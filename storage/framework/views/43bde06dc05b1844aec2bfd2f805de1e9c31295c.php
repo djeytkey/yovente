@@ -83,7 +83,7 @@
                   <div class="row">
                       <div class="col-md-6 form-group">
                           <label> <?php echo e(trans('file.From Account')); ?> *</label>
-                          <select class="form-control selectpicker" name="from_account_id" data-live-search="true" data-live-search-style="begins" title="Select from account..." required>
+                          <select class="form-control selectpicker" name="from_account_id" data-live-search="true" title="Select from account..." required>
                           <?php $__currentLoopData = $lims_account_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $account): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               <option value="<?php echo e($account->id); ?>"><?php echo e($account->name); ?> [<?php echo e($account->account_no); ?>]</option>
                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -91,7 +91,7 @@
                       </div>
                       <div class="col-md-6 form-group">
                           <label> <?php echo e(trans('file.To Account')); ?> *</label>
-                          <select class="form-control selectpicker" name="to_account_id" data-live-search="true" data-live-search-style="begins" title="Select to account..." required>
+                          <select class="form-control selectpicker" name="to_account_id" data-live-search="true" title="Select to account..." required>
                           <?php $__currentLoopData = $lims_account_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $account): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               <option value="<?php echo e($account->id); ?>"><?php echo e($account->name); ?> [<?php echo e($account->account_no); ?>]</option>
                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -129,7 +129,7 @@
                         <input type="hidden" name="id">
                       <div class="col-md-6 form-group">
                           <label> <?php echo e(trans('file.From Account')); ?> *</label>
-                          <select class="form-control selectpicker" name="from_account_id" data-live-search="true" data-live-search-style="begins" title="Select from account..." required>
+                          <select class="form-control selectpicker" name="from_account_id" data-live-search="true" title="Select from account..." required>
                           <?php $__currentLoopData = $lims_account_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $account): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               <option value="<?php echo e($account->id); ?>"><?php echo e($account->name); ?> [<?php echo e($account->account_no); ?>]</option>
                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -137,7 +137,7 @@
                       </div>
                       <div class="col-md-6 form-group">
                           <label> <?php echo e(trans('file.To Account')); ?> *</label>
-                          <select class="form-control selectpicker" name="to_account_id" data-live-search="true" data-live-search-style="begins" title="Select to account..." required>
+                          <select class="form-control selectpicker" name="to_account_id" data-live-search="true" title="Select to account..." required>
                           <?php $__currentLoopData = $lims_account_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $account): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                               <option value="<?php echo e($account->id); ?>"><?php echo e($account->name); ?> [<?php echo e($account->account_no); ?>]</option>
                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

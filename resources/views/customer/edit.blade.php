@@ -84,14 +84,14 @@
                                     <input type="text" name="postal_code" value="{{$lims_customer_data->postal_code}}" class="form-control">
                                 </div>
                             </div> --}}
-                            @if(!$lims_customer_data->user_id)
+                            {{-- @if(!$lims_customer_data->user_id)
                             <div class="col-md-6 mt-3">
                                 <div class="form-group">
                                     <label>{{trans('file.Add User')}}</label>&nbsp;
                                     <input type="checkbox" name="user" value="1" />
                                 </div>
                             </div>
-                            @endif
+                            @endif --}}
                             {{-- <div class="col-md-6">
                                 <div class="form-group">
                                     <label>{{trans('file.Country')}}</label>

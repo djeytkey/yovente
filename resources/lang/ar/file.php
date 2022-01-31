@@ -590,6 +590,8 @@ return [
 	"This product has different price for different warehouse" => "هذا المنتج له سعر مختلف لمستودعات مختلفة",
 	"Backup Database" => "قاعدة بيانات النسخ الاحتياطي",
 	"Database backup created successfully" => "تم إنشاء نسخة احتياطية لقاعدة البيانات بنجاح",
-	
+	"It will be used for withdrawal" => "سيتم استخدامها للسحب",
+	"FirstName" => "الاسم الأول",
+	"LastName" => "الاسم الأخير",
 ];
 ?>

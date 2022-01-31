@@ -33,7 +33,8 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>{{trans('file.customer')}} *</label>
-                                            <select required name="customer_id" id="customer_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select customer...">
+                                            {{-- <select required name="customer_id" id="customer_id" class="selectpicker form-control" data-live-search="true" title="Select customer..."> --}}
+                                            <select required name="customer_id" id="customer_id" class="selectpicker form-control" data-live-search="true" title="Select customer...">
                                                 <?php $deposit = []; ?>
                                                 @foreach($lims_customer_list as $customer)
                                                 <?php $deposit[$customer->id] = $customer->deposit - $customer->expense; ?>
@@ -45,7 +46,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>{{trans('file.Warehouse')}} *</label>
-                                            <select required name="warehouse_id" id="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select warehouse...">
+                                            <select required name="warehouse_id" id="warehouse_id" class="selectpicker form-control" data-live-search="true" title="Select warehouse...">
                                                 @foreach($lims_warehouse_list as $warehouse)
                                                 <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
                                                 @endforeach
@@ -55,7 +56,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>{{trans('file.Biller')}} *</label>
-                                            <select required name="biller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Biller...">
+                                            <select required name="biller_id" class="selectpicker form-control" data-live-search="true" title="Select Biller...">
                                                 @foreach($lims_biller_list as $biller)
                                                 <option value="{{$biller->id}}">{{$biller->name . ' (' . $biller->company_name . ')'}}</option>
                                                 @endforeach
@@ -259,7 +260,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label> {{trans('file.Gift Card')}} *</label>
-                                                <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Gift Card..."></select>
+                                                <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" title="Select Gift Card..."></select>
                                             </div>
                                         </div>
                                     </div>
@@ -396,7 +397,7 @@
                 <div class="row">
                   <div class="col-md-6 form-group warehouse-section">
                       <label>{{trans('file.Warehouse')}} *</strong> </label>
-                      <select required name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select warehouse...">
+                      <select required name="warehouse_id" class="selectpicker form-control" data-live-search="true" title="Select warehouse...">
                           @foreach($lims_warehouse_list as $warehouse)
                           <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
                           @endforeach

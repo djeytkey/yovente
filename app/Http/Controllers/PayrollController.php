@@ -53,15 +53,15 @@ class PayrollController extends Controller
         $mail_data['amount'] = $data['amount'];
         $mail_data['name'] = $lims_employee_data->name;
         $mail_data['email'] = $lims_employee_data->email;
-        try{
-            Mail::send( 'mail.payroll_details', $mail_data, function( $message ) use ($mail_data)
-            {
-                $message->to( $mail_data['email'] )->subject( 'Payroll Details' );
-            });
-        }
-        catch(\Exception $e){
-            $message = ' Payroll created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-        }
+        // try{
+        //     Mail::send( 'mail.payroll_details', $mail_data, function( $message ) use ($mail_data)
+        //     {
+        //         $message->to( $mail_data['email'] )->subject( 'Payroll Details' );
+        //     });
+        // }
+        // catch(\Exception $e){
+        //     $message = ' Payroll created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        // }
 
         return redirect('payroll')->with('message', $message);
     }

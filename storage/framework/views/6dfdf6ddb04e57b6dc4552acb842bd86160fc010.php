@@ -17,13 +17,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>
                                                 <?php echo e(trans('file.Reference No')); ?>
 
                                             </label>
-                                            <input type="text" name="reference_no" class="form-control" />
+                                            <h3><?php echo e(strtolower(Auth::user()->name) . '-' . date("ymd") . '-'. date("His")); ?></h3>
+                                            <input type="hidden" name="reference_no" class="form-control" value="<?php echo e(strtolower(Auth::user()->name) . '-' . date("ymd") . '-'. date("His")); ?>"/>
                                         </div>
                                         <?php if($errors->has('reference_no')): ?>
                                        <span>
@@ -31,10 +32,11 @@
                                         </span>
                                         <?php endif; ?>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.customer')); ?> *</label>
-                                            <select required name="customer_id" id="customer_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select customer...">
+                                            
+                                            <select required name="customer_id" id="customer_id" class="selectpicker form-control" data-live-search="true" title="Select customer...">
                                                 <?php $deposit = []; ?>
                                                 <?php $__currentLoopData = $lims_customer_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php $deposit[$customer->id] = $customer->deposit - $customer->expense; ?>
@@ -43,20 +45,20 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.Warehouse')); ?> *</label>
-                                            <select required name="warehouse_id" id="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select warehouse...">
+                                            <select required name="warehouse_id" id="warehouse_id" class="selectpicker form-control" data-live-search="true" title="Select warehouse...">
                                                 <?php $__currentLoopData = $lims_warehouse_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $warehouse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($warehouse->id); ?>"><?php echo e($warehouse->name); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.Biller')); ?> *</label>
-                                            <select required name="biller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Biller...">
+                                            <select required name="biller_id" class="selectpicker form-control" data-live-search="true" title="Select Biller...">
                                                 <?php $__currentLoopData = $lims_biller_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $biller): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($biller->id); ?>"><?php echo e($biller->name . ' (' . $biller->company_name . ')'); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -96,9 +98,14 @@
                                                 <tfoot class="tfoot active">
                                                     <th colspan="2"><?php echo e(trans('file.Total')); ?></th>
                                                     <th id="total-qty">0</th>
+                                                    
+                                                    <?php if($role->id > 2): ?>
                                                     <th style="text-align: right;"><?php echo e(trans('file.Delivery Rate')); ?></th>
                                                     <th id="taux-livraison"><?php echo e(number_format($lims_general_setting_data->livraison, 2, '.', ' ')); ?></th>
-                                                    
+                                                    <?php else: ?>
+                                                    <th style="text-align: right;"></th>
+                                                    <th id="taux-livraison"></th>
+                                                    <?php endif; ?>
                                                     <th id="total-discount">0.00</th>
                                                     <th id="total-tax">0.00</th>
                                                     <th id="total">0.00</th>
@@ -141,10 +148,11 @@
                                             <input type="hidden" name="grand_total" />
                                             <input type="hidden" name="pos" value="0" />
                                             <input type="hidden" name="coupon_active" value="0" />
+                                            <input type="hidden" name="sale_status" value="1" />
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-3">
+                                <div class="row mt-3" style="display: none">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.Order Tax')); ?></label>
@@ -185,15 +193,7 @@
                                             <?php endif; ?>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label><?php echo e(trans('file.Sale Status')); ?> *</label>
-                                            <select name="sale_status" class="form-control">
-                                                <option value="2"><?php echo e(trans('file.Pending')); ?></option>
-                                                <option value="1"><?php echo e(trans('file.Completed')); ?></option>                                                
-                                            </select>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.Payment Status')); ?> *</label>
@@ -213,11 +213,7 @@
                                                 <label><?php echo e(trans('file.Paid By')); ?></label>
                                                 <select name="paid_by_id" class="form-control">
                                                     <option value="1">Cash</option>
-                                                    <option value="2">Gift Card</option>
-                                                    <option value="3">Credit Card</option>
-                                                    <option value="4">Cheque</option>
-                                                    <option value="5">Paypal</option>
-                                                    <option value="6">Deposit</option>
+                                                                                                        
                                                 </select>
                                             </div>
                                         </div>
@@ -253,7 +249,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label> <?php echo e(trans('file.Gift Card')); ?> *</label>
-                                                <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Gift Card..."></select>
+                                                <select id="gift_card_id" name="gift_card_id" class="selectpicker form-control" data-live-search="true" title="Select Gift Card..."></select>
                                             </div>
                                         </div>
                                     </div>
@@ -329,18 +325,26 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group">
-                            <label><?php echo e(trans('file.Quantity')); ?></label>
-                            <input type="number" name="edit_qty" class="form-control" step="any">
-                        </div>
-                        <div class="form-group">
-                            <label><?php echo e(trans('file.Unit Discount')); ?></label>
-                            <input type="number" name="edit_discount" class="form-control" step="any">
-                        </div>
-                        <div class="form-group">
-                            <label><?php echo e(trans('file.Unit Price')); ?></label>
-                            <input type="number" name="edit_unit_price" class="form-control" step="any">
-                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label><?php echo e(trans('file.Unit Price')); ?></label>
+                                    <input type="number" name="edit_unit_price" class="form-control" step="any">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label><?php echo e(trans('file.Quantity')); ?></label>
+                                    <input type="number" name="edit_qty" class="form-control" step="any">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label><?php echo e(trans('file.Unit Discount')); ?></label>
+                                    <input type="number" name="edit_discount" class="form-control" step="any">
+                                </div>
+                            </div>                            
+                        </div>                         
                         <?php
                             $tax_name_all[] = 'No Tax';
                             $tax_rate_all[] = 0;
@@ -349,20 +353,20 @@
                                 $tax_rate_all[] = $tax->rate;
                             }
                         ?>
-                            <div class="form-group">
-                                <label><?php echo e(trans('file.Tax Rate')); ?></label>
-                                <select name="edit_tax_rate" class="form-control selectpicker">
-                                    <?php $__currentLoopData = $tax_name_all; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($key); ?>"><?php echo e($name); ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
-                            </div>
-                            <div id="edit_unit" class="form-group">
-                                <label><?php echo e(trans('file.Product Unit')); ?></label>
-                                <select name="edit_unit" class="form-control selectpicker">
-                                </select>
-                            </div>
-                            <button type="button" name="update_btn" class="btn btn-primary"><?php echo e(trans('file.update')); ?></button>
+                        <div class="form-group d-none">
+                            <label><?php echo e(trans('file.Tax Rate')); ?></label>
+                            <select name="edit_tax_rate" class="form-control selectpicker">
+                                <?php $__currentLoopData = $tax_name_all; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($key); ?>"><?php echo e($name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+                        </div>
+                        <div id="edit_unit" class="form-group d-none">
+                            <label><?php echo e(trans('file.Product Unit')); ?></label>
+                            <select name="edit_unit" class="form-control selectpicker">
+                            </select>
+                        </div>
+                        <button type="button" name="update_btn" class="btn btn-primary"><?php echo e(trans('file.update')); ?></button>
                     </form>
                 </div>
             </div>
@@ -384,7 +388,7 @@
                 <div class="row">
                   <div class="col-md-6 form-group warehouse-section">
                       <label><?php echo e(trans('file.Warehouse')); ?> *</strong> </label>
-                      <select required name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select warehouse...">
+                      <select required name="warehouse_id" class="selectpicker form-control" data-live-search="true" title="Select warehouse...">
                           <?php $__currentLoopData = $lims_warehouse_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $warehouse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                           <option value="<?php echo e($warehouse->id); ?>"><?php echo e($warehouse->name); ?></option>
                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -467,24 +471,32 @@ $('select[name="customer_id"]').on('change', function() {
 
 $('select[name="warehouse_id"]').on('change', function() {
     var id = $(this).val();
-    $.get('getproduct/' + id, function(data) {
-        lims_product_array = [];
-        product_code = data[0];
-        product_name = data[1];
-        product_qty = data[2];
-        product_type = data[3];
-        product_id = data[4];
-        product_list = data[5];
-        qty_list = data[6];
-        product_warehouse_price = data[7];
-        batch_no = data[8];
-        product_batch_id = data[9];
-        $.each(product_code, function(index) {
-            lims_product_array.push(product_code[index] + ' (' + product_name[index] + ')');
-        });
+    $.ajax({
+        url: 'getproduct/' + id,
+        type: "GET",
+        success:function(data) {
+            lims_product_array = [];
+            product_code = data[0];
+            product_name = data[1];
+            product_qty = data[2];
+            product_type = data[3];
+            product_id = data[4];
+            product_list = data[5];
+            qty_list = data[6];
+            product_warehouse_price = data[7];
+            batch_no = data[8];
+            product_batch_id = data[9];
+            $.each(product_code, function(index) {
+                lims_product_array.push(product_code[index] + ' (' + product_name[index] + ')');
+            });
+        },
+        error:function(){
+            alert("No products in this warehouse");
+            document.location.reload(true);
+        }
     });
 
-    isCashRegisterAvailable(id);
+    //isCashRegisterAvailable(id);
 });
 
 $('#lims_productcodeSearch').on('input', function(){
@@ -888,16 +900,16 @@ function calculateTotal() {
 
     //Sum of subtotal
     var total = 0;
-    var taux_livraison = parseFloat($("#taux-livraison").text());
-    /*if ($("#taux-livraison").text() !== "0.00") {
+    //var taux_livraison = parseFloat($("#taux-livraison").text());
+    if ($("#taux-livraison").text() !== "") {
         var taux_livraison = parseFloat($("#taux-livraison").text());
     } else {
         var taux_livraison = 0;
-    }*/
+    }
     $(".sub-total").each(function() {
         total += parseFloat($(this).text());
     });
-    total = total + taux_livraison;
+    //total = total + taux_livraison;
     $("#total").text(total.toFixed(2));
     $('input[name="total_price"]').val(total.toFixed(2));
     $('input[name="livraison"]').val(taux_livraison.toFixed(2));

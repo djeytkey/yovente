@@ -55,7 +55,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-
         //dd($request);
         $this->validate($request, [
             'name' => [
@@ -86,13 +85,13 @@ class UserController extends Controller
 
         $data = $request->all();
         $message = 'User created successfully';
-        try {
-            Mail::send('mail.user_details', $data, function ($message) use ($data) {
-                $message->to($data['email'])->subject('User Account Details');
-            });
-        } catch (\Exception $e) {
-            $message = 'User created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-        }
+        // try {
+        //     Mail::send('mail.user_details', $data, function ($message) use ($data) {
+        //         $message->to($data['email'])->subject('User Account Details');
+        //     });
+        // } catch (\Exception $e) {
+        //     $message = 'User created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        // }
         if (!isset($data['is_active']))
             $data['is_active'] = false;
         $data['is_deleted'] = false;

@@ -115,7 +115,7 @@
                                         <label>{{trans('file.Brand')}}</strong> </label>
                                         <div class="input-group">
                                             <input type="hidden" name="brand" value="{{ $lims_product_data->brand_id}}">
-                                          <select name="brand_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Brand...">
+                                          <select name="brand_id" class="selectpicker form-control" data-live-search="true" title="Select Brand...">
                                             @foreach($lims_brand_list as $brand)
                                                 <option value="{{$brand->id}}">{{$brand->title}}</option>
                                             @endforeach
@@ -128,7 +128,7 @@
                                         <input type="hidden" name="category" value="{{$lims_product_data->category_id}}">
                                         <label>{{trans('file.category')}} *</strong> </label>
                                         <div class="input-group">
-                                          <select name="category_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Category...">
+                                          <select name="category_id" required class="selectpicker form-control" data-live-search="true" title="Select Category...">
                                             @foreach($lims_category_list as $category)
                                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                             @endforeach
@@ -141,7 +141,7 @@
                                         <div class="col-md-4">
                                                 <label>{{trans('file.Product Unit')}} *</strong> </label>
                                                 <div class="input-group">
-                                                  <select required class="form-control selectpicker" data-live-search="true" data-live-search-style="begins" title="Select unit..." name="unit_id">
+                                                  <select required class="form-control selectpicker" data-live-search="true" title="Select unit..." name="unit_id">
                                                     @foreach($lims_unit_list as $unit)
                                                         @if($unit->base_unit==null)
                                                             <option value="{{$unit->id}}">{{$unit->unit_name}}</option>

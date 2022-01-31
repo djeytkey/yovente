@@ -69,15 +69,15 @@ class SupplierController extends Controller
         }
         Supplier::create($lims_supplier_data);
         $message = 'Data inserted successfully';
-        try{
-            Mail::send( 'mail.supplier_create', $lims_supplier_data, function( $message ) use ($lims_supplier_data)
-            {
-                $message->to( $lims_supplier_data['email'] )->subject( 'New Supplier' );
-            });
-        }
-        catch(\Exception $e) {
-            $message = 'Data inserted successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-        }
+        // try{
+        //     Mail::send( 'mail.supplier_create', $lims_supplier_data, function( $message ) use ($lims_supplier_data)
+        //     {
+        //         $message->to( $lims_supplier_data['email'] )->subject( 'New Supplier' );
+        //     });
+        // }
+        // catch(\Exception $e) {
+        //     $message = 'Data inserted successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        // }
         return redirect('supplier')->with('message', $message);
     }
 
@@ -187,17 +187,17 @@ class SupplierController extends Controller
            $supplier->is_active = true;
            $supplier->save();
            $message = 'Supplier Imported Successfully';
-           if($data['email']){
-                try{
-                    Mail::send( 'mail.supplier_create', $data, function( $message ) use ($data)
-                    {
-                        $message->to( $data['email'] )->subject( 'New Supplier' );
-                    });
-                }
-                catch(\Excetion $e){
-                    $message = 'Supplier imported successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-                }   
-            }
+        //    if($data['email']){
+        //         try{
+        //             Mail::send( 'mail.supplier_create', $data, function( $message ) use ($data)
+        //             {
+        //                 $message->to( $data['email'] )->subject( 'New Supplier' );
+        //             });
+        //         }
+        //         catch(\Excetion $e){
+        //             $message = 'Supplier imported successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        //         }   
+        //     }
         }
         return redirect('supplier')->with('message', $message); 
     }

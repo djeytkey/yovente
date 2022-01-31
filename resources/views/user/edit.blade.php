@@ -67,7 +67,7 @@
                                     <div class="form-group">
                                         <label><strong>{{trans('file.Role')}} *</strong></label>
                                         <input type="hidden" name="role_id_hidden" value="{{$lims_user_data->role_id}}">
-                                        <select name="role_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Role...">
+                                        <select name="role_id" required class="selectpicker form-control" data-live-search="true" title="Select Role...">
                                           @foreach($lims_role_list as $role)
                                               <option value="{{$role->id}}">{{$role->name}}</option>
                                           @endforeach
@@ -76,7 +76,7 @@
                                     <div class="form-group" id="biller-id">
                                         <label><strong>{{trans('file.Biller')}} *</strong></label>
                                         <input type="hidden" name="biller_id_hidden" value="{{$lims_user_data->biller_id}}">
-                                        <select name="biller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Biller...">
+                                        <select name="biller_id" class="selectpicker form-control" data-live-search="true" title="Select Biller...">
                                           @foreach($lims_biller_list as $biller)
                                               <option value="{{$biller->id}}">{{$biller->name}}</option>
                                           @endforeach
@@ -85,7 +85,7 @@
                                     <div class="form-group" id="warehouseId">
                                         <label><strong>{{trans('file.Warehouse')}} *</strong></label>
                                         <input type="hidden" name="warehouse_id_hidden" value="{{$lims_user_data->warehouse_id}}">
-                                        <select name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Warehouse...">
+                                        <select name="warehouse_id" class="selectpicker form-control" data-live-search="true" title="Select Warehouse...">
                                           @foreach($lims_warehouse_list as $warehouse)
                                               <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
                                           @endforeach

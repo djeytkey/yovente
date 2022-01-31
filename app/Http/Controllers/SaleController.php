@@ -577,17 +577,17 @@ class SaleController extends Controller
             $message = 'Sale successfully added to draft';
         else
             $message = ' Sale created successfully';
-        /*if($mail_data['email'] && $data['sale_status'] == 1) {
-            try {
-                Mail::send( 'mail.sale_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Sale Details' );
-                });
-            }
-            catch(\Exception $e){
-                $message = ' Sale created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }
-        }*/
+        // if($mail_data['email'] && $data['sale_status'] == 1) {
+        //     try {
+        //         Mail::send( 'mail.sale_details', $mail_data, function( $message ) use ($mail_data)
+        //         {
+        //             $message->to( $mail_data['email'] )->subject( 'Sale Details' );
+        //         });
+        //     }
+        //     catch(\Exception $e){
+        //         $message = ' Sale created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+        //     }
+        // }
 
         if($data['payment_status'] == 3 || $data['payment_status'] == 4 || ($data['payment_status'] == 2 && $data['pos'] && $data['paid_amount'] > 0)) {
 
@@ -775,16 +775,16 @@ class SaleController extends Controller
                 $mail_data['total'][$key] = $product_sale_data->qty;
             }
 
-            try{
-                Mail::send( 'mail.sale_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Sale Details' );
-                });
-                $message = 'Mail sent successfully';
-            }
-            catch(\Exception $e){
-                $message = 'Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }
+            // try{
+            //     Mail::send( 'mail.sale_details', $mail_data, function( $message ) use ($mail_data)
+            //     {
+            //         $message->to( $mail_data['email'] )->subject( 'Sale Details' );
+            //     });
+            //     $message = 'Mail sent successfully';
+            // }
+            // catch(\Exception $e){
+            //     $message = 'Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            // }
         }
         else
             $message = 'Customer doesnt have email!';
@@ -1436,18 +1436,18 @@ class SaleController extends Controller
             $mail_data['shipping_cost'] = $lims_sale_data->shipping_cost;
             $mail_data['grand_total'] = $lims_sale_data->grand_total;
             $mail_data['paid_amount'] = $lims_sale_data->paid_amount;
-            /*if($mail_data['email']){
-                try{
-                    Mail::send( 'mail.sale_details', $mail_data, function( $message ) use ($mail_data)
-                    {
-                        $message->to( $mail_data['email'] )->subject( 'Sale Details' );
-                    });
-                }
+            // if($mail_data['email']){
+            //     try{
+            //         Mail::send( 'mail.sale_details', $mail_data, function( $message ) use ($mail_data)
+            //         {
+            //             $message->to( $mail_data['email'] )->subject( 'Sale Details' );
+            //         });
+            //     }
                 
-                catch(\Exception $e){
-                    $message = 'Sale imported successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-                }
-            }*/
+            //     catch(\Exception $e){
+            //         $message = 'Sale imported successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            //     }
+            // }
         }
         return redirect('sales')->with('message', $message);
     }
@@ -1740,17 +1740,17 @@ class SaleController extends Controller
             $mail_data['shipping_cost'] = $lims_sale_data->shipping_cost;
             $mail_data['grand_total'] = $lims_sale_data->grand_total;
             $mail_data['paid_amount'] = $lims_sale_data->paid_amount;
-            /*if($mail_data['email']){
-                try{
-                    Mail::send( 'mail.sale_details', $mail_data, function( $message ) use ($mail_data)
-                    {
-                        $message->to( $mail_data['email'] )->subject( 'Sale Details' );
-                    });
-                }
-                catch(\Exception $e){
-                    $message = 'Sale updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-                }
-            }*/
+            // if($mail_data['email']){
+            //     try{
+            //         Mail::send( 'mail.sale_details', $mail_data, function( $message ) use ($mail_data)
+            //         {
+            //             $message->to( $mail_data['email'] )->subject( 'Sale Details' );
+            //         });
+            //     }
+            //     catch(\Exception $e){
+            //         $message = 'Sale updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            //     }
+            // }
         }
 
         return redirect('sales')->with('message', $message);
@@ -1914,15 +1914,15 @@ class SaleController extends Controller
             $mail_data['payment_method'] = $lims_payment_data->paying_method;
             $mail_data['grand_total'] = $lims_sale_data->grand_total;
             $mail_data['paid_amount'] = $lims_payment_data->amount;
-            /*try{
-                Mail::send( 'mail.payment_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Payment Details' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'Payment created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }*/   
+            // try{
+            //     Mail::send( 'mail.payment_details', $mail_data, function( $message ) use ($mail_data)
+            //     {
+            //         $message->to( $mail_data['email'] )->subject( 'Payment Details' );
+            //     });
+            // }
+            // catch(\Exception $e){
+            //     $message = 'Payment created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            // }
         }
         return redirect('sales')->with('message', $message);
     }
@@ -2143,15 +2143,15 @@ class SaleController extends Controller
             $mail_data['payment_method'] = $lims_payment_data->paying_method;
             $mail_data['grand_total'] = $lims_sale_data->grand_total;
             $mail_data['paid_amount'] = $lims_payment_data->amount;
-            /*try{
-                Mail::send( 'mail.payment_details', $mail_data, function( $message ) use ($mail_data)
-                {
-                    $message->to( $mail_data['email'] )->subject( 'Payment Details' );
-                });
-            }
-            catch(\Exception $e){
-                $message = 'Payment updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }*/
+            // try{
+            //     Mail::send( 'mail.payment_details', $mail_data, function( $message ) use ($mail_data)
+            //     {
+            //         $message->to( $mail_data['email'] )->subject( 'Payment Details' );
+            //     });
+            // }
+            // catch(\Exception $e){
+            //     $message = 'Payment updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            // }
         }
         return redirect('sales')->with('message', $message);
     }
