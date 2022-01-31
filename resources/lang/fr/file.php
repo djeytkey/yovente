@@ -8,7 +8,7 @@ return [
 	"product_list" => "Liste de produits",
 	"add_product" => "Ajouter un produit",
 	"import_product" => "Produit d'importation",
-	"print_barcode" => "Imprimer le code à barres",
+	"print_barcode" => "Imprimer le code barres",
 	"welcome" => "Bienvenue",
 	"profile" => "Profil",
 	"add" => "Ajouter",

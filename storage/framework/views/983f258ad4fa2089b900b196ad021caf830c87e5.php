@@ -145,11 +145,7 @@
                         <li><a href="#product" aria-expanded="false" data-toggle="collapse"> <i
                                     class="dripicons-list"></i><span><?php echo e(__('file.product')); ?></span><span></a>
                             <ul id="product" class="collapse list-unstyled ">
-                                <?php if($category_permission_active): ?>
-                                    <li id="category-menu"><a
-                                            href="<?php echo e(route('category.index')); ?>"><?php echo e(__('file.category')); ?></a></li>
-                                <?php endif; ?>
-                                <?php if($index_permission_active): ?>
+                                    <?php if($index_permission_active): ?>
                                     <li id="product-list-menu"><a
                                             href="<?php echo e(route('products.index')); ?>"><?php echo e(__('file.product_list')); ?></a>
                                     </li>
@@ -167,7 +163,16 @@
                                         </li>
                                     <?php endif; ?>
                                 <?php endif; ?>
+                                <?php if($print_barcode_active): ?>
+                                    <li id="printBarcode-menu"><a
+                                            href="<?php echo e(route('product.printBarcode')); ?>"><?php echo e(__('file.print_barcode')); ?></a>
+                                    </li>
+                                <?php endif; ?>
                                 
+                                <?php if($category_permission_active): ?>
+                                    <li id="category-menu"><a
+                                            href="<?php echo e(route('category.index')); ?>"><?php echo e(__('file.category')); ?></a></li>
+                                <?php endif; ?>
                                 <?php if($stock_count_active): ?>
                                     <li id="stock-count-menu"><a
                                             href="<?php echo e(route('stock-count.index')); ?>"><?php echo e(trans('file.Stock Count')); ?></a>
@@ -1326,8 +1331,8 @@
                                 <label><?php echo e(trans('file.Choose Your Date')); ?></label>
                                 <div class="input-group">
                                     <input type="text" class="daterangepicker-field form-control" required />
-                                    <input type="hidden" name="start_date" />
-                                    <input type="hidden" name="end_date" />
+                                    <input type="hidden" name="start_date" value="<?php echo e(date('Y-m') . '-' . '01'); ?>" />
+                                    <input type="hidden" name="end_date" value="<?php echo e(date('Y-m-d')); ?>" />
                                 </div>
                             </div>
                         </div>

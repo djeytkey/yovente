@@ -706,8 +706,8 @@ class PurchaseController extends Controller
         $product_code = $data['product_code'];
         $qty = $data['qty'];
         $recieved = $data['recieved'];
-        $batch_no = $data['batch_no'];
-        $expired_date = $data['expired_date'];
+        /*$batch_no = $data['batch_no'];
+        $expired_date = $data['expired_date'];*/
         $purchase_unit = $data['purchase_unit'];
         $net_unit_cost = $data['net_unit_cost'];
         $discount = $data['discount'];
@@ -773,7 +773,7 @@ class PurchaseController extends Controller
 
             $lims_product_data = Product::find($pro_id);
             //dealing with product barch
-            if($batch_no[$key]) {
+            /*if($batch_no[$key]) {
                 $product_batch_data = ProductBatch::where([
                                         ['product_id', $lims_product_data->id],
                                         ['batch_no', $batch_no[$key]]
@@ -794,7 +794,8 @@ class PurchaseController extends Controller
                 $product_purchase['product_batch_id'] = $product_batch_data->id;
             }
             else
-                $product_purchase['product_batch_id'] = null;
+                $product_purchase['product_batch_id'] = null;*/
+            $product_purchase['product_batch_id'] = null;
 
             if($lims_product_data->is_variant) {
                 $lims_product_variant_data = ProductVariant::select('id', 'variant_id', 'qty')->FindExactProductWithCode($pro_id, $product_code[$key])->first();

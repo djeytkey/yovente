@@ -21,7 +21,8 @@
                                             <label>
                                                 {{trans('file.Reference No')}}
                                             </label>
-                                            <input type="text" name="reference_no" class="form-control" />
+                                            <h3>{{ strtolower(Auth::user()->name) . '-' . date("ymd") . '-'. date("His") }}</h3>
+                                            <input type="hidden" name="reference_no" class="form-control" value="{{ strtolower(Auth::user()->name) . '-' . date("ymd") . '-'. date("His") }}"/>
                                         </div>
                                         @if($errors->has('reference_no'))
                                        <span>
@@ -94,13 +95,15 @@
                                                 <tfoot class="tfoot active">
                                                     <th colspan="2">{{trans('file.Total')}}</th>
                                                     <th id="total-qty">0</th>
+                                                    {{-- <th style="text-align: right;">{{trans('file.Delivery Rate')}}</th>
+                                                    <th id="taux-livraison">{{ number_format($lims_general_setting_data->livraison, 2, '.', ' ') }}</th> --}}
+                                                    @if ($role->id > 2)
                                                     <th style="text-align: right;">{{trans('file.Delivery Rate')}}</th>
                                                     <th id="taux-livraison">{{ number_format($lims_general_setting_data->livraison, 2, '.', ' ') }}</th>
-                                                    {{-- @if ($role->id > 2)
-                                                    <th id="taux-livraison">{{ number_format($lims_general_setting_data->livraison, 2, '.', ' ') }}</th>
                                                     @else
-                                                    <th id="taux-livraison">{{ number_format("0", 2, '.', ' ') }}</th>
-                                                    @endif --}}
+                                                    <th style="text-align: right;"></th>
+                                                    <th id="taux-livraison"></th>
+                                                    @endif
                                                     <th id="total-discount">0.00</th>
                                                     <th id="total-tax">0.00</th>
                                                     <th id="total">0.00</th>
@@ -147,7 +150,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-3">
+                                <div class="row mt-3" style="display: none">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>{{trans('file.Order Tax')}}</label>
@@ -216,11 +219,11 @@
                                                 <label>{{trans('file.Paid By')}}</label>
                                                 <select name="paid_by_id" class="form-control">
                                                     <option value="1">Cash</option>
-                                                    <option value="2">Gift Card</option>
+                                                    {{-- <option value="2">Gift Card</option>
                                                     <option value="3">Credit Card</option>
                                                     <option value="4">Cheque</option>
                                                     <option value="5">Paypal</option>
-                                                    <option value="6">Deposit</option>
+                                                    <option value="6">Deposit</option> --}}                                                    
                                                 </select>
                                             </div>
                                         </div>
@@ -331,18 +334,26 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group">
-                            <label>{{trans('file.Quantity')}}</label>
-                            <input type="number" name="edit_qty" class="form-control" step="any">
-                        </div>
-                        <div class="form-group">
-                            <label>{{trans('file.Unit Discount')}}</label>
-                            <input type="number" name="edit_discount" class="form-control" step="any">
-                        </div>
-                        <div class="form-group">
-                            <label>{{trans('file.Unit Price')}}</label>
-                            <input type="number" name="edit_unit_price" class="form-control" step="any">
-                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{trans('file.Unit Price')}}</label>
+                                    <input type="number" name="edit_unit_price" class="form-control" step="any">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{trans('file.Quantity')}}</label>
+                                    <input type="number" name="edit_qty" class="form-control" step="any">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{trans('file.Unit Discount')}}</label>
+                                    <input type="number" name="edit_discount" class="form-control" step="any">
+                                </div>
+                            </div>                            
+                        </div>                         
                         <?php
                             $tax_name_all[] = 'No Tax';
                             $tax_rate_all[] = 0;
@@ -351,20 +362,20 @@
                                 $tax_rate_all[] = $tax->rate;
                             }
                         ?>
-                            <div class="form-group">
-                                <label>{{trans('file.Tax Rate')}}</label>
-                                <select name="edit_tax_rate" class="form-control selectpicker">
-                                    @foreach($tax_name_all as $key => $name)
-                                    <option value="{{$key}}">{{$name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div id="edit_unit" class="form-group">
-                                <label>{{trans('file.Product Unit')}}</label>
-                                <select name="edit_unit" class="form-control selectpicker">
-                                </select>
-                            </div>
-                            <button type="button" name="update_btn" class="btn btn-primary">{{trans('file.update')}}</button>
+                        <div class="form-group d-none">
+                            <label>{{trans('file.Tax Rate')}}</label>
+                            <select name="edit_tax_rate" class="form-control selectpicker">
+                                @foreach($tax_name_all as $key => $name)
+                                <option value="{{$key}}">{{$name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div id="edit_unit" class="form-group d-none">
+                            <label>{{trans('file.Product Unit')}}</label>
+                            <select name="edit_unit" class="form-control selectpicker">
+                            </select>
+                        </div>
+                        <button type="button" name="update_btn" class="btn btn-primary">{{trans('file.update')}}</button>
                     </form>
                 </div>
             </div>
@@ -467,24 +478,32 @@ $('select[name="customer_id"]').on('change', function() {
 
 $('select[name="warehouse_id"]').on('change', function() {
     var id = $(this).val();
-    $.get('getproduct/' + id, function(data) {
-        lims_product_array = [];
-        product_code = data[0];
-        product_name = data[1];
-        product_qty = data[2];
-        product_type = data[3];
-        product_id = data[4];
-        product_list = data[5];
-        qty_list = data[6];
-        product_warehouse_price = data[7];
-        batch_no = data[8];
-        product_batch_id = data[9];
-        $.each(product_code, function(index) {
-            lims_product_array.push(product_code[index] + ' (' + product_name[index] + ')');
-        });
+    $.ajax({
+        url: 'getproduct/' + id,
+        type: "GET",
+        success:function(data) {
+            lims_product_array = [];
+            product_code = data[0];
+            product_name = data[1];
+            product_qty = data[2];
+            product_type = data[3];
+            product_id = data[4];
+            product_list = data[5];
+            qty_list = data[6];
+            product_warehouse_price = data[7];
+            batch_no = data[8];
+            product_batch_id = data[9];
+            $.each(product_code, function(index) {
+                lims_product_array.push(product_code[index] + ' (' + product_name[index] + ')');
+            });
+        },
+        error:function(){
+            alert("No products in this warehouse");
+            document.location.reload(true);
+        }
     });
 
-    isCashRegisterAvailable(id);
+    //isCashRegisterAvailable(id);
 });
 
 $('#lims_productcodeSearch').on('input', function(){
@@ -888,16 +907,16 @@ function calculateTotal() {
 
     //Sum of subtotal
     var total = 0;
-    var taux_livraison = parseFloat($("#taux-livraison").text());
-    /*if ($("#taux-livraison").text() !== "0.00") {
+    //var taux_livraison = parseFloat($("#taux-livraison").text());
+    if ($("#taux-livraison").text() !== "") {
         var taux_livraison = parseFloat($("#taux-livraison").text());
     } else {
         var taux_livraison = 0;
-    }*/
+    }
     $(".sub-total").each(function() {
         total += parseFloat($(this).text());
     });
-    total = total + taux_livraison;
+    //total = total + taux_livraison;
     $("#total").text(total.toFixed(2));
     $('input[name="total_price"]').val(total.toFixed(2));
     $('input[name="livraison"]').val(taux_livraison.toFixed(2));

@@ -192,8 +192,13 @@
                                                 <tfoot class="tfoot active">
                                                     <th colspan="2">{{trans('file.Total')}}</th>
                                                     <th id="total-qty">{{$lims_sale_data->total_qty}}</th>
-                                                    <th style="text-align: right;">{{trans('file.Delivery Rate')}}</th>
+                                                    @if ($role->id > 2)
+                                                    <th style="text-align:right;">{{ trans('file.Delivery Rate') }}</th>
                                                     <th id="taux-livraison">{{ number_format((float)$lims_sale_data->livraison, 2, '.', '') }}</th>
+                                                    @else
+                                                    <th style="text-align:right;"></th>
+                                                    <th id="taux-livraison"></th>
+                                                    @endif
                                                     <th id="total-discount">{{ number_format((float)$lims_sale_data->total_discount, 2, '.', '') }}</th>
                                                     <th id="total-tax">{{ number_format((float)$lims_sale_data->total_tax, 2, '.', '')}}</th>
                                                     <th id="total">{{ number_format((float)$lims_sale_data->total_price, 2, '.', '') }}</th>
@@ -376,17 +381,25 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group">
-                            <label>{{trans('file.Quantity')}}</label>
-                            <input type="number" name="edit_qty" class="form-control" step="any">
-                        </div>
-                        <div class="form-group">
-                            <label>{{trans('file.Unit Discount')}}</label>
-                            <input type="number" name="edit_discount" class="form-control" step="any">
-                        </div>
-                        <div class="form-group">
-                            <label>{{trans('file.Unit Price')}}</label>
-                            <input type="number" name="edit_unit_price" class="form-control" step="any">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{trans('file.Unit Price')}}</label>
+                                    <input type="number" name="edit_unit_price" class="form-control" step="any">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{trans('file.Quantity')}}</label>
+                                    <input type="number" name="edit_qty" class="form-control" step="any">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{trans('file.Unit Discount')}}</label>
+                                    <input type="number" name="edit_discount" class="form-control" step="any">
+                                </div>
+                            </div>
                         </div>
                         <?php
                             $tax_name_all[] = 'No Tax';
@@ -396,20 +409,20 @@
                                 $tax_rate_all[] = $tax->rate;
                             }
                         ?>
-                            <div class="form-group">
-                                <label>{{trans('file.Tax Rate')}}</label>
-                                <select name="edit_tax_rate" class="form-control selectpicker">
-                                    @foreach($tax_name_all as $key => $name)
-                                    <option value="{{$key}}">{{$name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div id="edit_unit" class="form-group">
-                                <label>{{trans('file.Product Unit')}}</label>
-                                <select name="edit_unit" class="form-control selectpicker">
-                                </select>
-                            </div>
-                            <button type="button" name="update_btn" class="btn btn-primary">{{trans('file.update')}}</button>
+                        <div class="form-group d-none">
+                            <label>{{trans('file.Tax Rate')}}</label>
+                            <select name="edit_tax_rate" class="form-control selectpicker">
+                                @foreach($tax_name_all as $key => $name)
+                                <option value="{{$key}}">{{$name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div id="edit_unit" class="form-group d-none">
+                            <label>{{trans('file.Product Unit')}}</label>
+                            <select name="edit_unit" class="form-control selectpicker">
+                            </select>
+                        </div>
+                        <button type="button" name="update_btn" class="btn btn-primary">{{trans('file.update')}}</button>
                     </form>
                 </div>
             </div>
@@ -568,7 +581,7 @@ $.get('../getproduct/' + id, function(data) {
     });
 });
 
-isCashRegisterAvailable(id);
+//isCashRegisterAvailable(id);
 
 $('select[name="customer_id"]').on('change', function() {
     var id = $(this).val();
@@ -579,24 +592,32 @@ $('select[name="customer_id"]').on('change', function() {
 
 $('select[name="warehouse_id"]').on('change', function() {
     var id = $(this).val();
-    $.get('../getproduct/' + id, function(data) {
-        lims_product_array = [];
-        product_code = data[0];
-        product_name = data[1];
-        product_qty = data[2];
-        product_type = data[3];
-        product_id = data[4];
-        product_list = data[5];
-        qty_list = data[6];
-        product_warehouse_price = data[7];
-        batch_no = data[8];
-        product_batch_id = data[9];
+    $.ajax({
+        url: '../getproduct/' + id,
+        type: "GET",
+        success:function(data) {
+            lims_product_array = [];
+            product_code = data[0];
+            product_name = data[1];
+            product_qty = data[2];
+            product_type = data[3];
+            product_id = data[4];
+            product_list = data[5];
+            qty_list = data[6];
+            product_warehouse_price = data[7];
+            batch_no = data[8];
+            product_batch_id = data[9];
 
-        $.each(product_code, function(index) {
-            lims_product_array.push(product_code[index] + ' (' + product_name[index] + ')');
-        });
+            $.each(product_code, function(index) {
+                lims_product_array.push(product_code[index] + ' (' + product_name[index] + ')');
+            });
+        },
+        error:function(){
+            alert("No products in this warehouse");
+            document.location.reload(true);
+        }
     });
-    isCashRegisterAvailable(id);
+    //isCashRegisterAvailable(id);
 });
 
 var lims_productcodeSearch = $('#lims_productcodeSearch');
@@ -748,7 +769,7 @@ function productSearch(data){
         },
         success: function(data) {
             var flag = 1;
-            alert(data);
+            //alert(data);
             $(".product-code").each(function(i) {
                 if ($(this).val() == data[1]) {
                     rowindex = i;
@@ -1023,7 +1044,7 @@ function calculateTotal() {
     $(".sub-total").each(function() {
         total += parseFloat($(this).text());
     });
-    total = total + taux_livraison;
+    //total = total + taux_livraison;
     $("#total").text(total.toFixed(2));
     $('input[name="total_price"]').val(total.toFixed(2));
     $('input[name="livraison"]').val(taux_livraison.toFixed(2));

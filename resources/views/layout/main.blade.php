@@ -145,11 +145,7 @@
                         <li><a href="#product" aria-expanded="false" data-toggle="collapse"> <i
                                     class="dripicons-list"></i><span>{{ __('file.product') }}</span><span></a>
                             <ul id="product" class="collapse list-unstyled ">
-                                @if ($category_permission_active)
-                                    <li id="category-menu"><a
-                                            href="{{ route('category.index') }}">{{ __('file.category') }}</a></li>
-                                @endif
-                                @if ($index_permission_active)
+                                    @if ($index_permission_active)
                                     <li id="product-list-menu"><a
                                             href="{{ route('products.index') }}">{{ __('file.product_list') }}</a>
                                     </li>
@@ -167,12 +163,12 @@
                                         </li>
                                     @endif
                                 @endif
-                                {{-- @if ($print_barcode_active)
+                                @if ($print_barcode_active)
                                     <li id="printBarcode-menu"><a
                                             href="{{ route('product.printBarcode') }}">{{ __('file.print_barcode') }}</a>
                                     </li>
                                 @endif
-                                @if ($adjustment_active)
+                                {{-- @if ($adjustment_active)
                                     <li id="adjustment-list-menu"><a
                                             href="{{ route('qty_adjustment.index') }}">{{ trans('file.Adjustment List') }}</a>
                                     </li>
@@ -180,6 +176,10 @@
                                             href="{{ route('qty_adjustment.create') }}">{{ trans('file.Add Adjustment') }}</a>
                                     </li>
                                 @endif --}}
+                                @if ($category_permission_active)
+                                    <li id="category-menu"><a
+                                            href="{{ route('category.index') }}">{{ __('file.category') }}</a></li>
+                                @endif
                                 @if ($stock_count_active)
                                     <li id="stock-count-menu"><a
                                             href="{{ route('stock-count.index') }}">{{ trans('file.Stock Count') }}</a>
@@ -1435,8 +1435,8 @@
                                 <label>{{ trans('file.Choose Your Date') }}</label>
                                 <div class="input-group">
                                     <input type="text" class="daterangepicker-field form-control" required />
-                                    <input type="hidden" name="start_date" />
-                                    <input type="hidden" name="end_date" />
+                                    <input type="hidden" name="start_date" value="{{ date('Y-m') . '-' . '01' }}" />
+                                    <input type="hidden" name="end_date" value="{{ date('Y-m-d') }}" />
                                 </div>
                             </div>
                         </div>

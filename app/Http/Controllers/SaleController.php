@@ -225,6 +225,7 @@ class SaleController extends Controller
                 $nestedData['reference_no'] = $sale->reference_no;
                 $nestedData['biller'] = $sale->biller->name;
                 $nestedData['customer'] = $sale->customer->name;
+                $nestedData['username'] = User::find($nestedData['sold_by'])->name;
 
                 if($sale->sale_status == 1){
                     $nestedData['sale_status'] = '<div class="badge badge-success">'.trans('file.Completed').'</div>';
@@ -345,8 +346,7 @@ class SaleController extends Controller
     {
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('sales-add')){
-            $lims_customer_list = Customer::where('is_active', true)->get();
-            if(Auth::user()->role_id > 2) {
+            /*if(Auth::user()->role_id > 2) {
                 $lims_warehouse_list = Warehouse::where([
                     ['is_active', true],
                     ['id', Auth::user()->warehouse_id]
@@ -359,7 +359,16 @@ class SaleController extends Controller
             else {
                 $lims_warehouse_list = Warehouse::where('is_active', true)->get();
                 $lims_biller_list = Biller::where('is_active', true)->get();
+            }*/
+            $lims_customer_list = Customer::where('is_active', true)->get();
+
+            $lims_warehouse_list = Warehouse::where('is_active', true)->get();
+            foreach ($lims_warehouse_list as $key=>$lims_warehouse)
+            {
+
             }
+
+            $lims_biller_list = Biller::where('is_active', true)->get();
 
             $lims_general_setting_data = GeneralSetting::latest()->first();
             $lims_tax_list = Tax::where('is_active', true)->get();
@@ -414,7 +423,8 @@ class SaleController extends Controller
         }
         else {
             if(!isset($data['reference_no']))
-                $data['reference_no'] = 'sr-' . date("Ymd") . '-'. date("his");
+                $data['reference_no'] = strtolower(Auth::user()->name) . date("dmy") . '-'. date("His");
+                //$data['reference_no'] = 'sr-' . date("Ymd") . '-'. date("his");
         }
 
         $document = $request->document;
@@ -567,7 +577,7 @@ class SaleController extends Controller
             $message = 'Sale successfully added to draft';
         else
             $message = ' Sale created successfully';
-        if($mail_data['email'] && $data['sale_status'] == 1) {
+        /*if($mail_data['email'] && $data['sale_status'] == 1) {
             try {
                 Mail::send( 'mail.sale_details', $mail_data, function( $message ) use ($mail_data)
                 {
@@ -577,7 +587,7 @@ class SaleController extends Controller
             catch(\Exception $e){
                 $message = ' Sale created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
             }
-        }
+        }*/
 
         if($data['payment_status'] == 3 || $data['payment_status'] == 4 || ($data['payment_status'] == 2 && $data['pos'] && $data['paid_amount'] > 0)) {
 
@@ -713,11 +723,11 @@ class SaleController extends Controller
                 $lims_customer_data->save();
             }
         }
-        if($lims_sale_data->sale_status == '1')
+        /*if($lims_sale_data->sale_status == '1')
             return redirect('sales/gen_invoice/' . $lims_sale_data->id)->with('message', $message);
         elseif($data['pos'])
             return redirect('pos')->with('message', $message);
-        else
+        else*/
             return redirect('sales')->with('message', $message);
     }
 
@@ -916,6 +926,7 @@ class SaleController extends Controller
         $product_qty = [];
         $product_price = [];
         $product_data = [];
+        
         //product without variant
         foreach ($lims_product_warehouse_data as $product_warehouse) 
         {
@@ -931,6 +942,7 @@ class SaleController extends Controller
             $batch_no[] = null;
             $product_batch_id[] = null;
         }
+        
         //product with batches
         foreach ($lims_product_with_batch_warehouse_data as $product_warehouse) 
         {
@@ -947,6 +959,7 @@ class SaleController extends Controller
             $batch_no[] = $product_batch_data->batch_no;
             $product_batch_id[] = $product_batch_data->id;
         }
+        
         //product with variant
         foreach ($lims_product_with_variant_warehouse_data as $product_warehouse) 
         {
@@ -962,6 +975,7 @@ class SaleController extends Controller
             $batch_no[] = null;
             $product_batch_id[] = null;
         }
+        
         //retrieve product with type of digital and combo
         $lims_product_data = Product::whereNotIn('type', ['standard'])->where('is_active', true)->get();
         foreach ($lims_product_data as $product) 
@@ -1422,7 +1436,7 @@ class SaleController extends Controller
             $mail_data['shipping_cost'] = $lims_sale_data->shipping_cost;
             $mail_data['grand_total'] = $lims_sale_data->grand_total;
             $mail_data['paid_amount'] = $lims_sale_data->paid_amount;
-            if($mail_data['email']){
+            /*if($mail_data['email']){
                 try{
                     Mail::send( 'mail.sale_details', $mail_data, function( $message ) use ($mail_data)
                     {
@@ -1433,7 +1447,7 @@ class SaleController extends Controller
                 catch(\Exception $e){
                     $message = 'Sale imported successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
                 }
-            }
+            }*/
         }
         return redirect('sales')->with('message', $message);
     }
@@ -1479,7 +1493,7 @@ class SaleController extends Controller
             $lims_tax_list = Tax::where('is_active', true)->get();
             $lims_sale_data = Sale::find($id);
             $lims_product_sale_data = Product_Sale::where('sale_id', $id)->get();
-            return view('sale.edit', compact('lims_customer_list', 'lims_warehouse_list', 'lims_biller_list', 'lims_tax_list', 'lims_sale_data','lims_product_sale_data'));
+            return view('sale.edit', compact('role', 'lims_customer_list', 'lims_warehouse_list', 'lims_biller_list', 'lims_tax_list', 'lims_sale_data','lims_product_sale_data'));
         }
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
@@ -1713,7 +1727,7 @@ class SaleController extends Controller
         $lims_customer_data = Customer::find($data['customer_id']);
         $message = 'Sale updated successfully';
         //collecting mail data
-        /*if($lims_customer_data->email){
+        if($lims_customer_data->email){
             $mail_data['email'] = $lims_customer_data->email;
             $mail_data['reference_no'] = $lims_sale_data->reference_no;
             $mail_data['sale_status'] = $lims_sale_data->sale_status;
@@ -1726,7 +1740,7 @@ class SaleController extends Controller
             $mail_data['shipping_cost'] = $lims_sale_data->shipping_cost;
             $mail_data['grand_total'] = $lims_sale_data->grand_total;
             $mail_data['paid_amount'] = $lims_sale_data->paid_amount;
-            if($mail_data['email']){
+            /*if($mail_data['email']){
                 try{
                     Mail::send( 'mail.sale_details', $mail_data, function( $message ) use ($mail_data)
                     {
@@ -1736,8 +1750,8 @@ class SaleController extends Controller
                 catch(\Exception $e){
                     $message = 'Sale updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
                 }
-            }
-        }*/
+            }*/
+        }
 
         return redirect('sales')->with('message', $message);
     }
@@ -1900,7 +1914,7 @@ class SaleController extends Controller
             $mail_data['payment_method'] = $lims_payment_data->paying_method;
             $mail_data['grand_total'] = $lims_sale_data->grand_total;
             $mail_data['paid_amount'] = $lims_payment_data->amount;
-            try{
+            /*try{
                 Mail::send( 'mail.payment_details', $mail_data, function( $message ) use ($mail_data)
                 {
                     $message->to( $mail_data['email'] )->subject( 'Payment Details' );
@@ -1908,8 +1922,7 @@ class SaleController extends Controller
             }
             catch(\Exception $e){
                 $message = 'Payment created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }
-            
+            }*/   
         }
         return redirect('sales')->with('message', $message);
     }
@@ -2130,7 +2143,7 @@ class SaleController extends Controller
             $mail_data['payment_method'] = $lims_payment_data->paying_method;
             $mail_data['grand_total'] = $lims_sale_data->grand_total;
             $mail_data['paid_amount'] = $lims_payment_data->amount;
-            try{
+            /*try{
                 Mail::send( 'mail.payment_details', $mail_data, function( $message ) use ($mail_data)
                 {
                     $message->to( $mail_data['email'] )->subject( 'Payment Details' );
@@ -2138,7 +2151,7 @@ class SaleController extends Controller
             }
             catch(\Exception $e){
                 $message = 'Payment updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }
+            }*/
         }
         return redirect('sales')->with('message', $message);
     }

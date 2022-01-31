@@ -260,20 +260,22 @@
                     var newHead = $("<thead>");
                     var newBody = $("<tbody>");
                     var newRow = $("<tr>");
-                    newRow.append('<th><?php echo e(trans("file.Warehouse")); ?></th><th><?php echo e(trans("file.Batch No")); ?></th><th><?php echo e(trans("file.Expired Date")); ?></th><th><?php echo e(trans("file.Quantity")); ?></th>');
+                    newRow.append('<th><?php echo e(trans("file.Warehouse")); ?></th><!--<th><?php echo e(trans("file.Batch No")); ?></th><th><?php echo e(trans("file.Expired Date")); ?></th>--><th><?php echo e(trans("file.Quantity")); ?></th>');
                     newHead.append(newRow);
                     $.each(warehouse, function(index) {
-                        var newRow = $("<tr>");
-                        var cols = '';
-                        cols += '<td>' + warehouse[index] + '</td>';
-                        cols += '<td>' + batch[index] + '</td>';
-                        cols += '<td>' + expired_date[index] + '</td>';
-                        cols += '<td>' + qty[index] + '</td>';
+                        if (qty[index] !== 0) {
+                            var newRow = $("<tr>");
+                            var cols = '';
+                            cols += '<td>' + warehouse[index] + '</td>';
+                            /*cols += '<td>' + batch[index] + '</td>';
+                            cols += '<td>' + expired_date[index] + '</td>';*/
+                            cols += '<td>' + qty[index] + '</td>';
 
-                        newRow.append(cols);
-                        newBody.append(newRow);
-                        $("table.product-warehouse-list").append(newHead);
-                        $("table.product-warehouse-list").append(newBody);
+                            newRow.append(cols);
+                            newBody.append(newRow);
+                            $("table.product-warehouse-list").append(newHead);
+                            $("table.product-warehouse-list").append(newBody);
+                        }
                     });
                     $("#product-warehouse-section").removeClass('d-none');
                 }
@@ -287,16 +289,18 @@
                     newRow.append('<th><?php echo e(trans("file.Warehouse")); ?></th><th><?php echo e(trans("file.Variant")); ?></th><th><?php echo e(trans("file.Quantity")); ?></th>');
                     newHead.append(newRow);
                     $.each(warehouse, function(index){
-                        var newRow = $("<tr>");
-                        var cols = '';
-                        cols += '<td>' + warehouse[index] + '</td>';
-                        cols += '<td>' + variant[index] + '</td>';
-                        cols += '<td>' + qty[index] + '</td>';
+                        if (qty[index] !== 0) {
+                            var newRow = $("<tr>");
+                            var cols = '';
+                            cols += '<td>' + warehouse[index] + '</td>';
+                            cols += '<td>' + variant[index] + '</td>';
+                            cols += '<td>' + qty[index] + '</td>';
 
-                        newRow.append(cols);
-                        newBody.append(newRow);
-                        $("table.product-variant-warehouse-list").append(newHead);
-                        $("table.product-variant-warehouse-list").append(newBody);
+                            newRow.append(cols);
+                            newBody.append(newRow);
+                            $("table.product-variant-warehouse-list").append(newHead);
+                            $("table.product-variant-warehouse-list").append(newBody);
+                        }
                     });
                     $("#product-variant-warehouse-section").removeClass('d-none');
                 }

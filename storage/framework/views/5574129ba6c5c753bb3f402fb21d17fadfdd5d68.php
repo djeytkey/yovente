@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="form-group" id="biller-id">
                                         <label><strong><?php echo e(trans('file.Biller')); ?> *</strong></label>
-                                        <select name="biller_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Biller...">
+                                        <select name="biller_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Biller...">
                                           <?php $__currentLoopData = $lims_biller_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $biller): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                               <option value="<?php echo e($biller->id); ?>"><?php echo e($biller->name); ?></option>
                                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="form-group" id="warehouseId">
                                         <label><strong><?php echo e(trans('file.Warehouse')); ?> *</strong></label>
-                                        <select name="warehouse_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Warehouse...">
+                                        <select name="warehouse_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Warehouse...">
                                           <?php $__currentLoopData = $lims_warehouse_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $warehouse): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                               <option value="<?php echo e($warehouse->id); ?>"><?php echo e($warehouse->name); ?></option>
                                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -176,10 +176,10 @@
             $('select[name="biller_id"]').prop('required',false);
         }
         else if($(this).val() > 2 && $(this).val() != 5) {
-            $('select[name="warehouse_id"]').prop('required',true);
-            $('select[name="biller_id"]').prop('required',true);
-            $('#biller-id').show(300);
-            $('#warehouseId').show(300);
+            //$('select[name="warehouse_id"]').prop('required',true);
+            //$('select[name="biller_id"]').prop('required',true);
+            //$('#biller-id').show(300);
+            //$('#warehouseId').show(300);
             $('.customer-section').hide(300);
             $('.customer-input').prop('required',false);
         }
