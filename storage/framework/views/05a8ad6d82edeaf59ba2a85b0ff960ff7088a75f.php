@@ -55,7 +55,7 @@
                                             <div class="form-group">
                                                 <label><strong><?php echo e(trans('file.Password')); ?> *</strong> </label>
                                                 <div class="input-group">
-                                                    <input type="password" name="password" required class="form-control">
+                                                    <input type="text" name="password" required class="form-control">
                                                     <div class="input-group-append">
                                                         <button id="genbutton" type="button" class="btn btn-default"><?php echo e(trans('file.Generate')); ?></button>
                                                     </div>
