@@ -14,6 +14,7 @@
                         <p class="italic"><small><?php echo e(trans('file.The field labels marked with * are required input fields')); ?>.</small></p>
                         <?php echo Form::open(['route' => ['customer.update',$lims_customer_data->id], 'method' => 'put', 'files' => true]); ?>
 
+                        <input type="hidden" name="created_by" value="<?php echo e($lims_customer_data->created_by); ?>">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

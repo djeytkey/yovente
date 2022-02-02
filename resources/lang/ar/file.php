@@ -593,5 +593,7 @@ return [
 	"It will be used for withdrawal" => "سيتم استخدامها للسحب",
 	"FirstName" => "الاسم الأول",
 	"LastName" => "الاسم الأخير",
+	"Bank Name" => "اسم البنك",
+	"RIB" => "RIB",
 ];
 ?>

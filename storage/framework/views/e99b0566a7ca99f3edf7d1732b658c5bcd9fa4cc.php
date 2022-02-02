@@ -24,33 +24,78 @@
                         <p class="italic"><small><?php echo e(trans('file.The field labels marked with * are required input fields')); ?>.</small></p>
                         <?php echo Form::open(['route' => ['user.profileUpdate', Auth::id()], 'method' => 'put']); ?>
 
+                        <input type="hidden" name="role_id" id="role_id" value="<?php echo e(Auth::user()->role_id); ?>">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label><?php echo e(trans('file.UserName')); ?> *</strong> </label>
-                                    <input type="text" name="name" value="<?php echo e($lims_user_data->name); ?>" required class="form-control" />
-                                    <?php if($errors->has('name')): ?>
-                                    <span>
-                                       <strong class="has-error"><?php echo e($errors->first('name')); ?></strong>
-                                    </span>
-                                    <?php endif; ?>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo e(trans('file.LastName')); ?> *</strong> </label>
+                                            <input type="text" name="last_name" value="<?php echo e($lims_user_data->last_name); ?>" required class="form-control" />
+                                            <?php if($errors->has('last_name')): ?>
+                                            <span>
+                                               <strong class="has-error"><?php echo e($errors->first('last_name')); ?></strong>
+                                            </span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo e(trans('file.FirstName')); ?> *</strong> </label>
+                                            <input type="text" name="first_name" value="<?php echo e($lims_user_data->first_name); ?>" required class="form-control" />
+                                            <?php if($errors->has('first_name')): ?>
+                                            <span>
+                                               <strong class="has-error"><?php echo e($errors->first('first_name')); ?></strong>
+                                            </span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo e(trans('file.UserName')); ?> *</strong> </label>
+                                            <input type="text" name="name" value="<?php echo e($lims_user_data->name); ?>" required class="form-control" />
+                                            <?php if($errors->has('name')): ?>
+                                            <span>
+                                               <strong class="has-error"><?php echo e($errors->first('name')); ?></strong>
+                                            </span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo e(trans('file.Email')); ?> *</strong> </label>
+                                            <input type="email" name="email" value="<?php echo e($lims_user_data->email); ?>" required class="form-control">
+                                            <?php if($errors->has('email')): ?>
+                                            <span>
+                                               <strong class="has-error"><?php echo e($errors->first('email')); ?></strong>
+                                            </span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo e(trans('file.Phone Number')); ?> *</strong> </label>
+                                            <input type="text" name="phone" value="<?php echo e($lims_user_data->phone); ?>" required class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label><?php echo e(trans('file.Company Name')); ?></strong> </label>
+                                            <input type="text" name="company_name" value="<?php echo e($lims_user_data->company_name); ?>" class="form-control" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label><?php echo e(trans('file.Email')); ?> *</strong> </label>
-                                    <input type="email" name="email" value="<?php echo e($lims_user_data->email); ?>" required class="form-control">
-                                    <?php if($errors->has('email')): ?>
-                                    <span>
-                                       <strong class="has-error"><?php echo e($errors->first('email')); ?></strong>
-                                    </span>
-                                    <?php endif; ?>
+                                    <label><?php echo e(trans('file.Bank Name')); ?> *</strong> </label>
+                                    <input type="text" id="bank_name" name="bank_name" value="<?php echo e($lims_user_data->bank_name); ?>" required class="form-control" />
                                 </div>
                                 <div class="form-group">
-                                    <label><?php echo e(trans('file.Phone Number')); ?> *</strong> </label>
-                                    <input type="text" name="phone" value="<?php echo e($lims_user_data->phone); ?>" required class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label><?php echo e(trans('file.Company Name')); ?></strong> </label>
-                                    <input type="text" name="company_name" value="<?php echo e($lims_user_data->company_name); ?>" class="form-control" />
+                                    <label><?php echo e(trans('file.RIB')); ?> *</strong> </label>
+                                    <input type="number" id="rib" name="rib" value="<?php echo e($lims_user_data->rib); ?>" required class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="<?php echo e(trans('file.submit')); ?>" class="btn btn-primary">
@@ -104,11 +149,26 @@
 </section>
 
 <script type="text/javascript">
+
     $("ul#setting").siblings('a').attr('aria-expanded','true');
     $("ul#setting").addClass("show");
     $("ul#setting #user-menu").addClass("active");
 
-    
+    $(document).ready(function() {
+        var rib  = $('#rib').val(),
+            bank = $('#bank_name').val(),
+            role = $('#role_id').val()
+        
+        if ( rib !== "" ) {
+            if ( role == 1 ) {
+                $('#bank_name').prop('required',false);
+                $('#rib').prop('required',false);
+            } else {
+                $('#bank_name').prop('disabled',true);
+                $('#rib').prop('disabled',true);
+            }
+        }
+    });
 
     $('#confirm_pass').on('input', function(){
 

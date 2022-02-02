@@ -67,7 +67,7 @@
                     <th><?php echo e(trans('file.reference')); ?></th>
                     <th><?php echo e(trans('file.Biller')); ?></th>
                     <th><?php echo e(trans('file.customer')); ?></th>
-                    <th><?php echo e(trans('file.Sale Status')); ?></th>
+                    <th><?php echo e(trans('file.Created By')); ?></th>
                     <th><?php echo e(trans('file.Payment Status')); ?></th>
                     <th><?php echo e(trans('file.grand total')); ?></th>
                     <th><?php echo e(trans('file.Paid')); ?></th>
@@ -77,17 +77,34 @@
             </thead>
             
             <tfoot class="tfoot active">
-                <th></th>
-                <th><?php echo e(trans('file.Total')); ?></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <tr>
+                    <th></th>
+                    <th><?php echo e(trans('file.Total')); ?></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="noVis"></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th><?php echo e(trans('file.grand total')); ?></th>
+                    <th><?php echo e(trans('file.Paid')); ?></th>
+                    <th><?php echo e(trans('file.Due')); ?></th>
+                    <th></th>
+                </tr>
+                
+                
             </tfoot>
         </table>
     </div>
@@ -753,15 +770,15 @@
             {"data": "reference_no"},
             {"data": "biller"},
             {"data": "customer"},
-            {"data": "sale_status"},
+            {"data": "username"},
+            /*{"data": "sale_status"},*/
             {"data": "payment_status"},
             {"data": "grand_total"},
             {"data": "paid_amount"},
             {"data": "due"},
             {"data": "options"},
         ],
-        'language': {
-            
+        'language': {            
             'lengthMenu': '_MENU_ <?php echo e(trans("file.records per page")); ?>',
              "info":      '<small><?php echo e(trans("file.Showing")); ?> _START_ - _END_ (_TOTAL_)</small>',
             "search":  '<?php echo e(trans("file.Search")); ?>',
@@ -774,7 +791,11 @@
         'columnDefs': [
             {
                 "orderable": false,
-                'targets': [0, 3, 4, 5, 6, 9, 10]
+                'targets': [0, 3, 4, 5, 6, 9, 10],
+            },
+            {
+                'targets': 3,
+                className: 'noVis'
             },
             {
                 'render': function(data, type, row, meta){
@@ -870,11 +891,12 @@
                         alert('This feature is disable for demo!');
                 }
             },
-            {
+            /*{
                 extend: 'colvis',
                 text: '<?php echo e(trans("file.Column visibility")); ?>',
+                //columns: ':not(.noVis)'
                 columns: ':gt(0)'
-            },
+            },*/
         ],
         drawCallback: function () {
             var api = this.api();
@@ -900,7 +922,7 @@
     function saleDetails(sale){
         $("#sale-details input[name='sale_id']").val(sale[13]);
 
-        var htmltext = '<strong><?php echo e(trans("file.Date")); ?>: </strong>'+sale[0]+'<br><strong><?php echo e(trans("file.reference")); ?>: </strong>'+sale[1]+'<br><strong><?php echo e(trans("file.Warehouse")); ?>: </strong>'+sale[27]+'<br><strong><?php echo e(trans("file.Sale Status")); ?>: </strong>'+sale[2]+'<br><br><div class="row"><div class="col-md-6"><strong><?php echo e(trans("file.From")); ?>:</strong><br>'+sale[3]+'<br>'+sale[4]+'<br>'+sale[5]+'<br>'+sale[6]+'<br>'+sale[7]+'<br>'+sale[8]+'</div><div class="col-md-6"><div class="float-right"><strong><?php echo e(trans("file.To")); ?>:</strong><br>'+sale[9]+'<br>'+sale[10]+'<br>'+sale[11]+'<br>'+sale[12]+'</div></div></div>';
+        var htmltext = '<strong><?php echo e(trans("file.Date")); ?>: </strong>'+sale[0]+'<br><strong><?php echo e(trans("file.reference")); ?>: </strong>'+sale[1]+'<br><strong><?php echo e(trans("file.Warehouse")); ?>: </strong>'+sale[27]+'<br><br><div class="row"><div class="col-md-6"><strong><?php echo e(trans("file.From")); ?>:</strong><br>'+sale[3]+'<br>'+sale[4]+'<br>'+sale[5]+'<br>'+sale[6]+'<br>'+sale[7]+'<br>'+sale[8]+'</div><div class="col-md-6"><div class="float-right"><strong><?php echo e(trans("file.To")); ?>:</strong><br>'+sale[9]+'<br>'+sale[10]+'<br>'+sale[11]+'<br>'+sale[12]+'</div></div></div>';
         $.get('sales/product_sale/' + sale[13], function(data){
             $(".product-sale-list tbody").remove();
             var name_code = data[0];

@@ -599,5 +599,8 @@ return [
 	"It will be used for withdrawal" => "It will be used for withdrawal",
 	"FirstName" => "First Name",
 	"LastName" => "Last Name",
+	"Bank Name" => "Bank Name",
+	"RIB" => "RIB",
+	"Sorry! You are not allowed to access this module" => "Sorry! You are not allowed to access this module",
 ];
 ?>

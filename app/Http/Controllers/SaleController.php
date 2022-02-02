@@ -347,10 +347,7 @@ class SaleController extends Controller
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('sales-add')){
             /*if(Auth::user()->role_id > 2) {
-                $lims_warehouse_list = Warehouse::where([
-                    ['is_active', true],
-                    ['id', Auth::user()->warehouse_id]
-                ])->get();
+                $lims_warehouse_list = Warehouse::where([['is_active', true],['id', Auth::user()->warehouse_id]])->get();
                 $lims_biller_list = Biller::where([
                     ['is_active', true],
                     ['id', Auth::user()->biller_id]
@@ -360,7 +357,11 @@ class SaleController extends Controller
                 $lims_warehouse_list = Warehouse::where('is_active', true)->get();
                 $lims_biller_list = Biller::where('is_active', true)->get();
             }*/
-            $lims_customer_list = Customer::where('is_active', true)->get();
+            if (Auth::user()->role_id == 1) {
+                $lims_customer_list = Customer::where('is_active', true)->get();
+            } else {
+                $lims_customer_list = Customer::where([['is_active', true],['created_by', Auth::user()->id]])->get();
+            }
 
             $lims_warehouse_list = Warehouse::where('is_active', true)->get();
             foreach ($lims_warehouse_list as $key=>$lims_warehouse)

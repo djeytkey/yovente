@@ -17,7 +17,7 @@
                         <div class="card-body">
                             <input type="hidden" name="role_id" value="{{ $lims_role_data->id }}" />
                             <div class="table-responsive">
-                                <table class="table table-bordered permission-table">
+                                <table class="table table-bordered permission-table role-table">
                                     <thead>
                                         <tr>
                                             <th colspan="5" class="text-center">{{ $lims_role_data->name }}
@@ -561,7 +561,7 @@
                                         </tr>
 
                                         {{-- Employés --}}
-                                        <tr>
+                                        {{-- <tr>
                                             <td>{{ trans('file.Employee') }}</td>
                                             <td class="text-center">
                                                 <div class="icheckbox_square-blue checked" aria-checked="false"
@@ -623,7 +623,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
 
                                         {{-- Utilisateurs --}}
                                         <tr>
@@ -959,7 +959,7 @@
                                         </tr>
 
                                         {{-- Personnel --}}
-                                        <tr>
+                                        {{-- <tr>
                                             <td>HRM</td>
                                             <td class="report-permissions" colspan="5">
                                                 <span>
@@ -1027,7 +1027,7 @@
                                                     </div>
                                                 </span>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
 
                                         {{-- Rapports --}}
                                         <tr>

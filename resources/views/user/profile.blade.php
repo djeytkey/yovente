@@ -24,33 +24,78 @@
                     <div class="card-body">
                         <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
                         {!! Form::open(['route' => ['user.profileUpdate', Auth::id()], 'method' => 'put']) !!}
+                        <input type="hidden" name="role_id" id="role_id" value="{{ Auth::user()->role_id }}">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>{{trans('file.UserName')}} *</strong> </label>
-                                    <input type="text" name="name" value="{{$lims_user_data->name}}" required class="form-control" />
-                                    @if($errors->has('name'))
-                                    <span>
-                                       <strong class="has-error">{{ $errors->first('name') }}</strong>
-                                    </span>
-                                    @endif
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{trans('file.LastName')}} *</strong> </label>
+                                            <input type="text" name="last_name" value="{{$lims_user_data->last_name}}" required class="form-control" />
+                                            @if($errors->has('last_name'))
+                                            <span>
+                                               <strong class="has-error">{{ $errors->first('last_name') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{trans('file.FirstName')}} *</strong> </label>
+                                            <input type="text" name="first_name" value="{{$lims_user_data->first_name}}" required class="form-control" />
+                                            @if($errors->has('first_name'))
+                                            <span>
+                                               <strong class="has-error">{{ $errors->first('first_name') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{trans('file.UserName')}} *</strong> </label>
+                                            <input type="text" name="name" value="{{$lims_user_data->name}}" required class="form-control" />
+                                            @if($errors->has('name'))
+                                            <span>
+                                               <strong class="has-error">{{ $errors->first('name') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{trans('file.Email')}} *</strong> </label>
+                                            <input type="email" name="email" value="{{$lims_user_data->email}}" required class="form-control">
+                                            @if($errors->has('email'))
+                                            <span>
+                                               <strong class="has-error">{{ $errors->first('email') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{trans('file.Phone Number')}} *</strong> </label>
+                                            <input type="text" name="phone" value="{{$lims_user_data->phone}}" required class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>{{trans('file.Company Name')}}</strong> </label>
+                                            <input type="text" name="company_name" value="{{$lims_user_data->company_name}}" class="form-control" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>{{trans('file.Email')}} *</strong> </label>
-                                    <input type="email" name="email" value="{{$lims_user_data->email}}" required class="form-control">
-                                    @if($errors->has('email'))
-                                    <span>
-                                       <strong class="has-error">{{ $errors->first('email') }}</strong>
-                                    </span>
-                                    @endif
+                                    <label>{{trans('file.Bank Name')}} *</strong> </label>
+                                    <input type="text" id="bank_name" name="bank_name" value="{{$lims_user_data->bank_name}}" required class="form-control" />
                                 </div>
                                 <div class="form-group">
-                                    <label>{{trans('file.Phone Number')}} *</strong> </label>
-                                    <input type="text" name="phone" value="{{$lims_user_data->phone}}" required class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>{{trans('file.Company Name')}}</strong> </label>
-                                    <input type="text" name="company_name" value="{{$lims_user_data->company_name}}" class="form-control" />
+                                    <label>{{trans('file.RIB')}} *</strong> </label>
+                                    <input type="number" id="rib" name="rib" value="{{$lims_user_data->rib}}" required class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="{{trans('file.submit')}}" class="btn btn-primary">
@@ -101,11 +146,26 @@
 </section>
 
 <script type="text/javascript">
+
     $("ul#setting").siblings('a').attr('aria-expanded','true');
     $("ul#setting").addClass("show");
     $("ul#setting #user-menu").addClass("active");
 
-    
+    $(document).ready(function() {
+        var rib  = $('#rib').val(),
+            bank = $('#bank_name').val(),
+            role = $('#role_id').val()
+        
+        if ( rib !== "" ) {
+            if ( role == 1 ) {
+                $('#bank_name').prop('required',false);
+                $('#rib').prop('required',false);
+            } else {
+                $('#bank_name').prop('disabled',true);
+                $('#rib').prop('disabled',true);
+            }
+        }
+    });
 
     $('#confirm_pass').on('input', function(){
 

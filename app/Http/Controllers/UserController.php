@@ -153,12 +153,18 @@ class UserController extends Controller
 
     public function profile($id)
     {
+        if (Auth::user()->id != $id) {
+            return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access other user data');
+        }
         $lims_user_data = User::find($id);
         return view('user.profile', compact('lims_user_data'));
     }
 
     public function profileUpdate(Request $request, $id)
     {
+        if (Auth::user()->id != $id) {
+            return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access other user data');
+        }
         if (!env('USER_VERIFIED'))
             return redirect()->back()->with('not_permitted', 'This feature is disable for demo!');
 

@@ -25,7 +25,12 @@ class CustomerController extends Controller
                 $all_permission[] = $permission->name;
             if(empty($all_permission))
                 $all_permission[] = 'dummy text';
-            $lims_customer_all = Customer::where('is_active', true)->get();
+            if (Auth::user()->role_id == 1) {
+                $lims_customer_all = Customer::where('is_active', true)->get();
+            } else {
+                $lims_customer_all = Customer::where([['is_active', true],['created_by', Auth::user()->id]])->get();
+            }
+            
             return view('customer.index', compact('lims_customer_all', 'all_permission'));
         }
         else

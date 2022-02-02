@@ -13,6 +13,7 @@
                     <div class="card-body">
                         <p class="italic"><small>{{trans('file.The field labels marked with * are required input fields')}}.</small></p>
                         {!! Form::open(['route' => ['customer.update',$lims_customer_data->id], 'method' => 'put', 'files' => true]) !!}
+                        <input type="hidden" name="created_by" value="{{ $lims_customer_data->created_by }}">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

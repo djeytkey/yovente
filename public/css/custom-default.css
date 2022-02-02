@@ -49,6 +49,10 @@ th, td {
     white-space: nowrap;
 }
 
+.table.role-table td, .table.role-table th {
+	white-space: inherit;
+}
+
 tr.product-link td {
     vertical-align: middle;
 }
