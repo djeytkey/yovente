@@ -113,7 +113,7 @@
                                         @endif
                                         <select name="invoice_format" class="selectpicker form-control" required>
                                             <option value="standard">Standard</option>
-                                            <option value="gst">Indian GST</option>
+                                            {{-- <option value="gst">Indian GST</option> --}}
                                         </select>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@
                                         </select>
                                     </div>
                                 </div> 
-                                <div class="col-md-6">
+                                <div class="col-md-6 d-none">
                                     <div class="form-group">
                                         <label>{{trans('file.Developed By')}}</label>
                                         <input type="text" name="developed_by" class="form-control" value="{{$lims_general_setting_data->developed_by}}">
@@ -158,6 +158,12 @@
                                     <div class="form-group">
                                         <label>{{trans('file.Delivery Rate')}} *</label>
                                         <input type="number" min="0" name="livraison" class="form-control" value="@if($lims_general_setting_data){{$lims_general_setting_data->livraison}}@endif" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{trans('file.Minimim Withdraw')}} *</label>
+                                        <input type="number" min="0" name="min_withdraw" class="form-control" value="@if($lims_general_setting_data){{$lims_general_setting_data->min_withdraw}}@endif" required />
                                     </div>
                                 </div>       
                             </div>

@@ -601,6 +601,9 @@ return [
 	"LastName" => "Last Name",
 	"Bank Name" => "Bank Name",
 	"RIB" => "RIB",
-	"Sorry! You are not allowed to access this module" => "Sorry! You are not allowed to access this module",
+	"Minimim Withdraw" => "Minimim Withdraw",
+	"Withdraw List" => "Withdraw List",
+	"Withdraw" => "Withdraw",
+	"Add Withdraw" => "Add Withdraw",
 ];
 ?>

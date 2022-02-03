@@ -310,6 +310,10 @@
                         </li>
                     <?php endif; ?>
                     
+                    
+                    
+                    
+                    
                     <?php
                     $index_permission = DB::table('permissions')
                         ->where('name', 'quotes-index')
@@ -1255,6 +1259,58 @@
             </div>
         </div>
         <!-- end expense modal -->
+
+        <!-- withdraw modal -->
+        <div id="withdraw-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            class="modal fade text-left">
+            <div role="document" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="exampleModalLabel" class="modal-title"><?php echo e(trans('file.Add Withdraw')); ?></h5>
+                        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                                aria-hidden="true"><i class="dripicons-cross"></i></span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="italic">
+                            <small><?php echo e(trans('file.The field labels marked with * are required input fields')); ?>.</small>
+                        </p>
+                        
+                        
+                        
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+								<label>
+									<?php echo e(trans('file.Reference No')); ?>
+
+								</label>
+								<h3><?php echo e('retrait-' . strtolower(Auth::user()->name) . '-' . date("ymd") . '-'. date("His")); ?></h3>
+								<input type="hidden" name="reference_no" class="form-control" value="<?php echo e('retrait-' . strtolower(Auth::user()->name) . '-' . date("ymd") . '-'. date("His")); ?>"/>
+								<input type="hidden" name="user_id" class="form-control" value="<?php echo e(Auth::user()->id); ?>"/>
+								<?php if($errors->has('reference_no')): ?>
+								<span>
+								<strong class="has-error"><?php echo e($errors->first('reference_no')); ?></strong>
+								</span>
+								<?php endif; ?>
+							</div>
+							<div class="col-md-6 form-group">
+                                <label><?php echo e(trans('file.Amount')); ?> *</label>
+                                <input type="number" name="withdraw_amount" step="any" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><?php echo e(trans('file.Note')); ?></label>
+                            <textarea name="withdraw_note" rows="3" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><?php echo e(trans('file.submit')); ?></button>
+                        </div>
+                        <?php echo e(Form::close()); ?>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end withdraw modal -->
 
         <!-- account modal -->
         <div id="account-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"

@@ -325,6 +325,10 @@
                             </ul>
                         </li>
                     @endif
+                    {{-- Retrait Menu --}}
+                    
+                    {{-- *************************** --}}
+                    
                     {{-- Devis Menu --}}
                     <?php
                     $index_permission = DB::table('permissions')
@@ -1355,6 +1359,56 @@
             </div>
         </div>
         <!-- end expense modal -->
+
+        <!-- withdraw modal -->
+        <div id="withdraw-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            class="modal fade text-left">
+            <div role="document" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="exampleModalLabel" class="modal-title">{{ trans('file.Add Withdraw') }}</h5>
+                        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                                aria-hidden="true"><i class="dripicons-cross"></i></span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="italic">
+                            <small>{{ trans('file.The field labels marked with * are required input fields') }}.</small>
+                        </p>
+                        {{-- {!! Form::open(['route' => 'withdraws.store', 'method' => 'post']) !!} --}}
+                        
+                        
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+								<label>
+									{{trans('file.Reference No')}}
+								</label>
+								<h3>{{ 'retrait-' . strtolower(Auth::user()->name) . '-' . date("ymd") . '-'. date("His") }}</h3>
+								<input type="hidden" name="reference_no" class="form-control" value="{{ 'retrait-' . strtolower(Auth::user()->name) . '-' . date("ymd") . '-'. date("His") }}"/>
+								<input type="hidden" name="user_id" class="form-control" value="{{ Auth::user()->id }}"/>
+								@if($errors->has('reference_no'))
+								<span>
+								<strong class="has-error">{{ $errors->first('reference_no') }}</strong>
+								</span>
+								@endif
+							</div>
+							<div class="col-md-6 form-group">
+                                <label>{{ trans('file.Amount') }} *</label>
+                                <input type="number" name="withdraw_amount" step="any" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ trans('file.Note') }}</label>
+                            <textarea name="withdraw_note" rows="3" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">{{ trans('file.submit') }}</button>
+                        </div>
+                        {{ Form::close() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end withdraw modal -->
 
         <!-- account modal -->
         <div id="account-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"

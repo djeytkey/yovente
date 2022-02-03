@@ -595,5 +595,7 @@ return [
 	"LastName" => "Nom",
 	"Bank Name" => "Nom de la banque",
 	"RIB" => "RIB",
+	"Minimim Withdraw" => "Retrait Minimal",
+	"Withdraw List" => "Liste de Retrait",
 ];
 ?>

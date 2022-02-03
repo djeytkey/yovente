@@ -595,5 +595,7 @@ return [
 	"LastName" => "الاسم الأخير",
 	"Bank Name" => "اسم البنك",
 	"RIB" => "RIB",
+	"Minimim Withdraw" => "الحد الأدنى للسحب",
+	"Withdraw List" => "قائمة السحب",
 ];
 ?>

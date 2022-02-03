@@ -71,6 +71,7 @@ class SettingController extends Controller
         $general_setting->site_title = $data['site_title'];
         $general_setting->currency = $data['currency'];
         $general_setting->livraison = $data['livraison'];
+        $general_setting->min_withdraw = $data['min_withdraw'];
         $general_setting->currency_position = $data['currency_position'];
         $general_setting->staff_access = $data['staff_access'];
         $general_setting->date_format = $data['date_format'];
@@ -102,7 +103,7 @@ class SettingController extends Controller
         $user = env('DB_USERNAME');
         $pass = env('DB_PASSWORD');
         $host = env('DB_HOST');
-        $dir = public_path().'/'.$database . '_backup_' . date('d-m-Y-H-i-s') . '.sql';
+        $dir = public_path().'/dbBackups/'.$database . '_backup_' . date('d-m-Y-H-i-s') . '.sql';
 
         exec("mysqldump --user={$user} --password={$pass} --host={$host} {$database} --result-file={$dir} 2>&1", $output);
 
