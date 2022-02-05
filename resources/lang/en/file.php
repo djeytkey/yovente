@@ -605,5 +605,11 @@ return [
 	"Withdraw List" => "Withdraw List",
 	"Withdraw" => "Withdraw",
 	"Add Withdraw" => "Add Withdraw",
+	"Amount available" => "Amount available",
+	"Amount requested" => "Amount requested",
+	"Update Withdraw" => "Update Withdraw",
+	"Valid" => "Valid",
+	"Is Paid" => "Paid",
+	"Minimum : " => "Minimum : ",
 ];
 ?>

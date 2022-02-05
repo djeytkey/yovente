@@ -236,6 +236,42 @@ class RoleController extends Controller
         else
             $role->revokePermissionTo('expenses-delete');
 
+        if($request->has('withdraw-index')){
+            $permission = Permission::firstOrCreate(['name' => 'withdraw-index']);
+            if(!$role->hasPermissionTo('withdraw-index')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('withdraw-index');
+
+        if($request->has('withdraw-add')){
+            $permission = Permission::firstOrCreate(['name' => 'withdraw-add']);
+            if(!$role->hasPermissionTo('withdraw-add')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('withdraw-add');
+
+        if($request->has('withdraw-edit')){
+            $permission = Permission::firstOrCreate(['name' => 'withdraw-edit']);
+            if(!$role->hasPermissionTo('withdraw-edit')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('withdraw-edit');
+
+        if($request->has('withdraw-delete')){
+            $permission = Permission::firstOrCreate(['name' => 'withdraw-delete']);
+            if(!$role->hasPermissionTo('withdraw-delete')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('withdraw-delete');        
+
         if($request->has('quotes-index')){
             $permission = Permission::firstOrCreate(['name' => 'quotes-index']);
             if(!$role->hasPermissionTo('quotes-index')){

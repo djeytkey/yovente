@@ -597,5 +597,13 @@ return [
 	"RIB" => "RIB",
 	"Minimim Withdraw" => "Retrait Minimal",
 	"Withdraw List" => "Liste de Retrait",
+	"Withdraw" => "Retrait",
+	"Add Withdraw" => "Ajouter un retrait",
+	"Amount available" => "Montant disponible",
+	"Amount requested" => "Montant demandé",
+	"Update Withdraw" => "Editer le retrait",
+	"Valid" => "Validé",
+	"Is Paid" => "Payé",
+	"Minimum : " => "Minimum : ",
 ];
 ?>

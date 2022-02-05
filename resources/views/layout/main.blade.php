@@ -326,8 +326,34 @@
                         </li>
                     @endif
                     {{-- Retrait Menu --}}
-                    
-                    {{-- *************************** --}}
+                    <?php
+                    $index_permission = DB::table('permissions')
+                        ->where('name', 'withdraw-index')
+                        ->first();
+                    $index_permission_active = DB::table('role_has_permissions')
+                        ->where([['permission_id', $index_permission->id], ['role_id', $role->id]])
+                        ->first();
+                    ?>
+                    @if ($index_permission_active)
+                        <li><a href="#withdraw" aria-expanded="false" data-toggle="collapse"> <i
+                                    class="dripicons-card"></i><span>{{ trans('file.Withdraw') }}</span></a>
+                            <ul id="withdraw" class="collapse list-unstyled ">
+                                <li id="withdraw-list-menu"><a
+                                        href="{{ route('withdraw.index') }}">{{ trans('file.Withdraw List') }}</a></li>
+                                <?php
+                                $add_permission = DB::table('permissions')
+                                    ->where('name', 'withdraw-add')
+                                    ->first();
+                                $add_permission_active = DB::table('role_has_permissions')
+                                    ->where([['permission_id', $add_permission->id], ['role_id', $role->id]])
+                                    ->first();
+                                ?>
+                                @if ($add_permission_active)
+                                    <li><a id="add-withdraw" href=""> {{ trans('file.Add Withdraw') }}</a></li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
                     
                     {{-- Devis Menu --}}
                     <?php
@@ -727,7 +753,7 @@
                     ?>
                     @if ($profit_loss_active || $best_seller_active || $warehouse_report_active || $warehouse_stock_report_active || $product_report_active || $daily_sale_active || $monthly_sale_active || $daily_purchase_active || $monthly_purchase_active || $purchase_report_active || $sale_report_active || $payment_report_active || $product_qty_alert_active || $user_report_active || $customer_report_active || $supplier_report_active || $due_report_active)
                         <li><a href="#report" aria-expanded="false" data-toggle="collapse"> <i
-                                    class="dripicons-document-remove"></i><span>{{ trans('file.Reports') }}</span></a>
+                                    class="dripicons-document"></i><span>{{ trans('file.Reports') }}</span></a>
                             <ul id="report" class="collapse list-unstyled ">
                                 @if ($profit_loss_active)
                                     <li id="profit-loss-report-menu">
@@ -1374,8 +1400,7 @@
                         <p class="italic">
                             <small>{{ trans('file.The field labels marked with * are required input fields') }}.</small>
                         </p>
-                        {{-- {!! Form::open(['route' => 'withdraws.store', 'method' => 'post']) !!} --}}
-                        
+                        {!! Form::open(['route' => 'withdraw.store', 'method' => 'post']) !!}                        
                         
                         <div class="row">
                             <div class="col-md-6 form-group">
@@ -1391,14 +1416,45 @@
 								</span>
 								@endif
 							</div>
-							<div class="col-md-6 form-group">
-                                <label>{{ trans('file.Amount') }} *</label>
-                                <input type="number" name="withdraw_amount" step="any" required class="form-control">
+                            <div class="col-md-6 form-group">
+                                <label>{{trans('file.Amount available')}}</label>
+                                <?php
+                                    $retait_total = 0;
+                                    $retait_total = \App\Withdrawal::where('user_id', Auth::id())->sum('withdrawals.withdraw_amount');
+                                    $user_sales = \App\Sale::where('user_id', Auth::id())->get();
+                                    if ($user_sales->count() > 0) {
+                                        $grand_total = 0;
+                                        $original_total = 0;
+                                        $livraison_total = 0;
+                                        $benifice = 0;
+                                        foreach ($user_sales as $user_sale) {
+                                            $grand_total += $user_sale->grand_total;
+                                            $livraison_total += $user_sale->livraison;
+                                            $original_prices = \App\Product_Sale::where('sale_id', $user_sale->id)->get();
+                                            foreach ($original_prices as $original_price) {
+                                                $original_total += $original_price->original_price * $original_price->qty;
+                                            }
+                                        }
+                                    }
+                                    $benifice = $grand_total - $original_total - $livraison_total - $retait_total;
+                                ?>
+                                <h3> {{ number_format($benifice, 2, '.', ' ') }}</h3>
+                                <input type="hidden" name="withdraw_available" class="form-control" value="{{ $benifice }}"/>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>{{ trans('file.Note') }}</label>
-                            <textarea name="withdraw_note" rows="3" class="form-control"></textarea>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <?php
+                                    $general_setting = \App\GeneralSetting::latest()->first();
+                                    $min_withdraw = $general_setting->min_withdraw;
+                                ?>
+                                <label>{{ trans('file.Amount') }} * <small>({{ trans('file.Minimum : ') . $min_withdraw }})</small></label>
+                                <input type="number" value="{{ $min_withdraw }}" name="withdraw_amount" min="{{ $min_withdraw }}" step="any" required class="form-control">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>{{ trans('file.Note') }}</label>
+                                <textarea name="withdraw_note" rows="3" class="form-control"></textarea>
+                            </div>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">{{ trans('file.submit') }}</button>

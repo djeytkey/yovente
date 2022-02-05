@@ -238,6 +238,9 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::post('expenses/deletebyselection', 'ExpenseController@deleteBySelection');
 	Route::resource('expenses', 'ExpenseController');
 
+	Route::post('withdraw/deletebyselection', 'WithdrawalController@deleteBySelection');
+	Route::resource('withdraw', 'WithdrawalController');
+
 	Route::get('gift_cards/gencode', 'GiftCardController@generateCode');
 	Route::post('gift_cards/recharge/{id}', 'GiftCardController@recharge')->name('gift_cards.recharge');
 	Route::post('gift_cards/deletebyselection', 'GiftCardController@deleteBySelection');

@@ -597,5 +597,13 @@ return [
 	"RIB" => "RIB",
 	"Minimim Withdraw" => "الحد الأدنى للسحب",
 	"Withdraw List" => "قائمة السحب",
+	"Withdraw" => "السحب",
+	"Add Withdraw" => "إضافة سحب جديد",
+	"Amount available" => "المبلغ المتاح",
+	"Amount requested" => "المبلغ المطلوب",
+	"Update Withdraw" => "تعديل السحب",
+	"Valid" => "مفعَّل",
+	"Is Paid" => "مدفوع",
+	"Minimum : " => "الحد الأدنى:",
 ];
 ?>

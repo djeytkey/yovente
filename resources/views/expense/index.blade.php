@@ -60,7 +60,7 @@
                 ?>
                 <tr data-id="{{$expense->id}}">
                     <td>{{$key}}</td>
-                    <td>{{date($general_setting->date_format, strtotime($expense->created_at->toDateString())) . ' '. $expense->created_at->toTimeString() }}</td>
+                    <td>{{date($general_setting->date_format, strtotime($expense->created_at->toDateString())) }}</td>
                     <td>{{ $expense->reference_no }}</td>
                     <td>{{ $warehouse->name }}</td>
                     <td>{{ $expense_category->name }}</td>
