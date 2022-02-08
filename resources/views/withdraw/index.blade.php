@@ -38,27 +38,34 @@
                             <td>{{ $withdraw->withdraw_note }}</td>
                             <td>
                                 @if ($withdraw->is_valide != 1)
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-sm dropdown-toggle"
-                                        data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">{{ trans('file.action') }}
-                                        <span class="caret"></span>
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>                                    
-                                    <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
-                                    {{-- @if (in_array('withdraw-edit', $all_permission))
-                                        <li><button type="button" data-id="{{ $withdraw->id }}" class="open-Editwithdraw_categoryDialog btn btn-link" data-toggle="modal" data-target="#editModal"><i class="dripicons-document-edit"></i>{{ trans('file.edit') }}</button></li>
-                                    @endif --}}
-                                    @if (in_array('withdraw-delete', $all_permission))
-                                        <li class="divider"></li>
-                                        {{ Form::open(['route' => ['withdraw.destroy', $withdraw->id], 'method' => 'DELETE']) }}
-                                        <li>
-                                            <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i>{{ trans('file.delete') }}</button>
-                                        </li>
-                                        {{ Form::close() }}
-                                    @endif
-                                    </ul>
-                                </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">{{ trans('file.action') }}
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
+                                            user="menu">
+                                            @if (in_array('withdraw-edit', $all_permission))
+                                                <li><button type="button" data-value="{{ $withdraw->withdraw_amount }}" data-id="{{ $withdraw->id }}"
+                                                        class="open-Editwithdraw_categoryDialog btn btn-link"
+                                                        data-toggle="modal" data-target="#editModal"><i
+                                                            class="dripicons-document-edit"></i>{{ trans('file.edit') }}</button>
+                                                </li>
+                                            @endif
+                                            @if (in_array('withdraw-delete', $all_permission))
+                                                <li class="divider"></li>
+                                                {{ Form::open(['route' => ['withdraw.destroy', $withdraw->id], 'method' => 'DELETE']) }}
+                                                <li>
+                                                    <button type="submit" class="btn btn-link"
+                                                        onclick="return confirmDelete()"><i
+                                                            class="dripicons-trash"></i>{{ trans('file.delete') }}</button>
+                                                </li>
+                                                {{ Form::close() }}
+                                            @endif
+                                        </ul>
+                                    </div>
                                 @else
                                     @if ($withdraw->is_paid == '1')
                                         <div class="badge badge-success">{{ trans('file.Is Paid') }}</div>
@@ -92,28 +99,68 @@
                     {!! Form::open(['route' => ['withdraw.update', 1], 'method' => 'put']) !!}
 
                     <div class="row">
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <input type="hidden" name="withdraw_id">
                             <label>{{ trans('file.Reference No') }}</label>
                             <h3 id="reference"></h3>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6 form-group">
                             <label>{{ trans('file.Amount available') }}</label>
-                            <h3 id="amount_available"></h3>
+                            <?php
+                                $retait_total = 0;
+                                $retait_total = \App\Withdrawal::where('user_id', Auth::id())->sum('withdrawals.withdraw_amount');
+                                $user_sales = \App\Sale::where('user_id', Auth::id())->get();
+                                if ($user_sales->count() > 0) {
+                                    $grand_total = 0;
+                                    $original_total = 0;
+                                    $livraison_total = 0;
+                                    $benifice = 0;
+                                    foreach ($user_sales as $user_sale) {
+                                        $grand_total += $user_sale->grand_total;
+                                        $livraison_total += $user_sale->livraison;
+                                        $original_prices = \App\Product_Sale::where('sale_id', $user_sale->id)->get();
+                                        foreach ($original_prices as $original_price) {
+                                            $original_total += $original_price->original_price * $original_price->qty;
+                                        }
+                                    }
+                                    $benifice = $grand_total - $original_total - $livraison_total - $retait_total;?>
+                                    <h4 >{{ number_format($benifice, 2, '.', ' ') }}</h4>
+                                    <input type="hidden" name="withdraw_available" id="withdraw_available" class="form-control" />
+                                <?php
+                                } else {?>
+                                    <h4>0.00</h4>
+                                    <input type="hidden" name="withdraw_available" id="withdraw_available" class="form-control" />
+                                <?php
+                                }
+                            ?>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <?php
+                            $general_setting = \App\GeneralSetting::latest()->first();
+                            $min_withdraw = $general_setting->min_withdraw;
+                            ?>
+                            <label>{{ trans('file.Amount') }} *
+                                <small>({{ trans('file.Minimum : ') . $min_withdraw }})</small></label>
+                            <input type="number" name="withdraw_amount" min="{{ $min_withdraw }}" step="any" required
+                                class="form-control">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <?php
-                                $general_setting = \App\GeneralSetting::latest()->first();
-                                $min_withdraw = $general_setting->min_withdraw;
-                            ?>
-                            <label>{{ trans('file.Amount') }} * <small>({{ trans('file.Minimum : ') . $min_withdraw }})</small></label>
-                            <input type="number" name="withdraw_amount" min="{{ $min_withdraw }}" step="any" required class="form-control">
+                            <label>{{ trans('file.Bank Name') }}</label>
+                            <h5>{{ strtoupper(Auth::user()->bank_name) }}</h5>
                         </div>
                         <div class="col-md-6 form-group">
+                            <label>{{ trans('file.RIB') }}</label>
+                            <h5>{{ Auth::user()->rib }}</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
                             <label>{{ trans('file.Note') }}</label>
-                            <textarea name="withdraw_note" rows="3" class="form-control"></textarea>
+                            <textarea name="withdraw_note" rows="2" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -143,10 +190,15 @@
         $(document).ready(function() {
             $(document).on('click', 'button.open-Editwithdraw_categoryDialog', function() {
                 var url = "withdraw/";
+                var total_available = 0;
+                var amount = parseFloat($(this).data('value'));
                 var id = $(this).data('id').toString();
                 url = url.concat(id).concat("/edit");
                 $.get(url, function(data) {
+                    total_available = parseFloat($('#editModal #withdraw_available').text()) + amount;
+                    alert("Amount : " + amount + "\nTotal : " + total_available);
                     $('#editModal #reference').text(data['reference_no']);
+                    $('#editModal #withdraw_available').text(total_available);
                     $("#editModal input[name='withdraw_amount']").val(data['withdraw_amount']);
                     $("#editModal input[name='withdraw_id']").val(data['id']);
                     $("#editModal textarea[name='withdraw_note']").val(data['withdraw_note']);

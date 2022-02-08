@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Withdrawal;
+use App\GeneralSetting;
 use Illuminate\Http\Request;
-use App\Account;
-use App\CashRegister;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Auth;
@@ -41,15 +40,19 @@ class WithdrawalController extends Controller
     {
         //dd($request);
         $data = $request->all();
+        $general_settings = GeneralSetting::latest()->first();
+        $min_withdraw = $general_settings->min_withdraw;
+        if ($data['withdraw_amount'] < $min_withdraw) {
+            return redirect()->back()->with('not_permitted', trans('file.Sorry! The minimum amount is not reached'));
+        }
         if ($data['withdraw_available'] >= $data['withdraw_amount']) {
             $data['is_valide'] = 0;
             $data['is_paid'] = 0;
             Withdrawal::create($data);
             return redirect('withdraw')->with('message', 'Data inserted successfully');
         } else {
-            return redirect()->back()->with('not_permitted', 'Sorry! You past the available amount');
-        }
-        
+            return redirect()->back()->with('not_permitted', trans('file.Sorry! You have exceeded the available amount'));
+        }        
     }
 
     public function show($id)

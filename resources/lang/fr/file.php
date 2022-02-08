@@ -605,5 +605,7 @@ return [
 	"Valid" => "Validé",
 	"Is Paid" => "Payé",
 	"Minimum : " => "Minimum : ",
+	"Sorry! You have exceeded the available amount" => "Désolé! Vous avez dépassé le montant disponible",
+	"Sorry! The minimum amount is not reached" => "Désolé! Le montant minimum n'est pas atteint",
 ];
 ?>

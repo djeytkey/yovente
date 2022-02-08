@@ -302,6 +302,71 @@
                                         </tr>
 
                                         
+                                        <tr>
+                                            <td><?php echo e(trans('file.Withdraw')); ?></td>
+                                            <td class="text-center">
+                                                <div class="icheckbox_square-blue checked" aria-checked="false"
+                                                    aria-disabled="false">
+                                                    <div class="checkbox">
+                                                        <?php if(in_array('withdraw-index', $all_permission)): ?>
+                                                            <input type="checkbox" value="1" id="withdraw-index"
+                                                                name="withdraw-index" checked />
+                                                        <?php else: ?>
+                                                            <input type="checkbox" value="1" id="withdraw-index"
+                                                                name="withdraw-index">
+                                                        <?php endif; ?>
+                                                        <label for="withdraw-index"></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="icheckbox_square-blue checked" aria-checked="false"
+                                                    aria-disabled="false">
+                                                    <div class="checkbox">
+                                                        <?php if(in_array('withdraw-add', $all_permission)): ?>
+                                                            <input type="checkbox" value="1" id="withdraw-add"
+                                                                name="withdraw-add" checked />
+                                                        <?php else: ?>
+                                                            <input type="checkbox" value="1" id="withdraw-add"
+                                                                name="withdraw-add">
+                                                        <?php endif; ?>
+                                                        <label for="withdraw-add"></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="icheckbox_square-blue" aria-checked="false"
+                                                    aria-disabled="false">
+                                                    <div class="checkbox">
+                                                        <?php if(in_array('withdraw-edit', $all_permission)): ?>
+                                                            <input type="checkbox" value="1" id="withdraw-edit"
+                                                                name="withdraw-edit" checked>
+                                                        <?php else: ?>
+                                                            <input type="checkbox" value="1" id="withdraw-edit"
+                                                                name="withdraw-edit">
+                                                        <?php endif; ?>
+                                                        <label for="withdraw-edit"></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="icheckbox_square-blue" aria-checked="false"
+                                                    aria-disabled="false">
+                                                    <div class="checkbox">
+                                                        <?php if(in_array('withdraw-delete', $all_permission)): ?>
+                                                            <input type="checkbox" value="1" id="withdraw-delete"
+                                                                name="withdraw-delete" checked>
+                                                        <?php else: ?>
+                                                            <input type="checkbox" value="1" id="withdraw-delete"
+                                                                name="withdraw-delete">
+                                                        <?php endif; ?>
+                                                        <label for="withdraw-delete"></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        
                                         
 
                                         
