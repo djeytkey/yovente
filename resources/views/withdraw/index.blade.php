@@ -108,33 +108,8 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>{{ trans('file.Amount available') }}</label>
-                            <?php
-                                $retait_total = 0;
-                                $retait_total = \App\Withdrawal::where('user_id', Auth::id())->sum('withdrawals.withdraw_amount');
-                                $user_sales = \App\Sale::where('user_id', Auth::id())->get();
-                                if ($user_sales->count() > 0) {
-                                    $grand_total = 0;
-                                    $original_total = 0;
-                                    $livraison_total = 0;
-                                    $benifice = 0;
-                                    foreach ($user_sales as $user_sale) {
-                                        $grand_total += $user_sale->grand_total;
-                                        $livraison_total += $user_sale->livraison;
-                                        $original_prices = \App\Product_Sale::where('sale_id', $user_sale->id)->get();
-                                        foreach ($original_prices as $original_price) {
-                                            $original_total += $original_price->original_price * $original_price->qty;
-                                        }
-                                    }
-                                    $benifice = $grand_total - $original_total - $livraison_total - $retait_total;?>
-                                    <h4 >{{ number_format($benifice, 2, '.', ' ') }}</h4>
-                                    <input type="hidden" name="withdraw_available" id="withdraw_available" class="form-control" />
-                                <?php
-                                } else {?>
-                                    <h4>0.00</h4>
-                                    <input type="hidden" name="withdraw_available" id="withdraw_available" class="form-control" />
-                                <?php
-                                }
-                            ?>
+                            <h4 id="withdraw_available"></h4>
+                            <input type="hidden" name="withdraw_available" class="form-control" />
                         </div>
                         <div class="col-md-6 form-group">
                             <?php
@@ -191,14 +166,13 @@
             $(document).on('click', 'button.open-Editwithdraw_categoryDialog', function() {
                 var url = "withdraw/";
                 var total_available = 0;
-                var amount = parseFloat($(this).data('value'));
                 var id = $(this).data('id').toString();
                 url = url.concat(id).concat("/edit");
                 $.get(url, function(data) {
-                    total_available = parseFloat($('#editModal #withdraw_available').text()) + amount;
-                    alert("Amount : " + amount + "\nTotal : " + total_available);
+                    total_available = parseFloat(data['withdraw_available']) + parseFloat(data['withdraw_amount']);
                     $('#editModal #reference').text(data['reference_no']);
                     $('#editModal #withdraw_available').text(total_available);
+                    $("#editModal input[name='withdraw_available']").val(total_available);
                     $("#editModal input[name='withdraw_amount']").val(data['withdraw_amount']);
                     $("#editModal input[name='withdraw_id']").val(data['id']);
                     $("#editModal textarea[name='withdraw_note']").val(data['withdraw_note']);
@@ -226,7 +200,7 @@
             },
             'columnDefs': [{
                     "orderable": false,
-                    'targets': [0, 3, 4, 5]
+                    'targets': [0, 4, 5]
                 },
                 {
                     'render': function(data, type, row, meta) {

@@ -205,8 +205,8 @@
                                         <div class="form-group">
                                             <label>{{trans('file.Payment Status')}} *</label>
                                             <select name="payment_status" class="form-control">
-                                                <option value="1">{{trans('file.Pending')}}</option>
                                                 <option value="2">{{trans('file.Due')}}</option>
+                                                <option value="1">{{trans('file.Pending')}}</option>                                                
                                                 <option value="3">{{trans('file.Partial')}}</option>
                                                 <option value="4">{{trans('file.Paid')}}</option>
                                             </select>

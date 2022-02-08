@@ -39,28 +39,37 @@
                             <td><?php echo e($withdraw->withdraw_note); ?></td>
                             <td>
                                 <?php if($withdraw->is_valide != 1): ?>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-sm dropdown-toggle"
-                                        data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false"><?php echo e(trans('file.action')); ?>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false"><?php echo e(trans('file.action')); ?>
 
-                                        <span class="caret"></span>
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>                                    
-                                    <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
-                                    
-                                    <?php if(in_array('withdraw-delete', $all_permission)): ?>
-                                        <li class="divider"></li>
-                                        <?php echo e(Form::open(['route' => ['withdraw.destroy', $withdraw->id], 'method' => 'DELETE'])); ?>
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
+                                            user="menu">
+                                            <?php if(in_array('withdraw-edit', $all_permission)): ?>
+                                                <li><button type="button" data-value="<?php echo e($withdraw->withdraw_amount); ?>" data-id="<?php echo e($withdraw->id); ?>"
+                                                        class="open-Editwithdraw_categoryDialog btn btn-link"
+                                                        data-toggle="modal" data-target="#editModal"><i
+                                                            class="dripicons-document-edit"></i><?php echo e(trans('file.edit')); ?></button>
+                                                </li>
+                                            <?php endif; ?>
+                                            <?php if(in_array('withdraw-delete', $all_permission)): ?>
+                                                <li class="divider"></li>
+                                                <?php echo e(Form::open(['route' => ['withdraw.destroy', $withdraw->id], 'method' => 'DELETE'])); ?>
 
-                                        <li>
-                                            <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i><?php echo e(trans('file.delete')); ?></button>
-                                        </li>
-                                        <?php echo e(Form::close()); ?>
+                                                <li>
+                                                    <button type="submit" class="btn btn-link"
+                                                        onclick="return confirmDelete()"><i
+                                                            class="dripicons-trash"></i><?php echo e(trans('file.delete')); ?></button>
+                                                </li>
+                                                <?php echo e(Form::close()); ?>
 
-                                    <?php endif; ?>
-                                    </ul>
-                                </div>
+                                            <?php endif; ?>
+                                        </ul>
+                                    </div>
                                 <?php else: ?>
                                     <?php if($withdraw->is_paid == '1'): ?>
                                         <div class="badge badge-success"><?php echo e(trans('file.Is Paid')); ?></div>
@@ -95,28 +104,43 @@
 
 
                     <div class="row">
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
                             <input type="hidden" name="withdraw_id">
                             <label><?php echo e(trans('file.Reference No')); ?></label>
                             <h3 id="reference"></h3>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6 form-group">
                             <label><?php echo e(trans('file.Amount available')); ?></label>
-                            <h3 id="amount_available"></h3>
+                            <h4 id="withdraw_available"></h4>
+                            <input type="hidden" name="withdraw_available" class="form-control" />
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <?php
+                            $general_setting = \App\GeneralSetting::latest()->first();
+                            $min_withdraw = $general_setting->min_withdraw;
+                            ?>
+                            <label><?php echo e(trans('file.Amount')); ?> *
+                                <small>(<?php echo e(trans('file.Minimum : ') . $min_withdraw); ?>)</small></label>
+                            <input type="number" name="withdraw_amount" min="<?php echo e($min_withdraw); ?>" step="any" required
+                                class="form-control">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <?php
-                                $general_setting = \App\GeneralSetting::latest()->first();
-                                $min_withdraw = $general_setting->min_withdraw;
-                            ?>
-                            <label><?php echo e(trans('file.Amount')); ?> * <small>(<?php echo e(trans('file.Minimum : ') . $min_withdraw); ?>)</small></label>
-                            <input type="number" name="withdraw_amount" min="<?php echo e($min_withdraw); ?>" step="any" required class="form-control">
+                            <label><?php echo e(trans('file.Bank Name')); ?></label>
+                            <h5><?php echo e(strtoupper(Auth::user()->bank_name)); ?></h5>
                         </div>
                         <div class="col-md-6 form-group">
+                            <label><?php echo e(trans('file.RIB')); ?></label>
+                            <h5><?php echo e(Auth::user()->rib); ?></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
                             <label><?php echo e(trans('file.Note')); ?></label>
-                            <textarea name="withdraw_note" rows="3" class="form-control"></textarea>
+                            <textarea name="withdraw_note" rows="2" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -147,10 +171,14 @@
         $(document).ready(function() {
             $(document).on('click', 'button.open-Editwithdraw_categoryDialog', function() {
                 var url = "withdraw/";
+                var total_available = 0;
                 var id = $(this).data('id').toString();
                 url = url.concat(id).concat("/edit");
                 $.get(url, function(data) {
+                    total_available = parseFloat(data['withdraw_available']) + parseFloat(data['withdraw_amount']);
                     $('#editModal #reference').text(data['reference_no']);
+                    $('#editModal #withdraw_available').text(total_available);
+                    $("#editModal input[name='withdraw_available']").val(total_available);
                     $("#editModal input[name='withdraw_amount']").val(data['withdraw_amount']);
                     $("#editModal input[name='withdraw_id']").val(data['id']);
                     $("#editModal textarea[name='withdraw_note']").val(data['withdraw_note']);
@@ -178,7 +206,7 @@
             },
             'columnDefs': [{
                     "orderable": false,
-                    'targets': [0, 3, 4, 5]
+                    'targets': [0, 4, 5]
                 },
                 {
                     'render': function(data, type, row, meta) {

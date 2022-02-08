@@ -546,7 +546,7 @@ $.get('../getcustomergroup/' + id, function(data) {
     customer_group_rate = (data / 100);
 });
 
-var id = $('select[name="warehouse_id"]').val();
+var id = $('input[name="warehouse_id_hidden"]').val();
 $.get('../getproduct/' + id, function(data) {
     lims_product_array = [];
     product_code = data[0];

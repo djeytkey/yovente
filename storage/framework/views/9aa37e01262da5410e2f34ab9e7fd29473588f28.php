@@ -198,8 +198,8 @@
                                         <div class="form-group">
                                             <label><?php echo e(trans('file.Payment Status')); ?> *</label>
                                             <select name="payment_status" class="form-control">
-                                                <option value="1"><?php echo e(trans('file.Pending')); ?></option>
                                                 <option value="2"><?php echo e(trans('file.Due')); ?></option>
+                                                <option value="1"><?php echo e(trans('file.Pending')); ?></option>                                                
                                                 <option value="3"><?php echo e(trans('file.Partial')); ?></option>
                                                 <option value="4"><?php echo e(trans('file.Paid')); ?></option>
                                             </select>

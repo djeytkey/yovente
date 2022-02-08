@@ -349,7 +349,7 @@
                                     ->first();
                                 ?>
                                 @if ($add_permission_active)
-                                    <li><a id="add-withdraw" href=""> {{ trans('file.Add Withdraw') }}</a></li>
+                                    <li><a id="add-withdraw" href="" data-toggle="modal" data-target="#withdraw-modal"> {{ trans('file.Add Withdraw') }}</a></li>
                                 @endif
                             </ul>
                         </li>

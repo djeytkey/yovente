@@ -333,7 +333,7 @@
                                     ->first();
                                 ?>
                                 <?php if($add_permission_active): ?>
-                                    <li><a id="add-withdraw" href=""> <?php echo e(trans('file.Add Withdraw')); ?></a></li>
+                                    <li><a id="add-withdraw" href="" data-toggle="modal" data-target="#withdraw-modal"> <?php echo e(trans('file.Add Withdraw')); ?></a></li>
                                 <?php endif; ?>
                             </ul>
                         </li>
@@ -1303,12 +1303,12 @@
                         <?php echo Form::open(['route' => 'withdraw.store', 'method' => 'post']); ?>                        
                         
                         <div class="row">
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-12 form-group">
 								<label>
 									<?php echo e(trans('file.Reference No')); ?>
 
 								</label>
-								<h3><?php echo e('retrait-' . strtolower(Auth::user()->name) . '-' . date("ymd") . '-'. date("His")); ?></h3>
+								<h4><?php echo e('retrait-' . strtolower(Auth::user()->name) . '-' . date("ymd") . '-'. date("His")); ?></h4>
 								<input type="hidden" name="reference_no" class="form-control" value="<?php echo e('retrait-' . strtolower(Auth::user()->name) . '-' . date("ymd") . '-'. date("His")); ?>"/>
 								<input type="hidden" name="user_id" class="form-control" value="<?php echo e(Auth::user()->id); ?>"/>
 								<?php if($errors->has('reference_no')): ?>
@@ -1317,6 +1317,8 @@
 								</span>
 								<?php endif; ?>
 							</div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6 form-group">
                                 <label><?php echo e(trans('file.Amount available')); ?></label>
                                 <?php
@@ -1336,14 +1338,17 @@
                                                 $original_total += $original_price->original_price * $original_price->qty;
                                             }
                                         }
+                                        $benifice = $grand_total - $original_total - $livraison_total - $retait_total;?>
+                                        <h4><?php echo e(number_format($benifice, 2, '.', ' ')); ?></h4>
+                                        <input type="hidden" name="withdraw_available" class="form-control" value="<?php echo e($benifice); ?>"/>
+                                    <?php
+                                    } else {?>
+                                        <h4>0.00</h4>
+                                        <input type="hidden" name="withdraw_available" class="form-control" value="0"/>
+                                    <?php
                                     }
-                                    $benifice = $grand_total - $original_total - $livraison_total - $retait_total;
                                 ?>
-                                <h3> <?php echo e(number_format($benifice, 2, '.', ' ')); ?></h3>
-                                <input type="hidden" name="withdraw_available" class="form-control" value="<?php echo e($benifice); ?>"/>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6 form-group">
                                 <?php
                                     $general_setting = \App\GeneralSetting::latest()->first();
@@ -1352,9 +1357,21 @@
                                 <label><?php echo e(trans('file.Amount')); ?> * <small>(<?php echo e(trans('file.Minimum : ') . $min_withdraw); ?>)</small></label>
                                 <input type="number" value="<?php echo e($min_withdraw); ?>" name="withdraw_amount" min="<?php echo e($min_withdraw); ?>" step="any" required class="form-control">
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6 form-group">
+                                <label><?php echo e(trans('file.Bank Name')); ?></label>
+                                <h5><?php echo e(strtoupper(Auth::user()->bank_name)); ?></h5>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label><?php echo e(trans('file.RIB')); ?></label>
+                                <h5><?php echo e(Auth::user()->rib); ?></h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-group">
                                 <label><?php echo e(trans('file.Note')); ?></label>
-                                <textarea name="withdraw_note" rows="3" class="form-control"></textarea>
+                                <textarea name="withdraw_note" rows="2" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
