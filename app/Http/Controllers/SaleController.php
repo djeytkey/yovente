@@ -249,6 +249,16 @@ class SaleController extends Controller
                 else
                     $nestedData['payment_status'] = '<div class="badge badge-success">'.trans('file.Paid').'</div>';
 
+                if($sale->is_valide == 1)
+                {
+                    $nestedData['valide_status'] = '<div class="badge badge-success">'.trans('file.Confirmed').'</div>';
+                    $nestedData['valide_status_search'] = trans('file.Confirmed');
+                    
+                } else {
+                    $nestedData['valide_status'] = '<div class="badge badge-warning">'.trans('file.Not Confirmed').'</div>';
+                    $nestedData['valide_status_search'] = trans('file.Not Confirmed');
+                }
+
                 $nestedData['grand_total'] = number_format($sale->grand_total, 2);
                 $nestedData['paid_amount'] = number_format($sale->paid_amount, 2);
                 $nestedData['due'] = number_format($sale->grand_total - $sale->paid_amount, 2);
@@ -257,22 +267,32 @@ class SaleController extends Controller
                               <span class="caret"></span>
                               <span class="sr-only">Toggle Dropdown</span>
                             </button>
-                            <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
-                                <li><a href="'.route('sale.invoice', $sale->id).'" class="btn btn-link"><i class="fa fa-copy"></i> '.trans('file.Generate Invoice').'</a></li>
-                                <li>
+                            <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">';
+                            if($sale->is_valide == 1) {
+                                $nestedData['options'] .= '<li>
+                                <a href="'.route('sale.invoice', $sale->id).'" class="btn btn-link">
+                                <i class="fa fa-copy"></i> '.trans('file.Generate Invoice').'</a>
+                                </li>';
+                            }
+                            $nestedData['options'] .= '<li>
                                     <button type="button" class="btn btn-link view"><i class="fa fa-eye"></i> '.trans('file.View').'</button>
                                 </li>';
                 if(in_array("sales-edit", $request['all_permission'])){
-                    if($sale->sale_status != 3)
+                    if($sale->is_valide != 1)
+                    {
                         $nestedData['options'] .= '<li>
-                            <a href="'.route('sales.edit', $sale->id).'" class="btn btn-link"><i class="dripicons-document-edit"></i> '.trans('file.edit').'</a>
-                            </li>';
-                    else
+                        <a href="'.route('sales.edit', $sale->id).'" class="btn btn-link"><i class="dripicons-document-edit"></i> '.trans('file.edit').'</a>
+                        </li>'; 
+                    } elseif(Auth::id() == 1)
+                    {
                         $nestedData['options'] .= '<li>
-                            <a href="'.url('sales/'.$sale->id.'/create').'" class="btn btn-link"><i class="dripicons-document-edit"></i> '.trans('file.edit').'</a>
+                        <a href="'.route('sales.edit', $sale->id).'" class="btn btn-link"><i class="dripicons-document-edit"></i> '.trans('file.edit').'</a>
                         </li>';
+                    }
                 }
-                $nestedData['options'] .= 
+                if (Auth::id() == 1)
+                {
+                    $nestedData['options'] .= 
                     '<li>
                         <button type="button" class="add-payment btn btn-link" data-id = "'.$sale->id.'" data-toggle="modal" data-target="#add-payment"><i class="fa fa-plus"></i> '.trans('file.Add Payment').'</button>
                     </li>
@@ -282,6 +302,8 @@ class SaleController extends Controller
                     <li>
                         <button type="button" class="add-delivery btn btn-link" data-id = "'.$sale->id.'"><i class="fa fa-truck"></i> '.trans('file.Add Delivery').'</button>
                     </li>';
+                }
+                
                 if(in_array("sales-delete", $request['all_permission']))
                     $nestedData['options'] .= \Form::open(["route" => ["sales.destroy", $sale->id], "method" => "DELETE"] ).'
                             <li>
@@ -297,37 +319,38 @@ class SaleController extends Controller
                     $coupon_code = null;
 
                 $nestedData['sale'] = array( '[ 
-                    "'.date(config('date_format'), strtotime($sale->created_at->toDateString())).'"', 
-                    ' "'.$sale->reference_no.'"', 
-                    ' "'.$sale_status.'"', 
-                    ' "'.$sale->biller->name.'"', 
-                    ' "'.$sale->biller->company_name.'"', 
-                    ' "'.$sale->biller->email.'"', 
-                    ' "'.$sale->biller->phone_number.'"', 
-                    ' "'.$sale->biller->address.'"', 
-                    ' "'.$sale->biller->city.'"', 
-                    ' "'.$sale->customer->name.'"', 
-                    ' "'.$sale->customer->phone_number.'"', 
-                    ' "'.$sale->customer->address.'"', 
-                    ' "'.$sale->customer->city.'"', 
-                    ' "'.$sale->id.'"', 
-                    ' "'.$sale->total_tax.'"', 
-                    ' "'.$sale->total_discount.'"', 
-                    ' "'.$sale->total_price.'"', 
-                    ' "'.$sale->order_tax.'"', 
-                    ' "'.$sale->order_tax_rate.'"', 
-                    ' "'.$sale->order_discount.'"', 
-                    ' "'.$sale->shipping_cost.'"', 
-                    ' "'.$sale->grand_total.'"', 
-                    ' "'.$sale->paid_amount.'"', 
-                    ' "'.preg_replace('/[\n\r]/', "<br>", $sale->sale_note).'"', 
-                    ' "'.preg_replace('/[\n\r]/', "<br>", $sale->staff_note).'"', 
-                    ' "'.$sale->user->name.'"', 
-                    ' "'.$sale->user->email.'"', 
-                    ' "'.$sale->warehouse->name.'"', 
-                    ' "'.$coupon_code.'"', 
-                    ' "'.$sale->coupon_discount.'"', 
-                    ' "'.$sale->user_id.'"]'
+                    "'.date(config('date_format'), strtotime($sale->created_at->toDateString())).'"', //0
+                    ' "'.$sale->reference_no.'"', //1
+                    ' "'.$sale_status.'"', //2
+                    ' "'.$sale->biller->name.'"', //3
+                    ' "'.$sale->biller->company_name.'"', //4
+                    ' "'.$sale->biller->email.'"', //5
+                    ' "'.$sale->biller->phone_number.'"', //6
+                    ' "'.$sale->biller->address.'"', //7
+                    ' "'.$sale->biller->city.'"', //8
+                    ' "'.$sale->customer->name.'"', //9
+                    ' "'.$sale->customer->phone_number.'"', //10
+                    ' "'.$sale->customer->address.'"', //11
+                    ' "'.$sale->customer->city.'"', //12
+                    ' "'.$sale->id.'"', //13
+                    ' "'.$sale->total_tax.'"', //14
+                    ' "'.$sale->total_discount.'"', //15
+                    ' "'.$sale->total_price.'"', //16
+                    ' "'.$sale->order_tax.'"', //17
+                    ' "'.$sale->order_tax_rate.'"', //18
+                    ' "'.$sale->order_discount.'"', //19
+                    ' "'.$sale->shipping_cost.'"', //20
+                    ' "'.$sale->grand_total.'"', //21
+                    ' "'.$sale->paid_amount.'"', //22
+                    ' "'.preg_replace('/[\n\r]/', "<br>", $sale->sale_note).'"', //23
+                    ' "'.preg_replace('/[\n\r]/', "<br>", $sale->staff_note).'"', //24
+                    ' "'.$sale->user->name.'"', //25
+                    ' "'.$sale->user->email.'"', //26
+                    ' "'.$sale->warehouse->name.'"', //27
+                    ' "'.$coupon_code.'"', //28
+                    ' "'.$sale->coupon_discount.'"', //29
+                    ' "'.$sale->user_id.'"',//30
+                    ' "'.$sale->is_valide.'"]'//31
                 );
                 $data[] = $nestedData;
             }
@@ -1540,6 +1563,7 @@ class SaleController extends Controller
         $tax_rate = $data['tax_rate'];
         $tax = $data['tax'];
         $total = $data['subtotal'];
+        //$is_valide = $data['is_valide'];
         $old_product_id = [];
         $product_sale = [];
         foreach ($lims_product_sale_data as  $key => $product_sale_data) { //Boucler sur les article de la vente
@@ -1695,33 +1719,27 @@ class SaleController extends Controller
             $product_sale['sale_unit_id'] = $sale_unit_id;
             $product_sale['net_unit_price'] = $net_unit_price[$key];
             $product_sale['original_price'] = $original_price[$key];
+            //$product_sale['is_valide'] = $is_valide[$key];
             $product_sale['discount'] = $discount[$key];
             $product_sale['tax_rate'] = $tax_rate[$key];
             $product_sale['tax'] = $tax[$key];
             $product_sale['total'] = $mail_data['total'][$key] = $total[$key];
             
-            //First if
             if($product_sale['variant_id'] && in_array($product_variant_id[$key], $old_product_variant_id)) {
                 Product_Sale::where([
                     ['product_id', $pro_id],
                     ['variant_id', $product_sale['variant_id']],
                     ['sale_id', $id]
                 ])->update($product_sale);
-                $json_string = json_encode($product_sale, JSON_PRETTY_PRINT);
-                //return "First if : <pre>".$json_string."</pre>";
-            } //second if
+            } 
             elseif( $product_sale['variant_id'] === null && (in_array($pro_id, $old_product_id)) ) {
                 Product_Sale::where([
                     ['sale_id', $id],
                     ['product_id', $pro_id]
                 ])->update($product_sale);
-                $json_string = json_encode($product_sale, JSON_PRETTY_PRINT);
-                //return "Second if : <pre>".$json_string."</pre>";
-            } //third if
+            } 
             else {
                 Product_Sale::create($product_sale);
-                $json_string = json_encode($product_sale, JSON_PRETTY_PRINT);
-                //return "Third if : <pre>".$json_string."</pre>";
             }
         }
         $lims_sale_data->update($data);

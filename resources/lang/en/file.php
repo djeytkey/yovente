@@ -613,5 +613,7 @@ return [
 	"Minimum : " => "Minimum : ",
 	"Sorry! You have exceeded the available amount" => "Sorry! You have exceeded the available amount",
 	"Sorry! The minimum amount is not reached" => "Sorry! The minimum amount is not reached",
+	"Confirmed" => "Confirmed",
+	"Not Confirmed" => "Not Confirmed",
 ];
 ?>

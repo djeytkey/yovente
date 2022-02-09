@@ -212,6 +212,12 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="mt-2" style="color: red"><strong>{{trans('file.Confirmed')}} ?</strong></label>
+                                            <input class="mt-2" type="checkbox" name="is_valide" id="is_valide" value="0">                                            
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="payment">
                                     <div class="row">
@@ -463,6 +469,14 @@ var customer_group_rate;
 var row_product_price;
 var pos;
 var role_id = <?php echo json_encode(Auth::user()->role_id)?>;
+
+$("#is_valide").change( function() {
+  if ( $(this).is(":checked") ) {
+    $(this).val("1");
+  } else if ( $(this).not(":checked") ) {
+    $(this).val("0");
+  }
+});
 
 $('.selectpicker').selectpicker({
     style: 'btn-link',

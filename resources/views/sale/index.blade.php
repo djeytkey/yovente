@@ -67,6 +67,7 @@
                     <th>{{trans('file.customer')}}</th>
                     <th>{{trans('file.Created By')}}</th>
                     <th>{{trans('file.Payment Status')}}</th>
+                    <th>{{trans('file.Sale Status')}}</th>
                     <th>{{trans('file.grand total')}}</th>
                     <th>{{trans('file.Paid')}}</th>
                     <th>{{trans('file.Due')}}</th>
@@ -87,12 +88,14 @@
                     <th></th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
                 <tr>
                     <th></th>
                     <th></th>
                     <th></th>
                     <th class="noVis"></th>
+                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -124,20 +127,20 @@
         <div class="modal-content">
             <div class="container mt-3 pb-2 border-bottom">
                 <div class="row">
-                    <div class="col-md-3">
+                    {{-- <div class="col-md-3">
                         <button id="print-btn" type="button" class="btn btn-default btn-sm d-print-none"><i class="dripicons-print"></i> {{trans('file.Print')}}</button>
                         
                         {{ Form::open(['route' => 'sale.sendmail', 'method' => 'post', 'class' => 'sendmail-form'] ) }}
                             <input type="hidden" name="sale_id">
                             <button class="btn btn-default btn-sm d-print-none"><i class="dripicons-mail"></i> {{trans('file.Email')}}</button>
                         {{ Form::close() }}
+                    </div> --}}
+                    <div class="col-md-12">
+                        <h3 id="exampleModalLabel" class="modal-title text-center container-fluid">{{$general_setting->site_title}}<button type="button" id="close-btn" data-dismiss="modal" aria-label="Close" class="close d-print-none"><span aria-hidden="true"><i class="dripicons-cross"></i></span></button></h3>
                     </div>
-                    <div class="col-md-6">
-                        <h3 id="exampleModalLabel" class="modal-title text-center container-fluid">{{$general_setting->site_title}}</h3>
-                    </div>
-                    <div class="col-md-3">
+                    {{-- <div class="col-md-3">
                         <button type="button" id="close-btn" data-dismiss="modal" aria-label="Close" class="close d-print-none"><span aria-hidden="true"><i class="dripicons-cross"></i></span></button>
-                    </div>
+                    </div> --}}
                     <div class="col-md-12 text-center">
                         <i style="font-size: 15px;">{{trans('file.Sale Details')}}</i>
                     </div>
@@ -745,7 +748,7 @@
     var starting_date = $("input[name=starting_date]").val(); 
     var ending_date = $("input[name=ending_date]").val();
     var warehouse_id = $("#warehouse_id").val();
-    
+
     $('#sale-table').DataTable( {
         "processing": true,
         "serverSide": true,
@@ -769,11 +772,11 @@
             {"data": "key"},
             {"data": "date"},
             {"data": "reference_no"},
-            {"data": "biller"},
+            {"data": "valide_status_search"},
             {"data": "customer"},
             {"data": "username"},
-            /*{"data": "sale_status"},*/
             {"data": "payment_status"},
+            {"data": "valide_status"},
             {"data": "grand_total"},
             {"data": "paid_amount"},
             {"data": "due"},
@@ -792,7 +795,7 @@
         'columnDefs': [
             {
                 "orderable": false,
-                'targets': [0, 3, 4, 5, 6, 9, 10],
+                'targets': [0, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             },
             {
                 'targets': 3,
@@ -892,38 +895,43 @@
                         alert('This feature is disable for demo!');
                 }
             },
-            /*{
-                extend: 'colvis',
-                text: '{{trans("file.Column visibility")}}',
-                //columns: ':not(.noVis)'
-                columns: ':gt(0)'
-            },*/
+            // {
+            //     extend: 'colvis',
+            //     text: '{{trans("file.Column visibility")}}',
+            //     //columns: ':not(.noVis)'
+            //     columns: ':gt(0)'
+            // },
         ],
         drawCallback: function () {
             var api = this.api();
             datatable_sum(api, false);
         }
     } );
-
+    
     function datatable_sum(dt_selector, is_calling_first) {
         if (dt_selector.rows( '.selected' ).any() && is_calling_first) {
             var rows = dt_selector.rows( '.selected' ).indexes();
 
-            $( dt_selector.column( 7 ).footer() ).html(dt_selector.cells( rows, 7, { page: 'current' } ).data().sum().toFixed(2));
             $( dt_selector.column( 8 ).footer() ).html(dt_selector.cells( rows, 8, { page: 'current' } ).data().sum().toFixed(2));
             $( dt_selector.column( 9 ).footer() ).html(dt_selector.cells( rows, 9, { page: 'current' } ).data().sum().toFixed(2));
+            $( dt_selector.column( 10 ).footer() ).html(dt_selector.cells( rows, 10, { page: 'current' } ).data().sum().toFixed(2));
         }
         else {
-            $( dt_selector.column( 7 ).footer() ).html(dt_selector.cells( rows, 7, { page: 'current' } ).data().sum().toFixed(2));
             $( dt_selector.column( 8 ).footer() ).html(dt_selector.cells( rows, 8, { page: 'current' } ).data().sum().toFixed(2));
             $( dt_selector.column( 9 ).footer() ).html(dt_selector.cells( rows, 9, { page: 'current' } ).data().sum().toFixed(2));
+            $( dt_selector.column( 10 ).footer() ).html(dt_selector.cells( rows, 10, { page: 'current' } ).data().sum().toFixed(2));
         }
     }
 
     function saleDetails(sale){
+        //alert(sale);
         $("#sale-details input[name='sale_id']").val(sale[13]);
+        if(sale[31] == 1)
+            var valide_status = '<div class="badge badge-success">{{trans("file.Confirmed")}}</div>';
+        else
+            var valide_status = '<div class="badge badge-warning">{{trans("file.Not Confirmed")}}</div>';
 
-        var htmltext = '<strong>{{trans("file.Date")}}: </strong>'+sale[0]+'<br><strong>{{trans("file.reference")}}: </strong>'+sale[1]+'<br><strong>{{trans("file.Warehouse")}}: </strong>'+sale[27]+'<br><br><div class="row"><div class="col-md-6"><strong>{{trans("file.From")}}:</strong><br>'+sale[3]+'<br>'+sale[4]+'<br>'+sale[5]+'<br>'+sale[6]+'<br>'+sale[7]+'<br>'+sale[8]+'</div><div class="col-md-6"><div class="float-right"><strong>{{trans("file.To")}}:</strong><br>'+sale[9]+'<br>'+sale[10]+'<br>'+sale[11]+'<br>'+sale[12]+'</div></div></div>';
+        var htmltext = '<strong>{{trans("file.Date")}}: </strong>'+sale[0]+'<br><strong>{{trans("file.reference")}}: </strong>'+sale[1]+'<br><strong>{{trans("file.Status")}}: </strong>'+valide_status+'<br><br><div class="row"><div class="col-md-6"><strong>{{trans("file.From")}}:</strong><br>'+sale[3]+'<br>'+sale[4]+'<br>'+sale[5]+'<br>'+sale[6]+'<br>'+sale[7]+'<br>'+sale[8]+'</div><div class="col-md-6"><div class="float-right"><strong>{{trans("file.To")}}:</strong><br>'+sale[9]+'<br>'+sale[10]+'<br>'+sale[11]+'<br>'+sale[12]+'</div></div></div>';
         $.get('sales/product_sale/' + sale[13], function(data){
             $(".product-sale-list tbody").remove();
             var name_code = data[0];

@@ -256,7 +256,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-3">
+                                <div class="row mt-3" style="display: none">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <input type="hidden" name="order_tax_rate_hidden" value="{{$lims_sale_data->order_tax_rate}}">
@@ -296,6 +296,12 @@
                                                    <strong class="has-error">{{ $errors->first('extension') }}</strong>
                                                 </span>
                                             @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="mt-2" style="color: red"><strong>{{trans('file.Confirmed')}} ?</strong></label>
+                                            <input class="mt-2" type="checkbox" name="is_valide" id="is_valide" value="{{$lims_sale_data->is_valide}}">                                            
                                         </div>
                                     </div>
                                     {{-- <div class="col-md-4">
@@ -520,6 +526,14 @@ for(rowindex  =0; rowindex <= rownumber; rowindex++){
     unit_operation_value.push($('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.sale-unit-operation-value').val());
     $('table.order-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.sale-unit').val(temp_unit_name[0]);
 }
+
+$("#is_valide").change( function() {
+  if ( $(this).is(":checked") ) {
+    $(this).val("1");
+  } else if ( $(this).not(":checked") ) {
+    $(this).val("0");
+  }
+});
 
 $('.selectpicker').selectpicker({
     style: 'btn-link',
