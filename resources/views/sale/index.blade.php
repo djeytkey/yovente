@@ -745,9 +745,14 @@
         });
     });
 
+    // $('select[name="is_valide"]').on("change", function() {  
+    //     alert("With name : " + $(this).val());
+    // });
+
     var starting_date = $("input[name=starting_date]").val(); 
     var ending_date = $("input[name=ending_date]").val();
     var warehouse_id = $("#warehouse_id").val();
+    var valide_id = $("#is_valide").val();
 
     $('#sale-table').DataTable( {
         "processing": true,
@@ -758,13 +763,13 @@
                 all_permission: all_permission,
                 starting_date: starting_date,
                 ending_date: ending_date,
-                warehouse_id: warehouse_id
+                warehouse_id: warehouse_id,
+                valide_id: valide_id
             },
             dataType: "json",
             type:"post"
         },
         "createdRow": function( row, data, dataIndex ) {
-            //alert(data);
             $(row).addClass('sale-link');
             $(row).attr('data-sale', data['sale']);
         },
@@ -795,12 +800,12 @@
         'columnDefs': [
             {
                 "orderable": false,
-                'targets': [0, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                'targets': [0, 4, 5, 6, 7, 8, 9, 10, 11],
             },
-            {
-                'targets': 3,
-                className: 'noVis'
-            },
+            // {
+            //     'targets': 3,
+            //     className: 'noVis'
+            // },
             {
                 'render': function(data, type, row, meta){
                     if(type === 'display'){
