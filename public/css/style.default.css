@@ -1088,28 +1088,32 @@ input.form-control::-moz-placeholder {
     font-size: 0.75em;
     font-weight: 400;
     color: #aaa;
-    font-family: "Nunito", sans-serif;
+    /* font-family: "Nunito", sans-serif; */
+    font-family: 'Tajawal', sans-serif;
 }
 
 input.form-control::-webkit-input-placeholder {
     font-size: 0.75em;
     font-weight: 400;
     color: #aaa;
-    font-family: "Nunito", sans-serif;
+    /* font-family: "Nunito", sans-serif; */
+    font-family: 'Tajawal', sans-serif;
 }
 
 input.form-control:-ms-input-placeholder {
     font-size: 0.75em;
     font-weight: 400;
     color: #aaa;
-    font-family: "Nunito", sans-serif;
+    /* font-family: "Nunito", sans-serif; */
+    font-family: 'Tajawal', sans-serif;
 }
 
 select.form-control {
     border-radius: 0;
     border-color: #ddd;
     font-weight: 300;
-    font-family: "Nunito", sans-serif;
+    /* font-family: "Nunito", sans-serif; */
+    font-family: 'Tajawal', sans-serif;
 }
 
 select.form-control option {
@@ -2191,7 +2195,8 @@ STYLE SWITCHER FOR DEMO
  * 3. TYPE  
  */
 body {
-    font-family: "Nunito", sans-serif;
+    /* font-family: "Nunito", sans-serif; */
+    font-family: 'Tajawal', sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;

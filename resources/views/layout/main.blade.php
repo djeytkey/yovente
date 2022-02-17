@@ -23,7 +23,8 @@
     <!-- Drip icon font-->
     <link rel="stylesheet" href="<?php echo asset('public/vendor/dripicons/webfont.css'); ?>" type="text/css">
     <!-- Google fonts - Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,500,700">
+    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,500,700"> --}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap">
     <!-- jQuery Circle-->
     <link rel="stylesheet" href="<?php echo asset('public/css/grasp_mobile_progress_circle-1.0.0.min.css'); ?>" type="text/css">
     <!-- Custom Scrollbar-->
@@ -264,7 +265,8 @@
                             <ul id="sale" class="collapse list-unstyled ">
                                 @if ($sale_index_permission_active)
                                     <li id="sale-list-menu"><a
-                                            href="{{ route('sales.index') }}">{{ trans('file.Sale List') }}</a></li>
+                                            href="{{ route('sales.index') }}">{{ trans('file.Sale List') }}</a>
+                                    </li>
                                     @if ($sale_add_permission_active)
                                         {{-- <li><a href="{{ route('sale.pos') }}">POS</a></li> --}}
                                         <li id="sale-create-menu"><a

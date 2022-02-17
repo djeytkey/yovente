@@ -105,11 +105,14 @@ class SettingController extends Controller
         $host = env('DB_HOST');
         $dir = public_path().'/dbBackups/'.$database . '_backup_' . date('d-m-Y-H-i-s') . '.sql';
 
-        exec("mysqldump --user={$user} --password={$pass} --host={$host} {$database} --result-file={$dir} 2>&1", $output);
-
+        exec("mysqldump --user={$user} --password={$pass} --host={$host} {$database} --result-file={$dir} 2>&1", $output, $return);
         var_dump($output);
 
-        return redirect('/')->with('message', trans("file.Database backup created successfully"));
+        if (!$return)
+            return redirect('/')->with('message', trans("file.Database backup created successfully"));
+        else
+            return redirect()->back()->with('not_permitted', 'This feature is disable for demo!');
+        
     }
 
     /*public function backup()

@@ -615,5 +615,7 @@ return [
 	"Sorry! The minimum amount is not reached" => "Sorry! The minimum amount is not reached",
 	"Confirmed" => "Confirmed",
 	"Not Confirmed" => "Not Confirmed",
+	"All Status" => "All Status",
+	"Choose Status" => "Choose Status",
 ];
 ?>

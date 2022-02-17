@@ -545,7 +545,7 @@ return [
 	"Variant" => "Une variante",
 	"Warehouse Quantity" => "Quantité d'entrepôt",
 	"Warehouse quantity of product variants" => "Quantité d'entrepôt de variantes de produit",
-	"Thank you for shopping with us. Please come again" => "Merci de magasiner avec nous. Reviens s'il te plait",
+	"Thank you for shopping with us. Please come again" => "Merci pour votre achat avec nous. Reviens s'il te plait",
 	"Money Transfer" => "Transfert d'argent",
 	"Add Money Transfer" => "Ajouter un transfert d'argent",
 	"From Account" => "Du compte",
@@ -609,5 +609,7 @@ return [
 	"Sorry! The minimum amount is not reached" => "Désolé! Le montant minimum n'est pas atteint",
 	"Confirmed" => "Confirmée",
 	"Not Confirmed" => "Non Confirmée",
+	"All Status" => "Tous les états",
+	"Choose Status" => "Choisissez un état",
 ];
 ?>

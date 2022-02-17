@@ -23,7 +23,8 @@
     <!-- Drip icon font-->
     <link rel="stylesheet" href="<?php echo asset('public/vendor/dripicons/webfont.css'); ?>" type="text/css">
     <!-- Google fonts - Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,500,700">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap">
     <!-- jQuery Circle-->
     <link rel="stylesheet" href="<?php echo asset('public/css/grasp_mobile_progress_circle-1.0.0.min.css'); ?>" type="text/css">
     <!-- Custom Scrollbar-->
@@ -257,7 +258,8 @@
                             <ul id="sale" class="collapse list-unstyled ">
                                 <?php if($sale_index_permission_active): ?>
                                     <li id="sale-list-menu"><a
-                                            href="<?php echo e(route('sales.index')); ?>"><?php echo e(trans('file.Sale List')); ?></a></li>
+                                            href="<?php echo e(route('sales.index')); ?>"><?php echo e(trans('file.Sale List')); ?></a>
+                                    </li>
                                     <?php if($sale_add_permission_active): ?>
                                         
                                         <li id="sale-create-menu"><a
@@ -333,7 +335,7 @@
                                     ->first();
                                 ?>
                                 <?php if($add_permission_active): ?>
-                                    <li><a id="add-withdraw" href=""> <?php echo e(trans('file.Add Withdraw')); ?></a></li>
+                                    <li><a id="add-withdraw" href="" data-toggle="modal" data-target="#withdraw-modal"> <?php echo e(trans('file.Add Withdraw')); ?></a></li>
                                 <?php endif; ?>
                             </ul>
                         </li>

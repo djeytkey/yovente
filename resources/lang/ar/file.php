@@ -609,5 +609,7 @@ return [
 	"Sorry! The minimum amount is not reached" => "آسف! لم يتم الوصول إلى الحد الأدنى للمبلغ",
 	"Confirmed" => "مؤكد",
 	"Not Confirmed" => "غير مؤكد",
+	"All Status" => "كل الحالات",
+	"Choose Status" => "",
 ];
 ?>

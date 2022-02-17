@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mt-3 @if(\Auth::user()->role_id > 2){{'d-none'}}@endif">
+                <div class="col-md-3 mt-3 d-none">
                     <div class="form-group row">
                         <label class="d-tc mt-2"><strong>{{trans('file.Choose Warehouse')}}</strong> &nbsp;</label>
                         <div class="d-tc">
@@ -39,6 +39,18 @@
                                         <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
                                     @endif
                                 @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mt-3">
+                    <div class="form-group row">
+                        <label class="d-tc mt-2"><strong>{{trans('file.Choose Status')}}</strong> &nbsp;</label>
+                        <div class="d-tc">
+                            <select id="status_id" name="status_id" class="selectpicker form-control" data-live-search="true" >
+                                <option value="2">{{trans('file.All Status')}}</option>
+                                <option value="1">{{trans('file.Confirmed')}}</option>
+                                <option value="0">{{trans('file.Not Confirmed')}}</option>
                             </select>
                         </div>
                     </div>
@@ -749,10 +761,16 @@
     //     alert("With name : " + $(this).val());
     // });
 
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var status = urlParams.get('status_id');
+    $('select[name=status_id]').val(status);
+    $('.selectpicker').selectpicker('refresh');
+
     var starting_date = $("input[name=starting_date]").val(); 
     var ending_date = $("input[name=ending_date]").val();
     var warehouse_id = $("#warehouse_id").val();
-    var valide_id = $("#is_valide").val();
+    var status_id = $("#status_id").val();
 
     $('#sale-table').DataTable( {
         "processing": true,
@@ -764,7 +782,7 @@
                 starting_date: starting_date,
                 ending_date: ending_date,
                 warehouse_id: warehouse_id,
-                valide_id: valide_id
+                status_id: status_id
             },
             dataType: "json",
             type:"post"
@@ -1077,6 +1095,10 @@
         }
         return false;
     }
+
+    $(document).ready(function(){
+        
+    });
 
 </script>
 @endsection
